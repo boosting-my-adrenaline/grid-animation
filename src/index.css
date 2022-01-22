@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@1,300&display=swap');
+
+@font-face {
+  font-family: 'Bebas';
+  src: url('../fonts/Fontspring-DEMO-bebasneuepro-middle.otf');
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
