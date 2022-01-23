@@ -1,8 +1,11 @@
 import React from 'react'
 import useDarkMode from '../../utils/hooks/useDarkMode'
+import { useWindowSize } from '../../utils/hooks/useDimensions'
 
 export const Navbar: React.FC = () => {
   const { toggle, isDarkMode } = useDarkMode()
+
+  const { width, height } = useWindowSize()
 
   return (
     <nav
@@ -13,6 +16,7 @@ export const Navbar: React.FC = () => {
           : `bg-gray-200 shadow-gray-500/60`
       }`}
     >
+      {width}
       <div
         className={`flex-grow bg-red-100 border-t border-b border-red-200 h-2`}
       />

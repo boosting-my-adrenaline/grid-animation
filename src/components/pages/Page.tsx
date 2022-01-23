@@ -33,7 +33,7 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
           back: true,
           height: '0vh',
         })),
-      125
+      0
     )
 
     return () => {
@@ -59,8 +59,8 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
       window.scrollTo(0, 0)
     }
 
-    setTimeout(() => navigate('/'), 450)
-    setTimeout(() => setOpen(null), 450)
+    setTimeout(() => navigate('/'), 400)
+    setTimeout(() => setOpen(null), 400)
   }
 
   const { isDarkMode, toggle } = useDarkMode()
@@ -101,7 +101,7 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
           backgroundColor: bg[0],
           padding: params.padding,
         }}
-        transition={{ delay: 0, duration: 0.5 }}
+        transition={{ delay: 0, duration: 0.4 }}
         className={`z-10 flex flex-col items-start justify-start w-[100%] h-[100vh] `}
       >
         <h1 className={`font-BebasNeue text-React-h1*3 translate-y-[-3px]`}>
@@ -112,7 +112,7 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
           animate={{
             fontSize: !params.back ? 'calc(6.6vmin)' : 'calc(2.8vmin )',
           }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
           className={`font-Bebas`}
         >
           Error dicta molestias
@@ -144,7 +144,7 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
         <motion.div
           initial={{ height: `50vh` }}
           animate={{ height: params.height }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
           className={`w-[100%] `}
         ></motion.div>
       </motion.div>
@@ -152,7 +152,7 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
       <motion.div
         initial={{ y: 1000, padding: params.padding }}
         animate={{ y: 0, padding: params.padding }}
-        transition={{ delay: 0, duration: 0.5 }}
+        transition={{ delay: 0, duration: 0.4 }}
         className={`w-[100%] h-[min-content]  text-gray-800 font-Bebas text-React-h1 ${
           isDarkMode && `bg-[#212121] text-gray-50`
         }`}

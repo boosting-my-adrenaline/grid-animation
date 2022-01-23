@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { Breakpoints } from '../../App'
 import useDarkMode from '../../utils/hooks/useDarkMode'
 import useElementSize from '../../utils/hooks/useElementSize'
-import { handleClickMultiple2, handleClickMultiple3 } from './main.functions'
+import { handleClickMultiple3 } from './main.functions'
 
 interface IProps {
   open: null | number
@@ -16,7 +15,7 @@ interface IProps {
   setParams: (params: { x: number; y: number }) => void
   multiple: number
   setMultiple: (multiple: number) => void
-  breakpoint: Breakpoints
+  columns: 3 | 2 | 1
 }
 
 export const MainContainer: React.FC<IProps> = ({
@@ -29,14 +28,8 @@ export const MainContainer: React.FC<IProps> = ({
   setParams,
   multiple,
   setMultiple,
-  breakpoint,
+  columns,
 }) => {
-  let sm = breakpoint === `sm`
-  let md = breakpoint === `md`
-  let lg = breakpoint === `lg`
-  const columns = breakpoint === 'lg' ? 3 : 2
-  const rows = columns === 3 ? 3 : 2
-
   const items = Array.from(
     { length: columns === 3 ? 9 : 8 },
     (_, i) => colors[i]
@@ -49,94 +42,79 @@ export const MainContainer: React.FC<IProps> = ({
   const navigate = useNavigate()
 
   const handleClick = (i: number) => {
-    if (columns === 3) {
-      handleClickMultiple3(
-        i,
-        block,
-        width,
-        height,
-        setBlock,
-        navigate,
-        setMultiple,
-        setOpen,
-        setParams,
-        open
-      )
-    } else {
-      handleClickMultiple2(
-        i,
-        block,
-        width,
-        height,
-        setBlock,
-        navigate,
-        setMultiple,
-        setOpen,
-        setParams,
-        open
-      )
-    }
+    handleClickMultiple3(
+      i,
+      block,
+      width,
+      height,
+      setBlock,
+      navigate,
+      setMultiple,
+      setOpen,
+      setParams,
+      open
+    )
+    // num: ,
+    // block: boolean,
+    // width: number,
+    // height: number,
+    // setBlock: (block: boolean) => void,
+    // navigate: (link: string) => void,
+    // setMultiple: (multiple: 1 | 3) => void,
+    // setOpen: (open: number | null) => void,
+    // setParams: ({}) => void
   }
 
   const elements = items.map((el, i) => (
     <motion.div
       initial={{
-        width: width / columns,
-        height: height / rows,
+        width: width / 3,
+        height: height / 3,
         scale: open === i ? 1 : 0.98,
         borderRadius: open === i ? 0 : height * 0.02,
         backgroundColor: el[0],
       }}
       animate={{
-        width: width / columns,
-        height: height / rows,
-        scale: open === i ? 1 : 0.96,
-        borderRadius: open === i ? 0 : height * 0.01,
+        width: width / 3,
+        height: height / 3,
+        scale: open === i ? 1 : 0.98,
+        borderRadius: open === i ? 0 : height * 0.02,
       }}
       transition={{
-        borderRadius: { delay: open ? 0.45 : 0.25, duration: 0.5 },
+        borderColor: { delay: open ? 0.45 : 0.25, duration: 0.1 },
+        borderRadius: { delay: open ? 0.45 : 0.25, duration: 0.7 },
       }}
-      className={`overflow-hidden flex flex-col justify-center items-center  bg-transparent ${
-        lg ? `p-[1%]` : `p-[1.35%]`
-      } cursor-pointer shado -[2px_2px_10px_5px_rgba(50,50,50,0.1)] shadow-cyan-800/50`}
+      className={`overflow-hidden flex flex-col justify-center items-center  bg-transparent p-[1%] cursor-pointer shado -[2px_2px_10px_5px_rgba(50,50,50,0.1)] shadow-cyan-800/50`}
       onMouseDown={() => handleClick(i)}
     >
       <motion.div
         initial={{
           position: `absolute`,
           backgroundColor: `whitesmoke`,
-          opacity: 0.92,
+          opacity: 0.8,
         }}
         animate={
           open === i
             ? {
-                width: width / columns - width / columns,
-                height: height / rows - height / columns,
+                width: width / 3 - width / 3,
+                height: height / 3 - height / 3,
                 borderRadius: 0,
               }
             : {
-                width: width / columns - height * 0.005,
-                height: height / rows - height * 0.005,
-                borderRadius: height * 0.008,
+                width: width / 3 - height * 0.01,
+                height: height / 3 - height * 0.01,
+                borderRadius: height * 0.016,
               }
         }
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6 }}
       />
       <div
         className={`z-10 flex flex-col items-start justify-start w-[100%] h-[100%] `}
       >
-        <h1
-          className={`font-BebasNeue ${
-            lg ? `text-React-h1` : `text-React-h1*1.5`
-          } `}
-        >
+        <h1 className={`font-BebasNeue text-React-h1 `}>
           Tenetur, sapiente, ea excepturi
         </h1>
-        <p
-          className={`font-Bebas ${
-            lg ? `text-React-p4` : `text-React-p4*.1.5`
-          } `}
-        >
+        <p className={`font-Bebas text-React-p4 `}>
           Error dicta molestias{' '}
           <span className={`text-neutral-500`}> nesciunt accusantium </span>in
           doloremque quisquam assumenda id, tenetur amet debitis. Debitis sequi
@@ -155,7 +133,6 @@ export const MainContainer: React.FC<IProps> = ({
 
   return (
     <div
-      // style={{ width: width }} ////////?!!!
       className={`w-[100%] h-[100%] ${
         isDarkMode && 'b g-gray-900'
       }  flex justify-center items-start ${
@@ -178,7 +155,7 @@ export const MainContainer: React.FC<IProps> = ({
           width: width,
           height: height,
         }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 1 }}
         className={`absolute  flex flex-wrap flex-row justify-between items-center`}
       >
         {elements}
