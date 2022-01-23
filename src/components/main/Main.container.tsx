@@ -1,14 +1,13 @@
 import { motion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
-import useLocalStorage from '../../utils/hooks/useLocalStorage'
 
 interface IProps {
   open: null | number
   setOpen: (open: null | number) => void
   width: number
   height: number
-  colors: string[]
+  colors: [string, string, string, boolean][]
   params: { x: number; y: number }
   setParams: (params: { x: number; y: number }) => void
   multiple: number
@@ -53,7 +52,7 @@ export const MainContainer: React.FC<IProps> = ({
       if (open !== null) {
         navigate('/')
       } else {
-        navigate('/page/' + num)
+        navigate('/page/' + (num + 1))
       }
     }, 1000)
     if (open !== null) {
@@ -117,7 +116,7 @@ export const MainContainer: React.FC<IProps> = ({
         height: height / 3,
         scale: open === i ? 1 : 0.98,
         borderRadius: open === i ? 0 : height * 0.02,
-        backgroundColor: el,
+        backgroundColor: el[0],
       }}
       animate={{
         width: width / 3,
@@ -156,22 +155,24 @@ export const MainContainer: React.FC<IProps> = ({
       <div
         className={`z-10 flex flex-col items-start justify-start w-[100%] h-[100%] `}
       >
-        {' '}
-        <h1 className={`font-BebasNeue text-React-h1 text-gray-900`}>
-          Lorem ipsum dolor sit amet
+        <h1 className={`font-BebasNeue text-React-h1 `}>
+          Tenetur, sapiente, ea excepturi
         </h1>
-        <p className={`font-Bebas text-React-p text-gray-700`}>
-          Error dicta molestias nesciunt accusantium in doloremque quisquam
-          assumenda id, tenetur amet debitis. Debitis sequi eligendi ex
-          voluptatum. Repellendus architecto minus exercitationem. Velit nihil
-          odio nostrum dolorem eos, repellat ullam et deserunt pariatur, itaque
-          enim vero quibusdam nulla quia quisquam assumenda magni accusantium
-          quae similique hic optio unde tempora. Assumenda, nemo sequi.
-          {/* width: {width}, height: {height} */}
+        <p className={`font-Bebas text-React-p4 `}>
+          Error dicta molestias{' '}
+          <span className={`text-neutral-500`}> nesciunt accusantium </span>in
+          doloremque quisquam assumenda id, tenetur amet debitis. Debitis sequi
+          eligendi<span className={`text-neutral-500`}> ex </span>voluptatum.
+          Repellendus{' '}
+          <span className={`text-neutral-500`}>architecto minus </span>
+          exercitationem. Velit nihil odio
+          <span className={`text-neutral-500`}> nostrum </span>dolorem eos,
+          repellat ullam et deserunt pariatur, itaque
+          <span className={`text-neutral-500`}> enim vero</span> quibusdam nulla
+          quia.
         </p>
       </div>
     </motion.div>
-    // {/* </motion.div> */}
   ))
 
   return (
