@@ -7,6 +7,7 @@ module.exports = {
         Bebas: ['Bebas'],
         ArchitectsDaughter: ['Architects Daughter'],
         Staatliches: ['Staatliches'],
+        Merriweather: ['Merriweather'],
       },
       fontSize: {
         'React-h1': 'calc(10px + 2vmin)',

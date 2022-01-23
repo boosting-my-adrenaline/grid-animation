@@ -1,17 +1,19 @@
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
+import useDarkMode from '../../utils/hooks/useDarkMode'
 
 interface IProps {
   open: null | number
   setOpen: (open: null | number) => void
   width: number
   height: number
-  colors: [string, string, string, boolean][]
+  colors: [string, string, string, boolean, string][]
   params: { x: number; y: number }
   setParams: (params: { x: number; y: number }) => void
   multiple: number
   setMultiple: (multiple: number) => void
+  columns: 3 | 2 | 1
 }
 
 export const MainContainer: React.FC<IProps> = ({
@@ -24,8 +26,12 @@ export const MainContainer: React.FC<IProps> = ({
   setParams,
   multiple,
   setMultiple,
+  columns,
 }) => {
-  const items = Array.from({ length: 9 }, (_, i) => colors[i])
+  const items = Array.from(
+    { length: columns === 3 ? 9 : 8 },
+    (_, i) => colors[i]
+  )
 
   const [block, setBlock] = useState(false)
 
@@ -175,9 +181,13 @@ export const MainContainer: React.FC<IProps> = ({
     </motion.div>
   ))
 
+  let { isDarkMode } = useDarkMode()
+
   return (
     <div
-      className={`w-[100%] h-[100%]  flex justify-center items-start ${
+      className={`w-[100%] h-[100%] ${
+        isDarkMode && 'bg-gray-900'
+      }  flex justify-center items-start ${
         `` // !block ? `overflow-hidden` : 'overflow-hidden'
       }`}
     >

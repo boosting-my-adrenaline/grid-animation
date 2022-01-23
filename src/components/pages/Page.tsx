@@ -1,13 +1,15 @@
 import { motion } from 'framer-motion'
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
+import useDarkMode from '../../utils/hooks/useDarkMode'
 import useOnScreen from '../../utils/hooks/useOnScreen'
 const Arch = require('../../static/arch.jpg')
 const Tropics = require('../../static/tropics.jpg')
 const MiamiBeach = require('../../static/miami-beach.jpg')
+const OceanDrive = require('../../static/ocean-drive.jpg')
 
 interface IProps {
-  bg: [string, string, string, boolean]
+  bg: [string, string, string, boolean, string]
   width: number
   height: number
   setOpen: (open: null) => void
@@ -61,16 +63,21 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
     setTimeout(() => setOpen(null), 450)
   }
 
+  const { isDarkMode, toggle } = useDarkMode()
+
   const ref: any = useRef<HTMLDivElement>()
   const onScreen: boolean = useOnScreen<HTMLDivElement>(ref, '0px')
+
+  let textHighlight = { color: !isDarkMode ? bg[2] : bg[4] }
 
   return (
     <div className={`w-[100%] `}>
       <motion.span
         initial={{ backgroundColor: bg[0], left: `2vh`, top: `70vh` }}
         animate={{
-          top: !params.back ? '120vh' : '2vh',
+          top: !params.back ? '120vh' : '7vh',
           backgroundColor: !onScreen ? bg[0] : 'whitesmoke',
+
           color: onScreen ? 'black' : bg[3] ? 'white' : 'black',
         }}
         transition={{ duration: 0.4 }}
@@ -79,6 +86,21 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
       >
         BACK
       </motion.span>
+
+      <motion.span
+        initial={{ backgroundColor: bg[0], right: `-50vh`, top: `7vh` }}
+        animate={{
+          right: !params.back ? '-50vh' : '2vh',
+          backgroundColor: !onScreen ? bg[0] : 'whitesmoke',
+          color: onScreen ? 'black' : bg[3] ? 'white' : 'black',
+        }}
+        transition={{ duration: 0.4 }}
+        className={`absolute cursor-pointer  font-Bebas text-React-h1 px-2 py-1 border border-gray-800 rounded-lg`}
+        onMouseDown={() => toggle()}
+      >
+        {isDarkMode ? `DAY` : `NIGHT`}
+      </motion.span>
+
       <motion.div
         ref={ref}
         initial={{
@@ -140,109 +162,148 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
           className={`w-[100%] `}
         ></motion.div>
       </motion.div>
+
       <motion.div
         initial={{ y: 1000, padding: params.padding }}
         animate={{ y: 0, padding: params.padding }}
         transition={{ delay: 0, duration: 0.5 }}
-        className={`w-[100%] h-[200vh]  text-gray-800 font-Bebas text-React-h1`}
+        className={`w-[100%] h-[min-content]  text-gray-800 font-Bebas text-React-h1 ${
+          isDarkMode && `bg-[#212121] text-gray-50`
+        }`}
       >
-        <div className={`pb-8 text-React-h2 w-full`}>
+        <div className={`pb-8 text-React-h2 w-full  flex`}>
           {['Belize Sierra', 'Ivory Coast', 'Liberia', 'Montenegro'].map(
             (el, i) => (
               <span
-                className={`text-gray-800 border border-gray-800 p-[2px_8px] rounded-md mr-3`}
+                className={`${
+                  isDarkMode
+                    ? `text-gray-400 border-gray-400`
+                    : `text-gray-700 border-gray-800`
+                } border  p-[2px_8px] rounded-md mr-3`}
               >
                 {el}
               </span>
             )
           )}
+          <div className={`flex-grow`} />
+          <span className={`font-MochiyPopPOne`}>JAN. 23, 2022</span>
+          <div className={`w-[32%]`} />
         </div>
         <img
           className={`float-right w-[30%] ml-8 `}
           alt="Miami Beach. FL. USA"
           src={MiamiBeach}
         />
-        <div className={`w-[min-content]  bg-red-20 space-y-[-6vh]`}>
+        <div className={`w-[min-content]  bg-red-20 space-y-[-5.5vh]`}>
           <h1
-            className={`text-xl-2 font-Staatliches uppercase flex items-between`}
+            className={`text-xl-2 font-Merriweather uppercase flex items-between`}
           >
             <span>tempo</span>
             <div className={`flex-grow`} />
             <span>aucto</span>
           </h1>
-          <h1 className={`text-xl-1 font-Staatliches uppercase`}>
+          <h1 className={`text-xl-1 font-Merriweather uppercase`}>
             de`pellentesque
           </h1>
         </div>
-        <div className={`text-gray-700 text-React-p2 pl-1`}>
+        <div
+          className={`${
+            isDarkMode ? `text-gray-400` : `text-gray-700`
+          } text-React-p2 pl-1`}
+        >
           Praesent elementum lorem vel ligula imperdiet molestie elementum nunc
           at tellus vel, sagittis congue.
         </div>
         <br />
         <div className={`mr- [33%] bg-red-00 text-React-h1`}>
           Vivamus tincidunt, ante{' '}
-          <span style={{ color: bg[2] }}>laoreet lobortis </span>
+          <span style={textHighlight}>laoreet lobortis </span>
           facilisis,
-          <span style={{ color: bg[2] }}> neque ipsum facilisis orci</span>,
-          quis tristique felis augue ultricies ipsum. Nunc lobortis massa eros,
-          mollis <span style={{ color: bg[2] }}>ultricies </span>
+          <span style={textHighlight}> neque ipsum facilisis orci</span>, quis
+          tristique felis augue ultricies ipsum. Nunc lobortis massa eros,
+          mollis <span style={textHighlight}>ultricies </span>
           libero consequat vitae. Cras porttitor vel leo a mollis. Pellentesque
           rhoncus eros non venenatis tristique.{' '}
-          <span style={{ color: bg[2] }}>Fusce in gravida sem</span>. Cras
+          <span style={textHighlight}>Fusce in gravida sem</span>. Cras
           sollicitudin maximus risus sit amet aliquam. Donec rhoncus felis
           tortor, at porttitor est aliquet ac. Pellentesque a
-          <span style={{ color: bg[2] }}> egestas ex</span>. Cras porttitor vel
-          leo a mollis. Pellentesque rhoncus eros non venenatis tristique. Fusce
-          in <span style={{ color: bg[2] }}>gravida </span>sem.
+          <span style={textHighlight}> egestas ex</span>. Cras porttitor vel leo
+          a mollis. Pellentesque rhoncus eros non venenatis tristique. Fusce in{' '}
+          <span style={textHighlight}>gravida </span>sem.
         </div>
-
         <br />
-        <br />
-        {/* <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br /> */}
-
         <img
-          className={`float-left w-[40%] mr-10 mb-8 translate-y-[10px]`}
-          alt="Tropics"
-          src={Tropics}
+          className={`float-left w-[30%] mr-10 mb-8 translate-y-[10px]`}
+          alt="Ocean Drive"
+          src={OceanDrive}
         />
         <p>
-          Fugiat est repudiandae tenetur delectus repellendus corrupti impedit,
-          commodi nam debitis illo distinctio reiciendis veritatis excepturi
-          quidem inventore reprehenderit repellat aspernatur ullam? Repudiandae
-          a recusandae nihil. Consequatur sequi rem modi labore exercitationem
-          molestiae minus fugit iure, alias perferendis impedit error, illum
-          dolor iste quaerat mollitia expedita aperiam possimus fuga dignissimos
-          quos temporibus. Iusto reprehenderit ut fugiat. Doloremque sint
-          voluptate natus enim mollitia, cupiditate, unde est repellat ex
-          aliquid, porro voluptatum incidunt.{' '}
+          Fugiat est<span style={textHighlight}> repudiandae tenetur </span>{' '}
+          delectus repellendus corrupti impedit, commodi nam debitis illo
+          distinctio<span style={textHighlight}> reiciendis </span>veritatis
+          excepturi quidem inventore reprehenderit repellat aspernatur ullam?
+          Repudiandae a<span style={textHighlight}> recusandae nihil</span>.
+          Consequatur sequi rem modi labore exercitationem molestiae minus fugit
+          iure, alias perferendis impedit error, illum dolor iste quaerat
+          mollitia expedita aperiam possimus fuga dignissimos quos temporibus.
+          Iusto reprehenderit ut fugiat. Doloremque sint{' '}
+          <span style={textHighlight}>
+            voluptate natus enim mollitia, cupiditate, unde est repellat
+          </span>{' '}
+          ex aliquid, porro voluptatum incidunt.{' '}
         </p>
         <br />
-
         <p>
-          Error aliquid cum amet, rerum incidunt mollitia dolore rem at? Commodi
-          adipisci nesciunt culpa nisi? Illum dignissimos ab quibusdam tempora.
-          Ducimus commodi id at, fugiat perspiciatis incidunt fuga. Odit aliquid
-          cumque, inventore blanditiis eligendi cupiditate quia ipsa neque eius
+          Error aliquid cum amet, rerum{' '}
+          <span style={textHighlight}>incidunt mollitia </span>dolore rem at?
+          Commodi adipisci nesciunt culpa nisi? Illum dignissimos ab quibusdam
+          tempora. Ducimus commodi id at, fugiat perspiciatis incidunt fuga.
+          Odit aliquid cumque, inventore{' '}
+          <span style={textHighlight}>
+            blanditiis eligendi cupiditate quia ipsa neque eius{' '}
+          </span>
           earum doloremque? Possimus voluptatem nulla impedit. Optio laudantium
           consectetur dolorum unde vel accusantium, sit minus repudiandae nam
           fuga quasi possimus cum, in voluptatum adipisci pariatur earum.
           Necessitatibus corporis veniam quaerat esse accusamus enim nulla
-          maxime dignissimos? Soluta velit reiciendis deserunt? Quia provident
-          ad beatae alias. Incidunt consequuntur iure maxime beatae ipsa
-          sapiente atque? Dolore, ab.
+          maxime dignissimos? Soluta
+          <span style={textHighlight}> velit reiciendis </span>deserunt? Quia
+          provident ad beatae alias. Incidunt consequuntur iure maxime beatae
+          ipsa sapiente atque?<span style={textHighlight}> Dolore</span>, ab.
         </p>
         <br />
-
+        <img
+          className={`float-right w-[36%] ml-10 mb-8 translate-y-[10px]`}
+          alt="Tropics"
+          src={Tropics}
+        />{' '}
+        <p>
+          Error aliquid cum amet, rerum{' '}
+          <span style={textHighlight}>incidunt mollitia </span>dolore rem at?
+          Commodi adipisci nesciunt culpa nisi? Illum dignissimos ab quibusdam
+          tempora. Ducimus commodi id at, fugiat perspiciatis incidunt fuga.
+          Odit aliquid cumque, inventore{' '}
+          <span style={textHighlight}>
+            blanditiis eligendi cupiditate quia ipsa neque eius{' '}
+          </span>
+          earum doloremque? Possimus voluptatem nulla impedit. Optio laudantium
+          consectetur dolorum unde vel accusantium, sit minus repudiandae nam
+          fuga quasi possimus cum, in voluptatum adipisci pariatur earum.
+          Necessitatibus corporis veniam quaerat esse accusamus enim nulla
+          maxime dignissimos? Soluta
+          <span style={textHighlight}> velit reiciendis </span>deserunt? Quia
+          provident ad beatae alias. Incidunt consequuntur iure maxime beatae
+          ipsa sapiente atque?<span style={textHighlight}> Dolore</span>, ab.
+        </p>
+        <br />
+        <br />
+        <br />
+        <div
+          className={`w-f h-[1px] ${
+            isDarkMode ? `bg-gray-200` : `bg-gray-400`
+          }`}
+        ></div>
+        <br />
         <p>
           {' '}
           Ipsa tempora qui ex quod velit odit quia unde quidem sunt. Quae animi
@@ -270,7 +331,6 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
           libero temporibus corrupti iste.{' '}
         </p>
         <br />
-
         <p>
           Architecto non adipisci sapiente cumque tenetur, eveniet iure magni
           dolores minus neque, dignissimos impedit, iusto consequuntur velit id
@@ -290,7 +350,6 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
           qui saepe tenetur.{' '}
         </p>
         <br />
-
         <p>
           Temporibus similique nam iusto vero fuga facere, doloribus ab quae
           beatae harum? Eveniet exercitationem, cum inventore ullam incidunt
