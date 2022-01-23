@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { MainContainer } from './components/main/Main.container'
 import { Navbar } from './components/navbar/Navbar'
 import { Page } from './components/pages/Page'
+import useDarkMode from './utils/hooks/useDarkMode'
 import useElementSize from './utils/hooks/useElementSize'
 import useLocalStorage from './utils/hooks/useLocalStorage'
 
@@ -35,47 +36,64 @@ export const App: React.FC = () => {
 
     ['#D65DB1', '#EDEDED', '#D65DB1', true, '#D65DB1'],
   ]
+  // const [squareRef, { width, height }] = useElementSize()
+  const { isDarkMode } = useDarkMode()
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <div
-        className={`w-[100%] h-[95vh] ${
-          open !== null ? `mt-[5vh] mx-[0vh]` : `mt-[5.5vh] mx-[0vh]`
+    <div
+      className={`w-full h-[100vh] ${
+        isDarkMode
+          ? `bg-[#333333] shadow-gray-200/60`
+          : `bg-white shadow-gray-500/60`
+      }`}
+    >
+      <BrowserRouter>
+        <Navbar />
+        <div
+          className={`w-[100%]
+        ${
+          `` //  open === null ? `px-10` : `px-1`
         } transition duration-200 ease-in-out`}
-        ref={parentRef}
-      >
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <MainContainer
-                open={open}
-                setOpen={setOpen}
-                width={width}
-                height={height}
-                colors={colors}
-                params={params}
-                setParams={setParams}
-                multiple={multiple}
-                setMultiple={setMultiple}
-                columns={3}
+        >
+          <div
+            className={`w-[100%] h-[95vh] ${
+              open !== null ? `mt-[5vh] mx-[0vh]` : `mt-[5.5vh] mx-[0vh]`
+            } transition-all duration-200 ease-in-out`}
+            ref={parentRef}
+          >
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <MainContainer
+                    open={open}
+                    setOpen={setOpen}
+                    width={width}
+                    height={height}
+                    colors={colors}
+                    params={params}
+                    setParams={setParams}
+                    multiple={multiple}
+                    setMultiple={setMultiple}
+                    columns={3}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/page/*"
-            element={
-              <Page
-                bg={colors[open || 9]}
-                width={width}
-                height={height}
-                setOpen={setOpen}
+              <Route
+                path="/page/*"
+                element={
+                  <Page
+                    bg={colors[open || 9]}
+                    width={width}
+                    height={height}
+                    setOpen={setOpen}
+                  />
+                }
               />
-            }
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
+            </Routes>
+          </div>
+        </div>
+      </BrowserRouter>
+    </div>
   )
 }

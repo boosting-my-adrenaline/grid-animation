@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import useDarkMode from '../../utils/hooks/useDarkMode'
+import useElementSize from '../../utils/hooks/useElementSize'
+import { handleClickMultiple3 } from './main.functions'
 
 interface IProps {
   open: null | number
@@ -32,87 +34,34 @@ export const MainContainer: React.FC<IProps> = ({
     { length: columns === 3 ? 9 : 8 },
     (_, i) => colors[i]
   )
+  let { isDarkMode } = useDarkMode()
 
   const [block, setBlock] = useState(false)
 
   const navigate = useNavigate()
 
-  const handleClick = (num: number) => {
-    if (block) return
-    setBlock(true)
-    setTimeout(() => {
-      setBlock(false)
-    }, 1000)
-
-    try {
-      window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      })
-    } catch (error) {
-      window.scrollTo(0, 0)
-    }
-
-    setTimeout(() => {
-      if (open !== null) {
-        navigate('/')
-      } else {
-        navigate('/page/' + (num + 1))
-      }
-    }, 1000)
-    if (open !== null) {
-      setMultiple(1)
-      setOpen(null)
-      setParams({ x: 0, y: 0 })
-    } else {
-      setOpen(num)
-      setMultiple(3)
-      switch (num) {
-        case 0:
-          return setParams({
-            x: width,
-            y: height,
-          })
-        case 1:
-          return setParams({
-            x: 0,
-            y: height,
-          })
-        case 2:
-          return setParams({
-            x: -width,
-            y: height,
-          })
-        case 3:
-          return setParams({
-            x: width,
-            y: 0,
-          })
-        case 4:
-          return
-        case 5:
-          return setParams({
-            x: -width,
-            y: 0,
-          })
-        case 6:
-          return setParams({
-            x: width,
-            y: -height,
-          })
-        case 7:
-          return setParams({
-            x: 0,
-            y: -height,
-          })
-        case 8:
-          return setParams({
-            x: -width,
-            y: -height,
-          })
-      }
-    }
+  const handleClick = (i: number) => {
+    handleClickMultiple3(
+      i,
+      block,
+      width,
+      height,
+      setBlock,
+      navigate,
+      setMultiple,
+      setOpen,
+      setParams,
+      open
+    )
+    // num: ,
+    // block: boolean,
+    // width: number,
+    // height: number,
+    // setBlock: (block: boolean) => void,
+    // navigate: (link: string) => void,
+    // setMultiple: (multiple: 1 | 3) => void,
+    // setOpen: (open: number | null) => void,
+    // setParams: ({}) => void
   }
 
   const elements = items.map((el, i) => (
@@ -134,7 +83,7 @@ export const MainContainer: React.FC<IProps> = ({
         borderColor: { delay: open ? 0.45 : 0.25, duration: 0.1 },
         borderRadius: { delay: open ? 0.45 : 0.25, duration: 0.7 },
       }}
-      className={`overflow-hidden flex flex-col justify-center items-center  bg-cyan-100   p-[1%] cursor-pointer shado -[2px_2px_10px_5px_rgba(50,50,50,0.1)] shadow-cyan-800/50`}
+      className={`overflow-hidden flex flex-col justify-center items-center  bg-transparent p-[1%] cursor-pointer shado -[2px_2px_10px_5px_rgba(50,50,50,0.1)] shadow-cyan-800/50`}
       onMouseDown={() => handleClick(i)}
     >
       <motion.div
@@ -181,15 +130,14 @@ export const MainContainer: React.FC<IProps> = ({
     </motion.div>
   ))
 
-  let { isDarkMode } = useDarkMode()
-
   return (
     <div
       className={`w-[100%] h-[100%] ${
-        isDarkMode && 'bg-gray-900'
+        isDarkMode && 'b g-gray-900'
       }  flex justify-center items-start ${
         `` // !block ? `overflow-hidden` : 'overflow-hidden'
       }`}
+      // ref={squareRef}
     >
       <motion.div
         initial={{

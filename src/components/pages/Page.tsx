@@ -87,20 +87,6 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
         BACK
       </motion.span>
 
-      <motion.span
-        initial={{ backgroundColor: bg[0], right: `-50vh`, top: `7vh` }}
-        animate={{
-          right: !params.back ? '-50vh' : '2vh',
-          backgroundColor: !onScreen ? bg[0] : 'whitesmoke',
-          color: onScreen ? 'black' : bg[3] ? 'white' : 'black',
-        }}
-        transition={{ duration: 0.4 }}
-        className={`absolute cursor-pointer  font-Bebas text-React-h1 px-2 py-1 border border-gray-800 rounded-lg`}
-        onMouseDown={() => toggle()}
-      >
-        {isDarkMode ? `DAY` : `NIGHT`}
-      </motion.span>
-
       <motion.div
         ref={ref}
         initial={{
