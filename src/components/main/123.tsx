@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import useDarkMode from '../../utils/hooks/useDarkMode'
 import useElementSize from '../../utils/hooks/useElementSize'
-import { handleClickMultiple3 } from './main.functions'
+import { handleClickMultiple3 } from './cards.functions'
 
 interface IProps {
   open: null | number

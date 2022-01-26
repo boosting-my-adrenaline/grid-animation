@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import useDarkMode from '../../utils/hooks/useDarkMode'
+import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
 import useOnScreen from '../../utils/hooks/useOnScreen'
 const Arch = require('../../static/arch.jpg')
 const Tropics = require('../../static/tropics.jpg')
@@ -13,9 +14,20 @@ interface IProps {
   width: number
   height: number
   setOpen: (open: null) => void
+  opening: boolean
 }
 
-export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
+export const Page: React.FC<IProps> = ({
+  bg,
+  width,
+  height,
+  setOpen,
+  opening,
+}) => {
+  const xl = width
+  const lg = width >= 1200
+  const md = width < 1200 && width
+
   const navigate = useNavigate()
 
   const [params, setParams] = useState({
@@ -63,7 +75,13 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
     setTimeout(() => setOpen(null), 400)
   }
 
-  const { isDarkMode, toggle } = useDarkMode()
+  useDidMountEffect(() => {
+    if (!opening) {
+      handleBack()
+    }
+  }, [opening])
+
+  const { isDarkMode } = useDarkMode()
 
   const ref: any = useRef<HTMLDivElement>()
   const onScreen: boolean = useOnScreen<HTMLDivElement>(ref, '0px')
@@ -72,21 +90,6 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
 
   return (
     <div className={`w-[100%] `}>
-      <motion.span
-        initial={{ backgroundColor: bg[0], left: `2vh`, top: `70vh` }}
-        animate={{
-          top: !params.back ? '120vh' : '7vh',
-          backgroundColor: !onScreen ? bg[0] : 'whitesmoke',
-
-          color: onScreen ? 'black' : bg[3] ? 'white' : 'black',
-        }}
-        transition={{ duration: 0.4 }}
-        className={`fixed cursor-pointer  font-Bebas text-React-h1 px-2 py-1 border border-gray-800 rounded-lg`}
-        onMouseDown={handleBack}
-      >
-        BACK
-      </motion.span>
-
       <motion.div
         ref={ref}
         initial={{
@@ -97,50 +100,64 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
         }}
         animate={{
           height: 'min-content',
-
           backgroundColor: bg[0],
           padding: params.padding,
         }}
         transition={{ delay: 0, duration: 0.4 }}
-        className={`z-10 flex flex-col items-start justify-start w-[100%] h-[100vh] `}
+        className={`z-10 flex flex-col items-center justify-center w-[100%] relative `}
       >
-        <h1 className={`font-BebasNeue text-React-h1*3 translate-y-[-3px]`}>
-          Tenetur, sapiente, ea excepturi
-        </h1>
-        <motion.p
-          initial={{ fontSize: 'calc(6.6vmin)' }}
-          animate={{
-            fontSize: !params.back ? 'calc(6.6vmin)' : 'calc(2.8vmin )',
+        <motion.div
+          initial={{
+            backgroundColor: bg[0],
           }}
-          transition={{ duration: 0.4 }}
-          className={`font-Bebas`}
-        >
-          Error dicta molestias
-          <span style={{ color: params.back ? bg[1] : 'rgb(115 115 115)' }}>
-            {' '}
-            nesciunt accusantium{' '}
-          </span>
-          in doloremque quisquam assumenda id, tenetur amet debitis. Debitis
-          sequi eligendi{' '}
-          <span style={{ color: params.back ? bg[1] : 'rgb(115 115 115)' }}>
-            ex{' '}
-          </span>
-          voluptatum. Repellendus{' '}
-          <span style={{ color: params.back ? bg[1] : 'rgb(115 115 115)' }}>
-            architecto minus{' '}
-          </span>
-          exercitationem. Velit nihil odio
-          <span style={{ color: params.back ? bg[1] : 'rgb(115 115 115)' }}>
-            {' '}
-            nostrum{' '}
-          </span>
-          dolorem eos, repellat ullam et deserunt pariatur, itaque
-          <span style={{ color: params.back ? bg[1] : 'rgb(115 115 115)' }}>
-            {' '}
-            enim vero
-          </span>{' '}
-          quibusdam nulla quia.
-        </motion.p>
+          animate={{
+            width: params.back ? width * 2 : width / 2,
+          }}
+          transition={{ duration: 0.6 }}
+          className={`absolute h-[100%]`}
+        />
+        <div className={`z-10`}>
+          <h1
+            className={`z-10 font-BebasNeue text-React-h1*3 translate-y-[-3px] `}
+          >
+            Tenetur, sapiente, ea excepturi
+          </h1>
+
+          <motion.p
+            initial={{ fontSize: 'calc(6.6vmin)' }}
+            animate={{
+              fontSize: !params.back ? 'calc(6.6vmin)' : 'calc(2.8vmin )',
+            }}
+            transition={{ duration: 0.4 }}
+            className={`z-10 font-Bebas `}
+          >
+            Error dicta molestias
+            <span style={{ color: params.back ? bg[1] : 'rgb(115 115 115)' }}>
+              {' '}
+              nesciunt accusantium{' '}
+            </span>
+            in doloremque quisquam assumenda id, tenetur amet debitis. Debitis
+            sequi eligendi{' '}
+            <span style={{ color: params.back ? bg[1] : 'rgb(115 115 115)' }}>
+              ex{' '}
+            </span>
+            voluptatum. Repellendus{' '}
+            <span style={{ color: params.back ? bg[1] : 'rgb(115 115 115)' }}>
+              architecto minus{' '}
+            </span>
+            exercitationem. Velit nihil odio
+            <span style={{ color: params.back ? bg[1] : 'rgb(115 115 115)' }}>
+              {' '}
+              nostrum{' '}
+            </span>
+            dolorem eos, repellat ullam et deserunt pariatur, itaque
+            <span style={{ color: params.back ? bg[1] : 'rgb(115 115 115)' }}>
+              {' '}
+              enim vero
+            </span>{' '}
+            quibusdam nulla quia.
+          </motion.p>
+        </div>
         <motion.div
           initial={{ height: `50vh` }}
           animate={{ height: params.height }}
@@ -154,7 +171,7 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
         animate={{ y: 0, padding: params.padding }}
         transition={{ delay: 0, duration: 0.4 }}
         className={`w-[100%] h-[min-content]  text-gray-800 font-Bebas text-React-h1 ${
-          isDarkMode && `bg-[#212121] text-gray-50`
+          isDarkMode && ` text-gray-50`
         }`}
       >
         <div className={`pb-8 text-React-h2 w-full  flex`}>
@@ -259,7 +276,7 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
         </p>
         <br />
         <img
-          className={`float-right w-[36%] ml-10 mb-8 translate-y-[10px]`}
+          className={`float-right  w-[36%] ml-10 mb-8 translate-y-[10px]`}
           alt="Tropics"
           src={Tropics}
         />{' '}
@@ -284,13 +301,13 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
         <br />
         <br />
         <br />
-        <div
+        {/* <div
           className={`w-f h-[1px] ${
             isDarkMode ? `bg-gray-200` : `bg-gray-400`
           }`}
-        ></div>
+        ></div> */}
         <br />
-        <p>
+        {/* <p>
           {' '}
           Ipsa tempora qui ex quod velit odit quia unde quidem sunt. Quae animi
           voluptates necessitatibus nesciunt soluta eligendi inventore similique
@@ -346,7 +363,7 @@ export const Page: React.FC<IProps> = ({ bg, width, height, setOpen }) => {
           corrupti inventore officiis, veniam possimus impedit dolorum quis
           exercitationem dolore tempora nisi omnis ipsam id dignissimos quod
           repudiandae. Repellendus, temporibus sunt?
-        </p>
+        </p> */}
       </motion.div>
     </div>
   )

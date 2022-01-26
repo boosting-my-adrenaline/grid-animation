@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { MainContainer } from './components/main/Main.container'
+import { Footer } from './components/footer/Footer'
+import { CardsContainer } from './components/main/Cards.container'
+import { Cardsfilter } from './components/main/Cards.filter'
 import { Navbar } from './components/navbar/Navbar'
 import { Page } from './components/pages/Page'
 import useDarkMode from './utils/hooks/useDarkMode'
@@ -42,15 +44,10 @@ export const App: React.FC = () => {
     ['#D65DB1', '#EDEDED', '#D65DB1', true, '#D65DB1'],
   ]
   // const [squareRef, { width, height }] = useElementSize()
-  const [refresher, setRefresher] = useState(0)
-
-  useEffect(() => {
-    let id = setInterval(() => setRefresher((prev) => prev + 1), 100)
-  }, [])
 
   const { isDarkMode } = useDarkMode()
 
-  const { width: windowWidth } = useWindowSize()
+  const { width: windowWidth, height: windowHeight } = useWindowSize()
   const [breakpoint, setBreakpoint] = useState<Breakpoints>(
     windowWidth > 1200 ? `lg` : 'md'
   )
@@ -58,63 +55,71 @@ export const App: React.FC = () => {
     windowWidth > 1200 ? setBreakpoint(`lg`) : setBreakpoint('md')
   }, [windowWidth])
 
-  const [leftGap, setLeftGap] = useState(open === null ? 100 : 0)
+  const [filterHeight, setFilterHeight] = useState(
+    open === null ? `5vh` : `0vh`
+  )
 
   useDidMountEffect(() => {
     let id = setTimeout(
       () => {
-        open === null ? setLeftGap(100) : setLeftGap(0)
+        open === null
+          ? setFilterHeight(`calc(5vh + 6px)`)
+          : setFilterHeight(`calc(0vh + 0px)`)
       },
-      open === null ? 2000 : 2000
+      open === null ? 300 : 250
     )
   }, [open])
 
+  const [opening, setOpening] = useState(false)
+
+  useEffect(() => setOpening(open !== null), [open])
+
+  const [isResizing, setIsResizing] = useState(false)
+  useEffect(() => {
+    setIsResizing(true)
+    let id = setTimeout(() => setIsResizing(false), 300)
+    return () => clearTimeout(id)
+  }, [windowHeight, windowHeight])
+
   return (
     <div
-      className={`w-full h-[100vh] ${
+      className={`w-full h-[100%] ${
         isDarkMode
-          ? `bg-[#333333] shadow-gray-200/60`
+          ? // ? `bg-[#333333] shadow-gray-200/60`
+            `bg-[#101010] shadow-gray-200/60`
           : `bg-white shadow-gray-500/60`
       }`}
     >
       <BrowserRouter>
-        <Navbar />
+        <Navbar opening={opening} setOpening={setOpening} />
         <div
-          className={` flex items-center justify-center
-        ${
-          `` //  open === null ? `px-10` : `px-1`
-        } transition duration-200 ease-in-out `}
-          // style={{ width: windowWidth }}
+          className={` flex flex-col items-center justify-center pt-[5vh] max-w-[2000] mx-[200px] `}
         >
-          {/* <motion.div
-            animate={{ width: leftGap }}
-            className={`fixed top-0 bottom-0 left-0 border border-black bg-red-500 ${
-              `` // open !== 0 ? `w-[200px]` : `w-[10px]`
-            } `}
-          /> */}
-          <motion.div
-            // animate={{ marginLeft: leftGap }}
-            className={`w-[100%] h-[95vh]  ${
-              open !== null ? `mt-[5vh] ` : `mt-[5.5vh] `
-            } `}
+          <div
+            className={`w-[100%] flex flex-col items-center`}
             ref={parentRef}
           >
             <Routes>
               <Route
                 path="/"
                 element={
-                  <MainContainer
-                    open={open}
-                    setOpen={setOpen}
-                    width={width}
-                    height={height}
-                    colors={colors}
-                    params={params}
-                    setParams={setParams}
-                    multiple={multiple}
-                    setMultiple={setMultiple}
-                    breakpoint={breakpoint}
-                  />
+                  <>
+                    <Cardsfilter open={open !== null} />
+                    <CardsContainer
+                      open={open}
+                      setOpen={setOpen}
+                      width={width}
+                      height={windowHeight}
+                      // height={height}
+                      colors={colors}
+                      params={params}
+                      setParams={setParams}
+                      multiple={multiple}
+                      setMultiple={setMultiple}
+                      breakpoint={breakpoint}
+                      isResizing={isResizing}
+                    />
+                  </>
                 }
               />
               <Route
@@ -125,12 +130,14 @@ export const App: React.FC = () => {
                     width={width}
                     height={height}
                     setOpen={setOpen}
+                    opening={opening}
                   />
                 }
               />
             </Routes>
-          </motion.div>
+          </div>
         </div>
+        <Footer />
       </BrowserRouter>
     </div>
   )

@@ -24,15 +24,16 @@ module.exports = {
         'React-p4*.1.5': 'calc(3.3vmin)',
 
         'React-p*3': 'calc(6px + 4.5vmin)',
-        'xl-1': 'calc(16px + 5.7vmin)',
-        'xl-2': 'calc(20px + 7.5vmin)',
+        'xl-1': 'calc(16px + 5.2vmin)',
+        'xl-2': 'calc(20px + 6.95vmin)',
       },
-      height: {
-        custom1: 'calc(30px + 280vh)',
+      transitionTimingFunction: {
+        'in-expo': 'cubic-bezier(0.95, 0.05, 0.795, 0.035)',
+        'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
+        'custom-1': ' cubic-bezier(0.165, 0.84, 0.44, 1)',
       },
     },
   },
-  plugins: [],
 }
 
 // text-React-h1*1.5
