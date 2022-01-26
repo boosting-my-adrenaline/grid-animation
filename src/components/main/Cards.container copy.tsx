@@ -20,7 +20,7 @@ interface IProps {
   multiple: number
   setMultiple: (multiple: number) => void
   isResizing: boolean
-  breakpoint: Breakpoints
+  // breakpoint: Breakpoints
 }
 
 export const CardsContainer: React.FC<IProps> = ({
@@ -34,30 +34,19 @@ export const CardsContainer: React.FC<IProps> = ({
   multiple,
   setMultiple,
   isResizing,
-  breakpoint,
+  // breakpoint,
 }) => {
-  // const { width: windowWidth } = useWindowSize()
+  const { width: windowWidth } = useWindowSize()
 
-  // let sm = windowWidth < -768
-  // let md = windowWidth < 1200 && windowWidth > 768
-  // let lg = windowWidth > 1200
+  let sm = windowWidth < -768
+  let md = windowWidth < 1200 && windowWidth > 768
+  let lg = windowWidth > 1200
 
-  // const columns = lg ? 3 : md ? 2 : 1
-  // // const columns = 1
-  // const rows = lg ? 3 : md ? 2 : 5
+  const columns = lg ? 3 : md ? 2 : 1
+  // const columns = 1
+  const rows = lg ? 3 : md ? 2 : 5
 
-  // const items = Array.from({ length: lg ? 9 : 8 }, (_, i) => colors[i])
-
-  let sm = breakpoint === `sm`
-  let md = breakpoint === `md`
-  let lg = breakpoint === `lg`
-  const columns = breakpoint === 'lg' ? 3 : 2
-  const rows = columns === 3 ? 3 : 2
-
-  const items = Array.from(
-    { length: columns === 3 ? 9 : 8 },
-    (_, i) => colors[i]
-  )
+  const items = Array.from({ length: lg ? 9 : 8 }, (_, i) => colors[i])
 
   let { isDarkMode } = useDarkMode()
 

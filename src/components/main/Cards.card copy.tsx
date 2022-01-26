@@ -52,7 +52,6 @@ export const CardsCard: React.FC<IProps> = ({
         height: height / rows,
         scale: open === i ? 1 : 0.93,
         borderRadius: open === i ? 0 : height * 0.0075,
-        paddingTop: open === null ? '0.1%' : ``,
       }}
       transition={{
         borderRadius: {
@@ -60,52 +59,42 @@ export const CardsCard: React.FC<IProps> = ({
           duration: isResizing ? 0 : 0.5,
         },
       }}
-      className={`overflow-hidden flex flex-col justify-center items-center  bg-transparent  cursor-pointer shado -[2px_2px_10px_5px_rgba(50,50,50,0.1)] shadow-cyan-800/50`}
+      className={`overflow-hidden flex flex-col justify-center items-center  bg-transparent ${
+        lg ? `p-[1%]` : `p-[1.35%]`
+      } cursor-pointer shado -[2px_2px_10px_5px_rgba(50,50,50,0.1)] shadow-cyan-800/50`}
       onMouseDown={() => handleClick(i)}
     >
       <motion.div
         initial={{
-          // position: `absolute`,
+          position: `absolute`,
           // backgroundColor: isDarkMode ? `#505050` : 'whitesmoke',
           backgroundImage: `url(${MiamiBeach})`,
           backgroundPosition: `center`,
           backgroundSize: `cover`,
-          // opacity: 0.3,
-          opacity: 0.85,
-          width: width,
+          opacity: 0.3,
         }}
         animate={
           open === i
             ? {
-                // width: width / columns - width / columns,
-                width: width / columns - height * 0.005,
-
-                // height: height / rows - height / columns,
+                width: width / columns - width / columns,
+                height: height / rows - height / columns,
                 borderRadius: 0,
-                height: '0vh',
                 backgroundColor: isDarkMode ? `#505050` : 'whitesmoke',
               }
             : {
                 width: width / columns - height * 0.005,
-                // height: height / rows - height * 0.005,
-                // height: `max-content`,
-                height: '80vh',
+                height: height / rows - height * 0.005,
                 borderRadius: height * 0.006,
                 backgroundColor: isDarkMode ? `#505050` : 'whitesmoke',
               }
         }
         transition={{ duration: isResizing ? 0 : 0.5 }}
+        style={{}}
       />
       <motion.div
-        // animate={open === null ? { scale: 0.8, x: '-10%', y: '10%' } : {}}
-
-        initial={{ padding: '3%', paddingTop: open === null ? '0%' : '3%' }}
-        animate={{
-          padding: '3%',
-          paddingTop: open === null ? '0%' : '3%',
-        }}
+        animate={open === null ? { scale: 0.8, x: '-10%', y: '10%' } : {}}
         transition={{ delay: 0.2, duration: 0.4 }}
-        className={`z-10 bg-red-20 flex flex-col items-start justify-start w-[100%] h-[100%] ${
+        className={`z-10 flex flex-col items-start justify-start w-[100%] h-[100%] ${
           isDarkMode && open !== i ? `text-gray-200` : ``
         } `}
       >

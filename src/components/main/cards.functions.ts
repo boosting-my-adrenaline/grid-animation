@@ -33,6 +33,7 @@ export const handleClickMultiple3 = (
       navigate('/page/' + (num + 1))
     }
   }, 800)
+
   if (open !== null) {
     setMultiple(1)
     setOpen(null)

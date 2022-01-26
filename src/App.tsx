@@ -49,26 +49,20 @@ export const App: React.FC = () => {
 
   const { width: windowWidth, height: windowHeight } = useWindowSize()
   const [breakpoint, setBreakpoint] = useState<Breakpoints>(
-    windowWidth > 1200 ? `lg` : 'md'
+    windowWidth > 1200
+      ? `lg`
+      : windowWidth < 1200 && windowWidth >= 768
+      ? 'md'
+      : 'sm'
   )
+
   useEffect(() => {
-    windowWidth > 1200 ? setBreakpoint(`lg`) : setBreakpoint('md')
+    windowWidth > 1200
+      ? setBreakpoint(`lg`)
+      : windowWidth < 1200 && windowWidth >= 768
+      ? setBreakpoint('md')
+      : setBreakpoint(`sm`)
   }, [windowWidth])
-
-  const [filterHeight, setFilterHeight] = useState(
-    open === null ? `5vh` : `0vh`
-  )
-
-  useDidMountEffect(() => {
-    let id = setTimeout(
-      () => {
-        open === null
-          ? setFilterHeight(`calc(5vh + 6px)`)
-          : setFilterHeight(`calc(0vh + 0px)`)
-      },
-      open === null ? 300 : 250
-    )
-  }, [open])
 
   const [opening, setOpening] = useState(false)
 
@@ -80,6 +74,19 @@ export const App: React.FC = () => {
     let id = setTimeout(() => setIsResizing(false), 300)
     return () => clearTimeout(id)
   }, [windowHeight, windowHeight])
+
+  // const [filterHeight, setFilterHeight] = useState(open ? `5vh + 6px` : `0vh`)
+
+  // useDidMountEffect(() => {
+  //   let id = setTimeout(
+  //     () => {
+  //       open === null
+  //         ? setFilterHeight(`calc(5vh + 6px)`)
+  //         : setFilterHeight(`calc(0vh + 0px)`)
+  //     },
+  //     open === null ? 300 : 250
+  //   )
+  // }, [open])
 
   return (
     <div
@@ -93,10 +100,16 @@ export const App: React.FC = () => {
       <BrowserRouter>
         <Navbar opening={opening} setOpening={setOpening} />
         <div
-          className={` flex flex-col items-center justify-center pt-[5vh] max-w-[2000] mx-[200px] `}
+          className={` flex flex-col items-center justify-center pt-[5vh] max-w-[2000] ${
+            `` // width >= 1200
+            //   ? `mx-[200px]`
+            //   : width < 1200 && width >= 800
+            //   ? `mx-[50px] `
+            //   : ` mx-[10]px`
+          }  `}
         >
-          <div
-            className={`w-[100%] flex flex-col items-center`}
+          <motion.div
+            className={`w-[100%] flex flex-col items-center pt-[]`}
             ref={parentRef}
           >
             <Routes>
@@ -104,7 +117,7 @@ export const App: React.FC = () => {
                 path="/"
                 element={
                   <>
-                    <Cardsfilter open={open !== null} />
+                    {/* <Cardsfilter open={open} /> */}
                     <CardsContainer
                       open={open}
                       setOpen={setOpen}
@@ -131,11 +144,12 @@ export const App: React.FC = () => {
                     height={height}
                     setOpen={setOpen}
                     opening={opening}
+                    windowWidth={windowWidth}
                   />
                 }
               />
             </Routes>
-          </div>
+          </motion.div>
         </div>
         <Footer />
       </BrowserRouter>
