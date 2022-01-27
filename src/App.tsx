@@ -16,6 +16,7 @@ export type Breakpoints = 'sm' | 'md' | 'lg'
 
 export const App: React.FC = () => {
   const [parentRef, { width, height }] = useElementSize()
+  const [navbarRef, { height: navbarHeight }] = useElementSize()
 
   const [open, setOpen] = useLocalStorage<null | number>('isOpen', null)
   const [multiple, setMultiple] = useLocalStorage('main-multiple', 1)
@@ -51,7 +52,7 @@ export const App: React.FC = () => {
   const [breakpoint, setBreakpoint] = useState<Breakpoints>(
     windowWidth > 1200
       ? `lg`
-      : windowWidth < 1200 && windowWidth >= 768
+      : windowWidth < 1200 && windowWidth >= 800
       ? 'md'
       : 'sm'
   )
@@ -59,8 +60,8 @@ export const App: React.FC = () => {
   useEffect(() => {
     windowWidth > 1200
       ? setBreakpoint(`lg`)
-      : windowWidth < 1200 && windowWidth >= 768
-      ? setBreakpoint('md')
+      : windowWidth < 1200 && windowWidth > 800
+      ? setBreakpoint(`md`)
       : setBreakpoint(`sm`)
   }, [windowWidth])
 
@@ -98,16 +99,25 @@ export const App: React.FC = () => {
       }`}
     >
       <BrowserRouter>
-        <Navbar opening={opening} setOpening={setOpening} />
+        <Navbar
+          opening={opening}
+          setOpening={setOpening}
+          breakpoint={breakpoint}
+          ref={navbarRef}
+        />
         <div
-          className={` flex flex-col items-center justify-center pt-[5vh] max-w-[2000] ${
-            `` // width >= 1200
-            //   ? `mx-[200px]`
-            //   : width < 1200 && width >= 800
-            //   ? `mx-[50px] `
-            //   : ` mx-[10]px`
+          // style={{ paddingTop: `${navbarHeight}px` }}
+          className={` flex flex-col items-center justify-center  max-w-[2000] ${
+            breakpoint === `lg`
+              ? `mx-[200px]`
+              : breakpoint === `md`
+              ? `mx-[25px] `
+              : ` mx-[10px]`
           }  `}
         >
+          <div
+            className={`text-React-h1 py-1 font-Cooper uppercase`}
+          >{`\u0a00`}</div>
           <motion.div
             className={`w-[100%] flex flex-col items-center pt-[]`}
             ref={parentRef}
@@ -117,7 +127,7 @@ export const App: React.FC = () => {
                 path="/"
                 element={
                   <>
-                    {/* <Cardsfilter open={open} /> */}
+                    <Cardsfilter open={open} />
                     <CardsContainer
                       open={open}
                       setOpen={setOpen}

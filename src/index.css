@@ -8,8 +8,24 @@
 
 @font-face {
   font-family: 'Bebas';
-  src: url('../fonts/Fontspring-DEMO-bebasneuepro-middle.otf');
+  src: url('../fonts/Bebas.otf');
 }
+
+@font-face {
+  font-family: 'Cooper';
+  src: url('../fonts/Cooper.ttf');
+}
+
+@font-face {
+  font-family: 'Nuvo';
+  src: url('../fonts/Nuvo.ttf');
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('../fonts/Pitch.ttf');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

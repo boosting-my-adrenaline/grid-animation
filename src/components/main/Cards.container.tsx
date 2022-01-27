@@ -7,7 +7,11 @@ import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
 import { useWindowSize } from '../../utils/hooks/useDimensions'
 import useElementSize from '../../utils/hooks/useElementSize'
 import { CardsCard } from './Cards.card'
-import { handleClickMultiple2, handleClickMultiple3 } from './cards.functions'
+import {
+  handleClickMultiple1,
+  handleClickMultiple2,
+  handleClickMultiple3,
+} from './cards.functions'
 
 interface IProps {
   open: null | number
@@ -51,8 +55,8 @@ export const CardsContainer: React.FC<IProps> = ({
   let sm = breakpoint === `sm`
   let md = breakpoint === `md`
   let lg = breakpoint === `lg`
-  const columns = breakpoint === 'lg' ? 3 : 2
-  const rows = columns === 3 ? 3 : 2
+  const columns = lg ? 3 : md ? 2 : 1
+  const rows = lg ? 3 : md ? 2 : 4
 
   const items = Array.from(
     { length: columns === 3 ? 9 : 8 },
@@ -79,21 +83,33 @@ export const CardsContainer: React.FC<IProps> = ({
         setParams,
         open
       )
+    } else if (md) {
+      handleClickMultiple2(
+        i,
+        block,
+        width,
+        height,
+        setBlock,
+        navigate,
+        setMultiple,
+        setOpen,
+        setParams,
+        open
+      )
+    } else {
+      handleClickMultiple1(
+        i,
+        block,
+        width,
+        height,
+        setBlock,
+        navigate,
+        setMultiple,
+        setOpen,
+        setParams,
+        open
+      )
     }
-    //  else {
-    //   handleClickMultiple2(
-    //     i,
-    //     block,
-    //     width,
-    //     height,
-    //     setBlock,
-    //     navigate,
-    //     setMultiple,
-    //     setOpen,
-    //     setParams,
-    //     open
-    //   )
-    // }
   }
   const elements = items.map((el, i) => (
     <CardsCard
@@ -126,7 +142,7 @@ export const CardsContainer: React.FC<IProps> = ({
     <div
       // style={{ width: width }} ////////?!!!
       className={`w-[100%] relative  ${
-        lg ? `h-[105vh]` : md ? `h-[205vh] ` : `h-[165vh]`
+        lg ? `h-[105vh]` : md ? `h-[205vh] ` : `h-[205vh]`
       } ${
         isDarkMode && 'bg-[ #333333]'
       }  flex justify-center items-start ${margin}`}

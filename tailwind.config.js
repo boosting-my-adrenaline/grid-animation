@@ -8,6 +8,9 @@ module.exports = {
         ArchitectsDaughter: ['Architects Daughter'],
         Staatliches: ['Staatliches'],
         Merriweather: ['Merriweather'],
+        Cooper: ['Cooper'],
+        Nuvo: ['Nuvo'],
+        Pitch: ['Pitch'],
       },
       fontSize: {
         'React-h1': 'calc(10px + 2vmin)',
@@ -24,8 +27,13 @@ module.exports = {
         'React-p4*.1.5': 'calc(3.3vmin)',
 
         'React-p*3': 'calc(6px + 4.5vmin)',
-        'xl-1': 'calc(16px + 5.2vmin)',
+
+        'xl-1': 'calc(20px + 5.2vmin)',
+        'xl-1-sm': 'calc(16px + 3.3vmin)',
+        'xl-1-xs': 'calc(8px + 3vmin)',
+
         'xl-2': 'calc(20px + 6.95vmin)',
+        'xl-2-sm': 'calc(12px + 6.2vmin)',
       },
       transitionTimingFunction: {
         'in-expo': 'cubic-bezier(0.95, 0.05, 0.795, 0.035)',

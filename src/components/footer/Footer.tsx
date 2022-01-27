@@ -10,7 +10,8 @@ export const Footer: React.FC = () => {
   const { isDarkMode } = useDarkMode()
 
   const lg = width >= 1200
-  const mobile = width <= 500
+  const md = width < 1200 && width >= 500
+  const sm = width <= 500
 
   return (
     <div
@@ -19,16 +20,16 @@ export const Footer: React.FC = () => {
       } border-t border-gray-500 font-Bebas ${
         lg
           ? `text-React-h2 px-[2vh]`
-          : mobile
+          : sm
           ? `text-React-h1*1.2 p-[0.5vh]`
-          : `text-React-h1*1.5 p-[2vh]`
+          : `text-React-h1*1.5 p-[1vh]`
       } pt-[4rem]  `}
     >
       <FooterButtonAbove />
 
       <div
         className={`${
-          lg ? `px-[4rem]` : mobile ? `px-[0.5rem]` : `px-[2rem]`
+          lg ? `px-[4rem]` : sm ? `px-[0.5rem]` : `px-[2rem]`
         } mx-auto max-w-[2480px] `}
       >
         <ul

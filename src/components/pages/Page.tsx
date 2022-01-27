@@ -28,7 +28,8 @@ export const Page: React.FC<IProps> = ({
 }) => {
   const xl = width
   const lg = width >= 1200
-  const md = width < 1200 && width
+  const md = width < 1200 && width > 800
+  const sm = width <= 800
 
   const navigate = useNavigate()
 
@@ -43,7 +44,7 @@ export const Page: React.FC<IProps> = ({
       () =>
         setParams((prev) => ({
           ...prev,
-          padding: `1% 10%`,
+          padding: lg ? `1% 10%` : md ? `1% 5%` : `1% 5%`,
           back: true,
           height: '0vh',
         })),
@@ -86,7 +87,7 @@ export const Page: React.FC<IProps> = ({
   const { isDarkMode } = useDarkMode()
 
   const ref: any = useRef<HTMLDivElement>()
-  const onScreen: boolean = useOnScreen<HTMLDivElement>(ref, '0px')
+  // const onScreen: boolean = useOnScreen<HTMLDivElement>(ref, '0px')
 
   let textHighlight = { color: !isDarkMode ? bg[2] : bg[4] }
 
@@ -120,15 +121,21 @@ export const Page: React.FC<IProps> = ({
         />
         <div className={`z-10`}>
           <h1
-            className={`z-10 font-BebasNeue text-React-h1*3 translate-y-[-3px] `}
+            className={`z-10 font-BebasNeue ${
+              !sm ? `text-React-h1*3 ` : `text-React-h1*1.5`
+            } translate-y-[-3px] `}
           >
             Tenetur, sapiente, ea excepturi
           </h1>
 
           <motion.p
-            initial={{ fontSize: 'calc(6.6vmin)' }}
+            initial={{ fontSize: !sm ? 'calc(6.6vmin)' : `calc(3.3vmin)` }}
             animate={{
-              fontSize: !params.back ? 'calc(6.6vmin)' : 'calc(2.8vmin )',
+              fontSize: !params.back
+                ? !sm
+                  ? 'calc(6.6vmin)'
+                  : 'calc(3.3vmin)'
+                : 'calc(2.8vmin)',
             }}
             transition={{ duration: 0.4 }}
             className={`z-10 font-Bebas `}
@@ -182,11 +189,15 @@ export const Page: React.FC<IProps> = ({
         initial={{ y: 1000, padding: params.padding }}
         animate={{ y: 0, padding: params.padding }}
         transition={{ delay: 0, duration: 0.4 }}
-        className={`w-[100%] h-[min-content]  text-gray-800 font-Bebas text-React-h1 ${
-          isDarkMode && ` text-gray-50`
-        }`}
+        className={`w-[100%] h-[min-content]  text-gray-800 font-Bebas ${
+          !sm || 1 ? `text-React-h1` : `text-React-p`
+        } ${isDarkMode && ` text-gray-50`}`}
       >
-        <div className={`pb-8 text-React-h2 w-full  flex`}>
+        <div
+          className={` w-full ${
+            !sm ? `pb-8 text-React-h2` : `pb-4 text-React-p2`
+          } w-full  flex items-start`}
+        >
           {['Belize Sierra', 'Ivory Coast', 'Liberia', 'Montenegro'].map(
             (el, i) => (
               <span
@@ -194,7 +205,9 @@ export const Page: React.FC<IProps> = ({
                   isDarkMode
                     ? `text-gray-400 border-gray-400`
                     : `text-gray-700 border-gray-800`
-                } border  p-[2px_8px] rounded-md mr-3`}
+                } border  ${
+                  !sm ? `p-[2px_8px]` : `p-[2px_4px] whitespace-nowrap`
+                } rounded-md mr-3`}
               >
                 {el}
               </span>
@@ -202,32 +215,43 @@ export const Page: React.FC<IProps> = ({
           )}
           <div className={`flex-grow`} />
           <span className={`font-MochiyPopPOne`}>JAN. 23, 2022</span>
-          <div className={`w-[32%]`} />
+          {/* <div className={`w-[32%]`} /> */}
         </div>
-        <img
-          className={`float-right w-[30%] ml-8 `}
-          alt="Miami Beach. FL. USA"
-          src={MiamiBeach}
-        />
-        <div className={`w-[min-content]  bg-red-20 space-y-[-5.5vh]`}>
+        {(lg || md) && (
+          <img
+            className={`float-right w-[30%] ml-8`}
+            alt="Miami Beach. FL. USA"
+            src={MiamiBeach}
+          />
+        )}
+        <div
+          className={`w-[min-content]  bg-red-20 ${
+            lg ? `space-y-[-5.0vh]` : `space-y-[-2.5vh]`
+          }`}
+        >
           <h1
-            className={`text-xl-2 font-Merriweather uppercase flex items-between`}
+            className={`${
+              lg ? `text-xl-2` : `text-xl-2-sm`
+            } font-Cooper uppercase flex items-between`}
           >
             <span>tempo</span>
             <div className={`flex-grow`} />
             <span>aucto</span>
           </h1>
-          <h1 className={`text-xl-1 font-Merriweather uppercase`}>
+          <h1
+            className={`${
+              lg ? `text-xl-1` : `text-xl-1-sm`
+            } font-Cooper uppercase`}
+          >
             de`pellentesque
           </h1>
         </div>
         <div
           className={`${
             isDarkMode ? `text-gray-400` : `text-gray-700`
-          } text-React-p2 pl-1`}
+          } text-React-p2 pl-1 font-Cooper`}
         >
-          Praesent elementum lorem vel ligula imperdiet molestie elementum nunc
-          at tellus vel, sagittis congue.
+          Praesent elementum lorem vel ligula imperdiet molestie elementum nunc.
         </div>
         <br />
         <div className={`mr- [33%] bg-red-00 text-React-h1`}>
@@ -247,8 +271,21 @@ export const Page: React.FC<IProps> = ({
           <span style={textHighlight}>gravida </span>sem.
         </div>
         <br />
+        {sm && (
+          <img
+            className={`w-[48%] float-left mb-6`}
+            alt="Miami Beach. FL. USA"
+            src={MiamiBeach}
+          />
+        )}
         <img
-          className={`float-left w-[30%] mr-10 mb-8 translate-y-[10px]`}
+          className={` ${
+            lg
+              ? ` translate-y-[10px] float-left  w-[30%] mr-10 mb-8`
+              : md
+              ? `w-[40%] mr-6 mb-4 float-left translate-y-[10px]`
+              : 'w-[48%] mr-3 mb-6 float-right'
+          } `}
           alt="Ocean Drive"
           src={OceanDrive}
         />
@@ -288,16 +325,18 @@ export const Page: React.FC<IProps> = ({
         </p>
         <br />
         <img
-          className={`float-right  w-[36%] ml-10 mb-8 translate-y-[10px]`}
+          className={`float-right    ${
+            lg ? ` w-[36%] ml-10 mb-8` : md ? `w-[100%] mb-8` : 'ml-3 mb-6'
+          } translate-y-[10px]`}
           alt="Tropics"
           src={Tropics}
         />{' '}
         <p>
           Error aliquid cum amet, rerum{' '}
-          <span style={textHighlight}>incidunt mollitia </span>dolore rem at?
-          Commodi adipisci nesciunt culpa nisi? Illum dignissimos ab quibusdam
-          tempora. Ducimus commodi id at, fugiat perspiciatis incidunt fuga.
-          Odit aliquid cumque, inventore{' '}
+          <span style={textHighlight}>incidunt mollitia </span>dolore si rem at?
+          Commodi ot adip lisci nesciunt dom culpa nisi? Illum iure dignissimos
+          ab quibusdam tempora. Ducimus commodi id at, fugiat perspiciatis
+          incidunt fuga. Odit aliquid cumque, inventore{' '}
           <span style={textHighlight}>
             blanditiis eligendi cupiditate quia ipsa neque eius{' '}
           </span>
@@ -374,6 +413,12 @@ export const Page: React.FC<IProps> = ({
           exercitationem dolore tempora nisi omnis ipsam id dignissimos quod
           repudiandae. Repellendus, temporibus sunt?
         </p> */}
+        <br />
+        <br />
+        <div className={`flex justify-between`}>
+          <p></p>
+          <p></p>
+        </div>
       </motion.div>
     </div>
   )
