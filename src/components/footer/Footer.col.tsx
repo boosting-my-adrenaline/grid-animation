@@ -38,7 +38,6 @@ export const FooterCol: React.FC<IPropsCol> = ({ title, lis, lg }) => {
             className={`w-[2rem] text-gray-100 ${
               expanded && `rotate-180`
             } translate-y-[-0.25rem] transition duration-400 ease`}
-            xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 33.5 19.992"
           >
             <path

@@ -30,7 +30,13 @@ export const Footer: React.FC = () => {
       <div
         className={`${
           lg ? `px-[4rem]` : sm ? `px-[0.5rem]` : `px-[2rem]`
-        } mx-auto max-w-[2480px] `}
+        } mx-auto ${
+          width > 2000
+            ? 'max-w-[1800px]'
+            : width <= 2000 && width > 1200
+            ? `max-w-[1620px]`
+            : ''
+        } `}
       >
         <ul
           className={`flex ${

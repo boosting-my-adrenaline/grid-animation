@@ -24,7 +24,11 @@ export const FooterBottom: React.FC<IProps> = ({ lg }) => {
           <FooterLi i={i} tag={el} />
         ))}
       </ul>
-      <ul className={`flex ${lg ? `gap-[2rem]` : 'gap-[3.5rem]'}`}>
+      <ul
+        className={`flex flex-wrap justify-center ${
+          lg ? `gap-[2rem]` : 'gap-[3.5rem]'
+        }`}
+      >
         <li>
           <a
             target={'_blank'}

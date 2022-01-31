@@ -2,8 +2,11 @@ import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Footer } from './components/footer/Footer'
+import { LoadingPage } from './components/loading/LoadingPage'
 import { CardsContainer } from './components/main/Cards.container'
-import { Cardsfilter } from './components/main/Cards.filter'
+import { CardsFilter } from './components/main/Cards.filter'
+import { assembleCards } from './components/main/cards.former'
+import { CardsPagination } from './components/main/Cards.pagination'
 import { Navbar } from './components/navbar/Navbar'
 import { Page } from './components/pages/Page'
 import useDarkMode from './utils/hooks/useDarkMode'
@@ -14,9 +17,58 @@ import useLocalStorage from './utils/hooks/useLocalStorage'
 
 export type Breakpoints = 'sm' | 'md' | 'lg'
 
+export type Sort = 'most popular' | 'recommended' | 'newest' | 'oldest'
+
 export const App: React.FC = () => {
   const [parentRef, { width, height }] = useElementSize()
-  const [navbarRef, { height: navbarHeight }] = useElementSize()
+  const [sort, setSort] = useLocalStorage<Sort>('sort', 'recommended')
+
+  const [cards, setCards] = useLocalStorage(
+    'cards',
+    assembleCards(9, sort === `most popular` ? true : false)
+  )
+
+  const [shuffle, setShuffle] = useState(0)
+
+  useDidMountEffect(() => {
+    setCards(assembleCards(9, sort === `most popular` ? true : false))
+  }, [shuffle, sort])
+
+  const handleShuffle = () => {
+    setShuffle((prev) => prev + 1)
+  }
+
+  const [loadingBlast, setLoadingBlast] = useState<null | string>('BLAST')
+  const [allHidden, setAllHidden] = useState(true)
+
+  useEffect(() => {
+    try {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      })
+    } catch (error) {
+      window.scrollTo(0, 0)
+    }
+
+    setTimeout(() => setAllHidden(false), 500)
+  }, [])
+
+  const handleLoadingBlast = (tag: string) => {
+    if (loadingBlast === null) {
+      try {
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        })
+      } catch (error) {
+        window.scrollTo(0, 0)
+      }
+      setLoadingBlast(tag)
+    }
+  }
 
   const [open, setOpen] = useLocalStorage<null | number>('isOpen', null)
   const [multiple, setMultiple] = useLocalStorage('main-multiple', 1)
@@ -29,22 +81,7 @@ export const App: React.FC = () => {
     }
   }, [open])
 
-  const colors: [string, string, string, boolean, string][] = [
-    ['#D65DB1', '#EDEDED', '#D65DB1', true, '#D65DB1'],
-    ['#845EC2', '#EDEDED', '#845EC2', true, '#845EC2'],
-    ['#FF6F91', '#EDEDED', '#FF6F91', true, '#FF6F91'],
-
-    ['#F9F871', '#0A0AFF', '#0A0AFF', false, '#F9F871'],
-    ['#FF9671', '#FDFDFD', '#FF9671', true, '#FF9671'],
-    ['#FFC75F', '#2424FF', '#2424FF', false, '#FFC75F'],
-
-    ['#4FFBDF', '#8F7200', '#8F7200', false, '#4FFBDF'],
-    ['#C4FCEF', '#468847', '#468847', false, '#468847'],
-    ['#B0A8B9', '#FDFDFD', '#B0A8B9', true, '#F9F871'],
-
-    ['#D65DB1', '#EDEDED', '#D65DB1', true, '#D65DB1'],
-  ]
-  // const [squareRef, { width, height }] = useElementSize()
+  const [isMain, setIsMain] = useState(true)
 
   const { isDarkMode } = useDarkMode()
 
@@ -76,22 +113,15 @@ export const App: React.FC = () => {
     return () => clearTimeout(id)
   }, [windowHeight, windowHeight])
 
-  // const [filterHeight, setFilterHeight] = useState(open ? `5vh + 6px` : `0vh`)
+  const [loadingCards, setLoadingCards] = useState(true)
 
-  // useDidMountEffect(() => {
-  //   let id = setTimeout(
-  //     () => {
-  //       open === null
-  //         ? setFilterHeight(`calc(5vh + 6px)`)
-  //         : setFilterHeight(`calc(0vh + 0px)`)
-  //     },
-  //     open === null ? 300 : 250
-  //   )
-  // }, [open])
+  useEffect(() => {
+    setTimeout(() => setLoadingCards(false), 400)
+  }, [])
 
   return (
     <div
-      className={`w-full h-[100%] ${
+      className={`w-full h-[100%] overflow-y-hidden ${
         isDarkMode
           ? // ? `bg-[#333333] shadow-gray-200/60`
             `bg-[#101010] shadow-gray-200/60`
@@ -103,44 +133,71 @@ export const App: React.FC = () => {
           opening={opening}
           setOpening={setOpening}
           breakpoint={breakpoint}
-          ref={navbarRef}
+          isMain={isMain}
+          setLoadingBlast={handleLoadingBlast}
         />
+        {loadingBlast && (
+          <LoadingPage setLoadingBlast={setLoadingBlast} tag={'BLAST'} />
+        )}
         <div
           // style={{ paddingTop: `${navbarHeight}px` }}
-          className={` flex flex-col items-center justify-center  max-w-[2000] ${
+          className={` flex flex-col items-center justify-center   ${
             breakpoint === `lg`
-              ? `mx-[200px]`
+              ? windowWidth >= 1800
+                ? `mx-[200px] `
+                : `mx-[150px]  `
               : breakpoint === `md`
-              ? `mx-[25px] `
-              : ` mx-[10px]`
-          }  `}
+              ? `mx-[100px] `
+              : windowWidth >= 300
+              ? ` mx-[10px]`
+              : 'mx-[2px]'
+          }  ${allHidden && `opacity-0`}`}
         >
           <div
             className={`text-React-h1 py-1 font-Cooper uppercase`}
-          >{`\u0a00`}</div>
+          >{`\u00a0`}</div>
           <motion.div
             className={`w-[100%] flex flex-col items-center pt-[]`}
             ref={parentRef}
           >
             <Routes>
               <Route
-                path="/"
+                path="/*"
                 element={
                   <>
-                    <Cardsfilter open={open} />
+                    <CardsFilter
+                      open={open}
+                      loadingCards={loadingCards}
+                      setLoadingCards={setLoadingCards}
+                      handleShuffle={handleShuffle}
+                      breakpoint={breakpoint}
+                      sort={sort}
+                      setSort={setSort}
+                      width={width}
+                    />
                     <CardsContainer
                       open={open}
                       setOpen={setOpen}
                       width={width}
+                      windowWidth={windowWidth}
                       height={windowHeight}
-                      // height={height}
-                      colors={colors}
+                      // colors={colors}
                       params={params}
                       setParams={setParams}
                       multiple={multiple}
                       setMultiple={setMultiple}
                       breakpoint={breakpoint}
                       isResizing={isResizing}
+                      loading={loadingCards}
+                      cards={cards}
+                    />
+                    <CardsPagination
+                      open={open}
+                      loadingCards={loadingCards}
+                      setLoadingCards={setLoadingCards}
+                      handleShuffle={handleShuffle}
+                      breakpoint={breakpoint}
+                      windowWidth={windowWidth}
                     />
                   </>
                 }
@@ -149,12 +206,14 @@ export const App: React.FC = () => {
                 path="/page/*"
                 element={
                   <Page
-                    bg={colors[open || 9]}
-                    width={width}
+                    card={cards[open || 0]}
+                    width={windowWidth}
                     height={height}
                     setOpen={setOpen}
                     opening={opening}
                     windowWidth={windowWidth}
+                    isMain={isMain}
+                    setIsMain={setIsMain}
                   />
                 }
               />

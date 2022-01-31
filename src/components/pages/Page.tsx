@@ -1,37 +1,52 @@
 import { motion } from 'framer-motion'
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import useDarkMode from '../../utils/hooks/useDarkMode'
 import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
 import useOnScreen from '../../utils/hooks/useOnScreen'
-const Arch = require('../../static/arch.jpg')
-const Tropics = require('../../static/tropics.jpg')
-const MiamiBeach = require('../../static/miami-beach.jpg')
-const OceanDrive = require('../../static/ocean-drive.jpg')
+import { Card } from '../main/cards.former'
+import { PageReadMore } from './Page.read.more'
+import { PageShareThisStory } from './Page.share'
 
 interface IProps {
-  bg: [string, string, string, boolean, string]
   width: number
   height: number
   setOpen: (open: null) => void
   opening: boolean
   windowWidth: number
+  card: Card
+  isMain: boolean
+  setIsMain: (main: boolean) => void
 }
 
 export const Page: React.FC<IProps> = ({
-  bg,
   width,
   height,
   setOpen,
   opening,
   windowWidth,
+  card,
+  setIsMain,
+  isMain,
 }) => {
-  const xl = width
-  const lg = width >= 1200
+  const xl = width >= 1800
+  const lg = width < 1800 && width >= 1200
   const md = width < 1200 && width > 800
   const sm = width <= 800
 
   const navigate = useNavigate()
+  const location = useLocation()
+  const { pathname } = location
+
+  useEffect(() => {
+    console.log(location)
+    if (pathname == '') {
+      setIsMain(true)
+      console.log('mainnn')
+    } else {
+      setIsMain(false)
+    }
+  }, [pathname])
 
   const [params, setParams] = useState({
     padding: `3% 3%`,
@@ -44,7 +59,7 @@ export const Page: React.FC<IProps> = ({
       () =>
         setParams((prev) => ({
           ...prev,
-          padding: lg ? `1% 10%` : md ? `1% 5%` : `1% 5%`,
+          padding: xl || lg ? `1% 10%` : md ? `1% 5%` : `3% 5%`,
           back: true,
           height: '0vh',
         })),
@@ -75,7 +90,7 @@ export const Page: React.FC<IProps> = ({
     }
 
     setTimeout(() => navigate('/'), 400)
-    setTimeout(() => setOpen(null), 400)
+    setTimeout(() => setOpen(null), 500)
   }
 
   useDidMountEffect(() => {
@@ -86,15 +101,23 @@ export const Page: React.FC<IProps> = ({
 
   const { isDarkMode } = useDarkMode()
 
-  const ref: any = useRef<HTMLDivElement>()
   // const onScreen: boolean = useOnScreen<HTMLDivElement>(ref, '0px')
+
+  const bg: [string, string, string, boolean, string] = [
+    card.colors.mainColor,
+    card.colors.contrastForMain,
+    card.colors.forLightBackground,
+    card.colors.isLight,
+    card.colors.forDarkBackground,
+  ]
 
   let textHighlight = { color: !isDarkMode ? bg[2] : bg[4] }
 
+  const highlightTitleText = { color: card.colors.contrastForMain }
+
   return (
-    <div className={`w-[100%] `}>
+    <div className={`w-[100%] flex flex-col items-center`}>
       <motion.div
-        ref={ref}
         initial={{
           height: 'min-content',
 
@@ -119,13 +142,13 @@ export const Page: React.FC<IProps> = ({
           transition={{ duration: 0.6 }}
           className={`absolute h-[100%]`}
         />
-        <div className={`z-10`}>
+        <div className={`z-10 w-full`}>
           <h1
-            className={`z-10 font-BebasNeue ${
+            className={`z-10 font-BebasNeue  ${
               !sm ? `text-React-h1*3 ` : `text-React-h1*1.5`
             } translate-y-[-3px] `}
           >
-            Tenetur, sapiente, ea excepturi
+            {card.title}
           </h1>
 
           <motion.p
@@ -138,43 +161,20 @@ export const Page: React.FC<IProps> = ({
                 : 'calc(2.8vmin)',
             }}
             transition={{ duration: 0.4 }}
-            className={`z-10 font-Bebas `}
+            className={`z-10 font-Bebas first-letter:uppercase`}
           >
-            Error dicta molestias
-            <span
-              style={{ color: params.back || 1 ? bg[1] : 'rgb(115 115 115)' }}
-            >
-              {' '}
-              nesciunt accusantium{' '}
-            </span>
-            in doloremque quisquam assumenda id, tenetur amet debitis. Debitis
-            sequi eligendi{' '}
-            <span
-              style={{ color: params.back || 1 ? bg[1] : 'rgb(115 115 115)' }}
-            >
-              ex{' '}
-            </span>
-            voluptatum. Repellendus{' '}
-            <span
-              style={{ color: params.back || 1 ? bg[1] : 'rgb(115 115 115)' }}
-            >
-              architecto minus{' '}
-            </span>
-            exercitationem. Velit nihil odio
-            <span
-              style={{ color: params.back || 1 ? bg[1] : 'rgb(115 115 115)' }}
-            >
-              {' '}
-              nostrum{' '}
-            </span>
-            dolorem eos, repellat ullam et deserunt pariatur, itaque
-            <span
-              style={{ color: params.back || 1 ? bg[1] : 'rgb(115 115 115)' }}
-            >
-              {' '}
-              enim vero
-            </span>{' '}
-            quibusdam nulla quia.
+            {' '}
+            {card.text.split(' ').map((el, i) => {
+              if (el === el.toUpperCase()) {
+                return (
+                  <span style={highlightTitleText} className={` lowercase`}>
+                    {el}{' '}
+                  </span>
+                )
+              } else {
+                return <span>{el} </span>
+              }
+            })}
           </motion.p>
         </div>
         <motion.div
@@ -185,18 +185,44 @@ export const Page: React.FC<IProps> = ({
         ></motion.div>
       </motion.div>
 
+      {/* <div style={{ color: bg[4], backgroundColor: '#333' }}>TEST</div> */}
+
       <motion.div
-        initial={{ y: 1000, padding: params.padding }}
-        animate={{ y: 0, padding: params.padding }}
+        initial={{
+          y: 1000,
+          padding: params.padding,
+          // width: xl
+          //   ? windowWidth >= 2700
+          //     ? '70%'
+          //     : windowWidth > 2000
+          //     ? '65%'
+          //     : 1200
+          //   : lg
+          //   ? 1000
+          //   : '',
+        }}
+        animate={{
+          y: 0,
+          padding: params.padding,
+          width: xl
+            ? windowWidth >= 2700
+              ? '70%'
+              : windowWidth > 2000
+              ? '65%'
+              : 1200
+            : lg
+            ? 1000
+            : '',
+        }}
         transition={{ delay: 0, duration: 0.4 }}
-        className={`w-[100%] h-[min-content]  text-gray-800 font-Bebas ${
-          !sm || 1 ? `text-React-h1` : `text-React-p`
-        } ${isDarkMode && ` text-gray-50`}`}
+        className={`w-[100%] h-[min-content]  font-Cooper ${
+          !sm || 1 ? `text-React-Page max-w-[1000] ` : `text-React-p`
+        } ${isDarkMode ? ` text-gray-200` : `text-gray-800 `}`}
       >
         <div
           className={` w-full ${
-            !sm ? `pb-8 text-React-h2` : `pb-4 text-React-p2`
-          } w-full  flex items-start`}
+            !sm ? `pb-8 text-React-h2 ` : `pb-4 text-React-p2`
+          } w-full  flex items-center`}
         >
           {['Belize Sierra', 'Ivory Coast', 'Liberia', 'Montenegro'].map(
             (el, i) => (
@@ -217,33 +243,37 @@ export const Page: React.FC<IProps> = ({
           <span className={`font-MochiyPopPOne`}>JAN. 23, 2022</span>
           {/* <div className={`w-[32%]`} /> */}
         </div>
-        {(lg || md) && (
-          <img
-            className={`float-right w-[30%] ml-8`}
-            alt="Miami Beach. FL. USA"
-            src={MiamiBeach}
-          />
+        {(xl || lg || md) && (
+          <picture className={`flex flex-col  float-right w-[30%] ml-8 mb-4`}>
+            <img
+              className={` aspect-album object-cover`}
+              // alt="Miami Beach. FL. USA"
+              alt=""
+              // src={MiamiBeach}
+              src={card.image.main}
+            />
+            <dd className={`text-React-h3`}></dd>
+          </picture>
         )}
         <div
-          className={`w-[min-content]  bg-red-20 ${
-            lg ? `space-y-[-5.0vh]` : `space-y-[-2.5vh]`
+          className={`  bg-red-20 ${
+            xl ? `space-y-[-3.5vh]` : lg ? `space-y-[-2.5vh]` : ``
           }`}
         >
           <h1
             className={`${
-              lg ? `text-xl-2` : `text-xl-2-sm`
-            } font-Cooper uppercase flex items-between`}
-          >
-            <span>tempo</span>
-            <div className={`flex-grow`} />
-            <span>aucto</span>
-          </h1>
-          <h1
-            className={`${
-              lg ? `text-xl-1` : `text-xl-1-sm`
+              xl
+                ? 'text-xl-2'
+                : lg
+                ? windowWidth >= 1550
+                  ? `text-xl-2*0.75`
+                  : `text-xl-2*0.66`
+                : md
+                ? `text-xl-2-sm`
+                : `text-xl-2*0.75`
             } font-Cooper uppercase`}
           >
-            de`pellentesque
+            tempo aucto de`pellen tesque{' '}
           </h1>
         </div>
         <div
@@ -254,15 +284,18 @@ export const Page: React.FC<IProps> = ({
           Praesent elementum lorem vel ligula imperdiet molestie elementum nunc.
         </div>
         <br />
-        <div className={`mr- [33%] bg-red-00 text-React-h1`}>
+        <div className={``}>
           Vivamus tincidunt, ante{' '}
           <span style={textHighlight}>laoreet lobortis </span>
           facilisis,
           <span style={textHighlight}> neque ipsum facilisis orci</span>, quis
           tristique felis augue ultricies ipsum. Nunc lobortis massa eros,
           mollis <span style={textHighlight}>ultricies </span>
-          libero consequat vitae. Cras porttitor vel leo a mollis. Pellentesque
-          rhoncus eros non venenatis tristique.{' '}
+          libero consequat vitae.
+          <br />
+          <br />
+          Cras porttitor vel leo a mollis. Pellentesque rhoncus eros non
+          venenatis tristique.{' '}
           <span style={textHighlight}>Fusce in gravida sem</span>. Cras
           sollicitudin maximus risus sit amet aliquam. Donec rhoncus felis
           tortor, at porttitor est aliquet ac. Pellentesque a
@@ -273,27 +306,34 @@ export const Page: React.FC<IProps> = ({
         <br />
         {sm && (
           <img
-            className={`w-[48%] float-left mb-6`}
-            alt="Miami Beach. FL. USA"
-            src={MiamiBeach}
+            className={`w-[47%] float-left mb-6 aspect-album object-cover`}
+            // alt="Miami Beach. FL. USA"
+            // src={MiamiBeach}
+            src={card.image.main}
+            alt=""
           />
         )}
         <img
-          className={` ${
-            lg
-              ? ` translate-y-[10px] float-left  w-[30%] mr-10 mb-8`
+          className={`aspect-album object-cover ${
+            xl || lg
+              ? ` translate-y-[10px] float-left  w-[40%] mr-10 mb-8`
               : md
               ? `w-[40%] mr-6 mb-4 float-left translate-y-[10px]`
-              : 'w-[48%] mr-3 mb-6 float-right'
+              : 'w-[47%] mr-3 mb-6 float-right'
           } `}
-          alt="Ocean Drive"
-          src={OceanDrive}
+          // alt="Ocean Drive"
+          // src={OceanDrive}
+          src={card.image.vertical}
+          alt=""
         />
         <p>
           Fugiat est<span style={textHighlight}> repudiandae tenetur </span>{' '}
           delectus repellendus corrupti impedit, commodi nam debitis illo
           distinctio<span style={textHighlight}> reiciendis </span>veritatis
           excepturi quidem inventore reprehenderit repellat aspernatur ullam?
+        </p>
+        <br />
+        <p>
           Repudiandae a<span style={textHighlight}> recusandae nihil</span>.
           Consequatur sequi rem modi labore exercitationem molestiae minus fugit
           iure, alias perferendis impedit error, illum dolor iste quaerat
@@ -314,22 +354,31 @@ export const Page: React.FC<IProps> = ({
           <span style={textHighlight}>
             blanditiis eligendi cupiditate quia ipsa neque eius{' '}
           </span>
-          earum doloremque? Possimus voluptatem nulla impedit. Optio laudantium
-          consectetur dolorum unde vel accusantium, sit minus repudiandae nam
-          fuga quasi possimus cum, in voluptatum adipisci pariatur earum.
-          Necessitatibus corporis veniam quaerat esse accusamus enim nulla
-          maxime dignissimos? Soluta
+          earum doloremque? Possimus voluptatem nulla impedit.{' '}
+        </p>
+        <br />
+        <p>
+          Optio laudantium consectetur dolorum unde vel accusantium, sit minus
+          repudiandae nam fuga quasi possimus cum, in voluptatum adipisci
+          pariatur earum. Necessitatibus corporis veniam quaerat esse accusamus
+          enim nulla maxime dignissimos? Soluta
           <span style={textHighlight}> velit reiciendis </span>deserunt? Quia
           provident ad beatae alias. Incidunt consequuntur iure maxime beatae
           ipsa sapiente atque?<span style={textHighlight}> Dolore</span>, ab.
         </p>
         <br />
         <img
-          className={`float-right    ${
-            lg ? ` w-[36%] ml-10 mb-8` : md ? `w-[100%] mb-8` : 'ml-3 mb-6'
+          className={`float-right aspect-book object-cover ${
+            xl || lg
+              ? ` w-[50%] ml-10 mb-8 `
+              : md
+              ? `w-[100%] mb-8`
+              : 'ml-3 mb-6'
           } translate-y-[10px]`}
-          alt="Tropics"
-          src={Tropics}
+          // alt="Tropics"
+          // src={Tropics}
+          src={card.image.gorizontal}
+          alt=""
         />{' '}
         <p>
           Error aliquid cum amet, rerum{' '}
@@ -340,105 +389,27 @@ export const Page: React.FC<IProps> = ({
           <span style={textHighlight}>
             blanditiis eligendi cupiditate quia ipsa neque eius{' '}
           </span>
-          earum doloremque? Possimus voluptatem nulla impedit. Optio laudantium
-          consectetur dolorum unde vel accusantium, sit minus repudiandae nam
-          fuga quasi possimus cum, in voluptatum adipisci pariatur earum.
-          Necessitatibus corporis veniam quaerat esse accusamus enim nulla
-          maxime dignissimos? Soluta
+          earum doloremque? Possimus voluptatem nulla impedit.
+        </p>
+        <br />
+        <p>
+          {' '}
+          Optio laudantium consectetur dolorum unde vel accusantium, sit minus
+          repudiandae nam fuga quasi possimus cum, in voluptatum adipisci
+          pariatur earum. Necessitatibus corporis veniam quaerat esse accusamus
+          enim nulla maxime dignissimos? Soluta
           <span style={textHighlight}> velit reiciendis </span>deserunt? Quia
           provident ad beatae alias. Incidunt consequuntur iure maxime beatae
           ipsa sapiente atque?<span style={textHighlight}> Dolore</span>, ab.
         </p>
         <br />
-        {/* <div
-          className={`w-f h-[1px] ${
-            isDarkMode ? `bg-gray-200` : `bg-gray-400`
-          }`}
-        ></div> */}
         <br />
-        {/* <p>
-          {' '}
-          Ipsa tempora qui ex quod velit odit quia unde quidem sunt. Quae animi
-          voluptates necessitatibus nesciunt soluta eligendi inventore similique
-          iusto fuga. Error minima maiores fuga explicabo necessitatibus
-          blanditiis velit temporibus culpa dicta, voluptatibus, nihil quisquam
-          voluptate omnis. Ipsum, sunt suscipit. Fuga, omnis tenetur excepturi
-          quidem corporis debitis blanditiis magni atque earum, recusandae,
-          distinctio numquam deleniti. Illo perspiciatis expedita porro.
-          Exercitationem quos aliquam vitae necessitatibus eos qui ipsum
-          cupiditate, consectetur saepe. Nisi, ipsum blanditiis aspernatur
-          obcaecati iste officia quas incidunt error atque beatae voluptatum
-          fuga, soluta laudantium eum eligendi quam explicabo rem nulla.
-          Assumenda praesentium illo asperiores nihil a nulla consequuntur.
-          Facere, impedit. Aut, soluta. Asperiores quia architecto tempora
-          numquam eos omnis amet nihil vero quis. Ea inventore velit dolor
-          explicabo rerum, ad, voluptatem ducimus voluptatibus eveniet
-          perspiciatis nihil. Expedita, rem? Modi, consequuntur quibusdam vel
-          blanditiis, hic voluptatibus neque suscipit illum consequatur totam
-          exercitationem architecto beatae praesentium eligendi alias. Repellat
-          dolores perspiciatis dolorum maiores quam doloremque ipsa. Fugiat
-          consequatur eaque sed. Aut porro qui, eos provident commodi expedita
-          cumque vel ipsa odio laboriosam ut rerum molestiae iure, blanditiis
-          assumenda. Facere sint magni maiores quo dignissimos eos tempore
-          libero temporibus corrupti iste.{' '}
-        </p>
+        <PageShareThisStory />
         <br />
-        <p>
-          Architecto non adipisci sapiente cumque tenetur, eveniet iure magni
-          dolores minus neque, dignissimos impedit, iusto consequuntur velit id
-          quod. Sit doloribus molestias officiis aliquid tempora alias
-          asperiores, quia quasi excepturi? Tenetur, sapiente, ea odit excepturi
-          totam suscipit quisquam aliquam pariatur doloremque, aspernatur
-          aperiam. Eligendi ut, consequatur enim facere rerum nisi omnis soluta
-          maxime sequi, reprehenderit culpa. Repudiandae quaerat ut deserunt.
-          Quidem ab dolores reprehenderit laborum labore perspiciatis officia
-          nulla corporis quae. Harum ducimus explicabo magni magnam animi ipsam
-          sunt esse expedita porro blanditiis? Sit, hic tenetur nisi architecto
-          suscipit dolor? Placeat, non provident perspiciatis autem at modi
-          expedita mollitia earum iure qui ex sint quis quos. Optio harum non
-          aliquam asperiores aspernatur repellat sed molestiae laudantium, nulla
-          rem suscipit quos. Blanditiis, vero quam molestiae libero ab rem,
-          aspernatur minima voluptate sit officia, architecto repellendus minus
-          qui saepe tenetur.{' '}
-        </p>
+        <hr />
         <br />
-        <p>
-          Temporibus similique nam iusto vero fuga facere, doloribus ab quae
-          beatae harum? Eveniet exercitationem, cum inventore ullam incidunt
-          deserunt unde quae adipisci assumenda odio doloribus doloremque ad,
-          temporibus explicabo voluptatibus ipsam cupiditate officia nam? Quos
-          dolore corporis perspiciatis praesentium, ad ratione quis? Sapiente
-          minima vero molestias voluptatum nulla non accusantium blanditiis,
-          corrupti inventore officiis, veniam possimus impedit dolorum quis
-          exercitationem dolore tempora nisi omnis ipsam id dignissimos quod
-          repudiandae. Repellendus, temporibus sunt?
-        </p> */}
-        <br />
-        <br />
-        <div className={`flex justify-between`}>
-          <p></p>
-          <p></p>
-        </div>
       </motion.div>
+      <PageReadMore sm={sm} md={md} lg={lg} xl={xl} windowWidth={windowWidth} />
     </div>
   )
-}
-
-{
-  /* <div
-className={`z-10 flex flex-col items-start justify-start w-[100%] h-[100%] `}
->
-{' '}
-<h1 className={`font-BebasNeue text-React-h1 text-gray-900`}>
-  Lorem ipsum dolor sit amet
-</h1>
-<p className={`font-Bebas text-React-p text-gray-700`}>
-  Error dicta molestias nesciunt accusantium in doloremque quisquam
-  assumenda id, tenetur amet debitis. Debitis sequi eligendi ex
-  voluptatum. Repellendus architecto minus exercitationem. Velit nihil
-  odio nostrum dolorem eos, repellat ullam et deserunt pariatur, itaque
-  enim vero quibusdam nulla quia quisquam assumenda magni accusantium
-  quae similique hic optio unde tempora. Assumenda, nemo sequi.
-</p>
-</div> */
 }
