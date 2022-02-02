@@ -12,15 +12,15 @@ export interface ReadMore {
 }
 
 const titles = [
-  'Quisque efficitur purus id purus vestibulum bibendum.',
-  'Tortor sed suscipit condimentum, ante purus suscipit.',
+  'Quisque efficitur purus id purus vesti bibendum.',
+  'Tortor sed suscipit condum, ante purus suscipit.',
   'Consequat purus quam quis ligula. Mauris mi ligula.',
   'Suscipit at, pretium sit amet dolor. Nullam at.',
   'Duis placerat pharetra molestie. Aenean bibendum.',
   'Integer at turpis lacinia, ullamcorper metus nec.',
   'In sit amet tortor pharetra, eleifend urna lorem.',
   'Metus sit amet cursus feugiat, lorem erat rhoncus.',
-  'Vitae leo. Etiam odio massa, malesuada nec purus eget.',
+  'Vitae leo. Etiam odio massa, males nec purus eget.',
 ]
 
 const texts = [

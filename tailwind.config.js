@@ -14,6 +14,7 @@ module.exports = {
       },
       fontSize: {
         'React-h1': 'calc(10px + 2vmin)',
+        'React-h1*0.75': 'calc(6px + 1.5vmin)',
         'React-h1*1.5': 'calc(15px + 3vmin)',
         'React-h1*1.2': 'calc(12px + 2.4vmin)',
         'React-h1*2': 'calc(20px + 4vmin)',
@@ -53,6 +54,11 @@ module.exports = {
         album: '10/16',
         book: '16/10',
         custom1: '3/2',
+      },
+      height: {
+        custom1: 'calc(14px + 3vmin)',
+        'custom1*0.75': 'calc(9px + 2.3vmin)',
+        // custom1: 'calc(16px + 3.4vmin)',
       },
     },
   },

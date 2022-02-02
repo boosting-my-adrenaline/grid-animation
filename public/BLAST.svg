@@ -4,17 +4,17 @@
 	y="0px" viewBox="0 0 128 128" style="enable-background:new 0 0 128 128;" xml:space="preserve">
 	<style type="text/css">
 		.st0 {
-			opacity: 0.5;
+			opacity: 1;
 			fill: #0005B4;
 		}
 
 		.st1 {
-			opacity: 0.5;
+			opacity: 1;
 			fill: #FF6AFC;
 		}
 
 		.st2 {
-			opacity: 0.5;
+			opacity: 0.8;
 			fill: #3F3FFF;
 		}
 	</style>

@@ -11,7 +11,7 @@ import { PageShareThisStory } from './Page.share'
 interface IProps {
   width: number
   height: number
-  setOpen: (open: null) => void
+  setOpen: (open: null | number) => void
   opening: boolean
   windowWidth: number
   card: Card
@@ -89,14 +89,14 @@ export const Page: React.FC<IProps> = ({
       window.scrollTo(0, 0)
     }
 
-    setTimeout(() => navigate('/'), 400)
+    setTimeout(() => navigate('/'), 500)
     setTimeout(() => setOpen(null), 500)
   }
 
   useDidMountEffect(() => {
-    if (!opening) {
-      handleBack()
-    }
+    // if (!opening) {
+    handleBack()
+    // }
   }, [opening])
 
   const { isDarkMode } = useDarkMode()

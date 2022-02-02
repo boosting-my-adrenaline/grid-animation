@@ -15,7 +15,7 @@ interface IProps {
   breakpoint: Breakpoints
   sort: Sort
   setSort: (sort: Sort) => void
-  width: number
+  windowWidth: number
 }
 
 export const CardsFilter: React.FC<IProps> = ({
@@ -26,9 +26,11 @@ export const CardsFilter: React.FC<IProps> = ({
   breakpoint,
   sort,
   setSort,
-  width,
+  windowWidth,
 }) => {
   let sm = breakpoint === `sm`
+  let md = breakpoint === `md`
+  let lg = breakpoint === `lg`
   const { isDarkMode } = useDarkMode()
 
   const sorts: Sort[] = ['recommended', 'most popular', 'newest', 'oldest']
@@ -118,12 +120,12 @@ export const CardsFilter: React.FC<IProps> = ({
     <motion.div
       animate={
         open === null
-          ? { height: 'min-content', y: 0 }
-          : { height: '0vh', y: -100 }
+          ? { height: 'min-content', y: 0, marginTop: !sm ? '1rem' : '0rem' }
+          : { height: '0vh', y: -200, marginTop: '0rem' }
       }
       transition={{ delay: 0.25 }}
-      className={`mt-4 w-full flex flex-col items-center justify-center  ${
-        !sm ? `text-React-h3 px-4` : `text-React-h1 px-3`
+      className={` w-full flex flex-col items-center justify-center  ${
+        !sm ? `text-React-h3 px-4 ` : `text-React-h1 px-3 `
       } `}
     >
       <div className={`w-full flex items-center justify-between`}>
@@ -181,7 +183,11 @@ export const CardsFilter: React.FC<IProps> = ({
             color: isDarkMode ? 'rgb(7 89 133)' : 'rgb(255 255 255)',
           }}
           className={`px-3 ${
-            !sm ? `py-[0.15rem]` : 'py-[0.3rem] mt-[0.7rem]'
+            lg
+              ? `py-[0.15rem]`
+              : md
+              ? 'py-[0.225rem] -mt-[0.01rem]'
+              : 'py-[0.3rem] mt-[0.7rem]'
           } cursor-pointer rounded-md flex justify-center items-center gap-2`}
         >
           <div
@@ -192,8 +198,8 @@ export const CardsFilter: React.FC<IProps> = ({
             }}
             className={`flex items-center justify-center `}
           >
-            {sm || `filters`}
-            {'\u00a0'}( <span className={`font-Pitch`}> {filterActives} </span>)
+            {windowWidth > 1000 && `filters `}(
+            <span className={`font-Pitch mt-0.5`}> {filterActives} </span>)
             {'\u00a0'}
             <svg viewBox="0 0 32 32" xmlSpace="preserve" width="1.5rem">
               <path
@@ -207,16 +213,6 @@ export const CardsFilter: React.FC<IProps> = ({
               />
             </svg>
           </div>
-          {/* {isFilterOpened && (
-          <div
-            ref={refFilter}
-            className={`mt-1 absolute translate-y-[70%] translate-x-[-50%] z-10 flex gap-2 py-2 flex-col ${
-              isDarkMode ? '' : 'bg-sky-800'
-            } opacity-95`}
-          >
-            <CardsFilterInside setFilterActives={setFilterActives} />
-          </div>
-        )} */}
         </motion.div>
       </div>
       {isFilterOpened && (

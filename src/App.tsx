@@ -83,6 +83,12 @@ export const App: React.FC = () => {
 
   const [isMain, setIsMain] = useState(true)
 
+  useEffect(() => {
+    if (isMain) {
+      setTimeout(() => setOpen(null), 100)
+    }
+  }, [isMain])
+
   const { isDarkMode } = useDarkMode()
 
   const { width: windowWidth, height: windowHeight } = useWindowSize()
@@ -121,11 +127,11 @@ export const App: React.FC = () => {
 
   return (
     <div
-      className={`w-full h-[100%] overflow-y-hidden ${
+      className={`w-full h-[100%] overflow-y-hidden transition duration-150  ${
         isDarkMode
           ? // ? `bg-[#333333] shadow-gray-200/60`
             `bg-[#101010] shadow-gray-200/60`
-          : `bg-white shadow-gray-500/60`
+          : `bg-[#FFFBFF] shadow-gray-500/60`
       }`}
     >
       <BrowserRouter>
@@ -133,8 +139,23 @@ export const App: React.FC = () => {
           opening={opening}
           setOpening={setOpening}
           breakpoint={breakpoint}
-          isMain={isMain}
+          loadingBlast={loadingBlast}
           setLoadingBlast={handleLoadingBlast}
+          isMain={isMain}
+          setIsMain={setIsMain}
+          open={open}
+          setOpen={setOpen}
+          parentWidth={width}
+          windowWidth={windowWidth}
+          height={windowHeight}
+          // colors={colors}
+          params={params}
+          setParams={setParams}
+          multiple={multiple}
+          setMultiple={setMultiple}
+          isResizing={isResizing}
+          loading={loadingCards}
+          cards={cards}
         />
         {loadingBlast && (
           <LoadingPage setLoadingBlast={setLoadingBlast} tag={'BLAST'} />
@@ -147,14 +168,24 @@ export const App: React.FC = () => {
                 ? `mx-[200px] `
                 : `mx-[150px]  `
               : breakpoint === `md`
-              ? `mx-[100px] `
+              ? windowWidth > 1000
+                ? `mx-[100px]`
+                : ` mx-[25px]`
               : windowWidth >= 300
               ? ` mx-[10px]`
               : 'mx-[2px]'
           }  ${allHidden && `opacity-0`}`}
         >
           <div
-            className={`text-React-h1 py-1 font-Cooper uppercase`}
+            className={`text-React-h1 ${
+              breakpoint === `lg`
+                ? windowWidth >= 1500
+                  ? `py-[0.260rem]`
+                  : `py-2`
+                : breakpoint === `md`
+                ? `py-2.5`
+                : `py-3.5`
+            } font-Cooper uppercase`}
           >{`\u00a0`}</div>
           <motion.div
             className={`w-[100%] flex flex-col items-center pt-[]`}
@@ -173,7 +204,7 @@ export const App: React.FC = () => {
                       breakpoint={breakpoint}
                       sort={sort}
                       setSort={setSort}
-                      width={width}
+                      windowWidth={windowWidth}
                     />
                     <CardsContainer
                       open={open}

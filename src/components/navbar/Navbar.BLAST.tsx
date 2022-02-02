@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import motion from 'framer-motion'
+import { motion } from 'framer-motion'
 import useDarkMode from '../../utils/hooks/useDarkMode'
+import { useWindowSize } from '../../utils/hooks/useDimensions'
 
 interface IProps {
   sm: boolean
@@ -12,8 +13,37 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
 
   const { isDarkMode } = useDarkMode()
 
+  const degree = 90
+
+  const { width } = useWindowSize()
+
   return (
-    <div
+    <motion.div
+      animate={{
+        backgroundImage: isDarkMode
+          ? `linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1)), linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1))`
+          : `linear-gradient(${degree}deg, rgba(255, 106, 253, 0.7), rgba(0, 3, 90, 0.9)), linear-gradient(${degree}deg, rgba(255, 106, 253, 0.7), rgba(0, 3, 90, 0.9))`,
+      }}
+      whileTap={{
+        backgroundImage: isDarkMode
+          ? 'linear-gradient(to bottom right, #0081CF, #0081CF)'
+          : 'linear-gradient(to bottom right, #0081CF, #0081CF)',
+      }}
+      whileHover={{
+        backgroundImage: isDarkMode
+          ? `linear-gradient(${
+              (degree + 94) % 360
+            }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
+              (degree + 94) % 360
+            }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
+              (degree + 94) % 360
+            }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1))`
+          : `linear-gradient(${
+              (degree + 94) % 360
+            }deg, rgba(85,37,144, 0.9), rgba(0, 3, 90, 0.9)), linear-gradient(${
+              (degree + 94) % 360
+            }deg, rgba(255, 106, 253, 0.8), rgba(0, 3, 90, 0.89))`,
+      }}
       className={`flex flex-row-reverse  items-center cursor-pointer font-extrabold text-transparent bg-clip-text ${
         into
           ? isDarkMode
@@ -21,7 +51,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
             : `bg-gradient-to-br from-[#0081CF] to-[#0081CF]`
           : hover
           ? isDarkMode
-            ? `bg-gradient-to-br from-[#ff6afd]/40 to-sky-200`
+            ? `bg-gradient-to-br from-rose-100 to-sky-100`
             : `bg-gradient-to-br from-[#ff6afd]/80 to-[#00035a]/80`
           : isDarkMode
           ? `bg-gradient-to-br from-[#ff6afd]/90 to-sky-100`
@@ -41,8 +71,24 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 128 128"
           xmlSpace="preserve"
-          width="3rem"
-          height="3rem"
+          width={
+            width > 3000
+              ? '5rem'
+              : width > 2000
+              ? '4rem'
+              : width > 800
+              ? '2.5rem'
+              : '3rem'
+          }
+          height={
+            width > 3000
+              ? '5rem'
+              : width > 2000
+              ? '4rem'
+              : width > 800
+              ? '2.5rem'
+              : '3rem'
+          }
         >
           <path
             style={{
@@ -88,13 +134,29 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 128 128"
           xmlSpace="preserve"
-          width="3rem"
-          height="3rem"
+          width={
+            width > 3000
+              ? '5rem'
+              : width > 2000
+              ? '4rem'
+              : width > 800
+              ? '2.5rem'
+              : '3rem'
+          }
+          height={
+            width > 3000
+              ? '5rem'
+              : width > 2000
+              ? '4rem'
+              : width > 800
+              ? '2.5rem'
+              : '3rem'
+          }
           className={`absolute`}
         >
           <path
             style={{
-              opacity: !hover && !into ? 0.5 : into ? 1 : 0.65,
+              opacity: !hover && !into ? 0.75 : into ? 1 : 0.85,
               fill: into ? '#0081CF' : '#3f3fff',
               // transform: `translate(${
               //   into ? -4.155 : hover ? -4.155 * -0.3 : 0
@@ -108,7 +170,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
           />
           <path
             style={{
-              opacity: !hover && !into ? 0.5 : into ? 1 : 0.65,
+              opacity: !hover && !into ? 0.75 : into ? 1 : 0.85,
               fill: into ? '#0081CF' : '#0005b4',
               transform: `translate(${
                 into ? 3.97 : hover ? 3.97 * -0.3 : 0
@@ -119,7 +181,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
           />
           <path
             style={{
-              opacity: !hover && !into ? 0.5 : into ? 1 : 0.65,
+              opacity: !hover && !into ? 0.75 : into ? 1 : 0.85,
               fill: into ? '#0081CF' : '#ff6afc',
               // transform: `translate(${into ? -1.5 : hover ? 1.5 * -0.3 : 0}%, ${
               //   into ? -3 : hover ? -3 * -0.3 : 0
@@ -133,6 +195,6 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
           />
         </svg>
       </div>
-    </div>
+    </motion.div>
   )
 }

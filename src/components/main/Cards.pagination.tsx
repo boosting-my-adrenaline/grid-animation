@@ -79,6 +79,7 @@ export const CardsPagination: React.FC<IProps> = ({
   }
 
   const handleClick = (el: Button) => {
+    if (loadingCards) return
     if (el === 'de') {
       return
     } else if (el === '+') {
@@ -122,8 +123,9 @@ export const CardsPagination: React.FC<IProps> = ({
         border: !xl ? '2px solid' : '3px solid',
         borderColor:
           el === 'de' ? 'transparent' : currentPage === el ? '#009EFA' : '#ccc',
+        opacity: loadingCards ? 0.5 : 1,
       }}
-      whileHover={{ scale: el === 'de' ? 1 : 1.05 }}
+      whileHover={{ scale: el === 'de' || loadingCards ? 1 : 1.05 }}
       whileTap={{ scale: 0.97 }}
       transition={{ duration: 0.2 }}
       className={`flex justify-center items-center cursor-pointer text-React-h2 font-Marriweather ${
@@ -187,7 +189,7 @@ export const CardsPagination: React.FC<IProps> = ({
       transition={{ delay: 0.25 }}
       className={` w-full  flex items-center justify-center ${
         breakpoint !== `sm` ? `gap-[15px] ` : `gap-[3px] px-[2vh]`
-      } my-[2vh]`}
+      } my-[3vh]`}
     >
       {elements}
     </motion.div>

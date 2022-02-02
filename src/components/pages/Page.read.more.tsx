@@ -42,7 +42,9 @@ export const PageReadMore: React.FC<IProps> = ({
           <img
             src={image}
             alt=""
-            className={`${!sm ? `aspect-book` : `aspect-custom1`} object-cover`}
+            className={`${
+              !sm ? `aspect-book ` : `aspect-custom1`
+            }  object-cover`}
           />
         </div>
         <div className={` ${!sm ? `w-[32%] -mt-2` : 'w-full mt-2'}`}>
@@ -97,7 +99,9 @@ export const PageReadMore: React.FC<IProps> = ({
   return (
     <div className={`w-full  my-4 mx-[] font-Bebas`}>
       <div
-        className={`text-React-h1 mx-[15px] ${lg ? `pl-12` : ``} ${
+        className={`text-React-h1  ${
+          xl ? `pl-20 mx-[15px]` : lg ? `pl-12 mx-[15px]` : `mx-[15px]`
+        } ${
           isDarkMode ? 'bg-sky-900 text-gray-50' : `bg-sky-100 text-gray-900`
         }`}
       >

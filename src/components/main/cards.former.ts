@@ -66,13 +66,13 @@ const colors: CardColors[] = [
     isLight: true,
     forDarkBackground: '#D65DB1',
   },
-  {
-    mainColor: '#845EC2',
-    contrastForMain: '#EDEDED',
-    forLightBackground: '#845EC2',
-    isLight: true,
-    forDarkBackground: '#845EC2',
-  },
+  // {
+  //   mainColor: '#845EC2',
+  //   contrastForMain: '#EDEDED',
+  //   forLightBackground: '#845EC2',
+  //   isLight: true,
+  //   forDarkBackground: '#845EC2',
+  // },
   {
     mainColor: '#FF6F91',
     contrastForMain: '#EDEDED',

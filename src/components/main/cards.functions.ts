@@ -32,6 +32,11 @@ export const handleClickMultiple3 = (
     } else {
       navigate('/page/' + (num + 1))
     }
+
+    //
+    // setOpen(null)
+    // setMultiple(1)
+    // setParams({ x: 0, y: 0 })
   }, 800)
 
   if (open !== null) {
@@ -122,6 +127,7 @@ export const handleClickMultiple2 = (
     } else {
       navigate('/page/' + (num + 1))
     }
+    //////////
   }, 800)
   if (open !== null) {
     setMultiple(1)

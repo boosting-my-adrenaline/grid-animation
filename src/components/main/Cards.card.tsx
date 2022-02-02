@@ -21,6 +21,7 @@ interface IProps {
   handleClick: (num: number) => void
   isResizing: boolean
   loading: boolean
+  noText?: boolean
 }
 
 export const CardsCard: React.FC<IProps> = ({
@@ -37,8 +38,16 @@ export const CardsCard: React.FC<IProps> = ({
   handleClick,
   isResizing,
   loading,
+  noText = false,
 }) => {
   const { isDarkMode } = useDarkMode()
+
+  const [timer, setTimer] = useState(false)
+
+  useEffect(() => {
+    let id = setInterval(() => setTimer((prev) => !prev), 5000)
+    return () => clearInterval(id)
+  }, [])
 
   const [hover, setHover] = useState(false)
 
@@ -73,8 +82,10 @@ export const CardsCard: React.FC<IProps> = ({
           hover || open === i
             ? `linear-gradient(${card.colors.mainColor}, ${card.colors.mainColor})`
             : isDarkMode
-            ? `linear-gradient(to bottom, rgba(255,106,253,0.5), rgba(0,3,90,0.6)`
-            : `linear-gradient(to left bottom, rgba(255,106,253,0.3), rgba(0,3,90,0.3))`,
+            ? `linear-gradient(to bottom, rgba(255,106,253,0.5), rgba(0,3,90,0.6))`
+            : timer
+            ? `linear-gradient(to left bottom, rgba(255,106,253,0.3), rgba(0,3,90,0.2))`
+            : `linear-gradient(to left bottom, rgba(0,3,90,0.2), rgba(255,106,253,0.3))`,
       }}
       whileHover={{
         scale: open === i ? 1 : 0.98,
@@ -82,8 +93,10 @@ export const CardsCard: React.FC<IProps> = ({
       }}
       transition={{
         borderRadius: {
-          delay: isResizing ? 0 : open ? 0.45 : 0.25,
-          duration: isResizing ? 0 : 0.5,
+          defualt: {
+            delay: isResizing ? 0 : open ? 0.45 : 0.25,
+            duration: isResizing ? 0 : 0.5,
+          },
         },
       }}
       className={`overflow-hidden flex flex-col justify-center items-center  bg-transparent  cursor-pointer `}
@@ -217,7 +230,7 @@ export const CardsCard: React.FC<IProps> = ({
           paddingTop: open === null ? '0%' : !sm ? '3%' : '3%',
           scale: open === null && !hover && !loading ? 0.9 : 1,
           x: open === null && !hover && !loading ? '-5%' : '0%',
-          y: open === null && !hover && !loading ? '5%' : '0%',
+          y: open === null && !hover && !loading ? '5%' : '3%',
         }}
         transition={{
           default: { delay: 0.2, duration: 0.4 },
@@ -245,34 +258,36 @@ export const CardsCard: React.FC<IProps> = ({
         >
           {card.title}
         </h1>
-        <p
-          className={`font-Bebas first-letter:uppercase ${
-            lg ? `text-React-p4` : `text-React-p4*.1.5`
-          } ${
-            isDarkMode && !hover && open !== i
-              ? 'text-gray-200'
-              : hover || open === i
-              ? 'text-black'
-              : 'text-gray-700'
-          }`}
-        >
-          {card.text.split(' ').map((el, i) => {
-            if (el === el.toUpperCase()) {
-              return (
-                <span
-                  style={{
-                    ...highlight,
-                  }}
-                  className={`lowercase`}
-                >
-                  {el}{' '}
-                </span>
-              )
-            } else {
-              return <span>{el} </span>
-            }
-          })}
-        </p>
+        {noText || (
+          <p
+            className={`font-Bebas first-letter:uppercase ${
+              lg ? `text-React-p4` : `text-React-p4*.1.5`
+            } ${
+              isDarkMode && !hover && open !== i
+                ? 'text-gray-200'
+                : hover || open === i
+                ? 'text-black'
+                : 'text-gray-700'
+            }`}
+          >
+            {card.text.split(' ').map((el, i) => {
+              if (el === el.toUpperCase()) {
+                return (
+                  <span
+                    style={{
+                      ...highlight,
+                    }}
+                    className={`lowercase`}
+                  >
+                    {el}{' '}
+                  </span>
+                )
+              } else {
+                return <span>{el} </span>
+              }
+            })}
+          </p>
+        )}
       </motion.div>
     </motion.div>
   )

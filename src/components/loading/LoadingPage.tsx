@@ -22,7 +22,7 @@ export const LoadingPage: React.FC<IProps> = ({ tag, setLoadingBlast }) => {
 
   return (
     <div
-      className={`absolute h-[200vh] w-full z-20 flex items-start justify-center`}
+      className={`fixed h-[200vh] w-full z-[9] flex items-start justify-center`}
     >
       <motion.div
         initial={{ x: '-100%', y: '-50%' }}

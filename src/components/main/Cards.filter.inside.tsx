@@ -35,7 +35,8 @@ export const CardsFilterInside: React.FC<IProps> = ({
 
   useEffect(() => {
     setFilterActives(
-      [filter1, filter2, filter3, filter4].filter((el) => el).length +
+      [filter1, filter2, filter3, filter4, filter5, filter6].filter((el) => el)
+        .length +
         (filter111 === 1 ? 0 : 1) +
         (filter222 === 1 ? 0 : 1)
     )
