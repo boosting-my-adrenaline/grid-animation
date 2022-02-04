@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 import { NavbarChapter } from './Navbar.chapter'
 import { NavbarSuggested } from './Navbar.suggested'
 import { Card } from '../main/cards.former'
+import { NavbarScontainer } from './Navbar.s.container'
 
 interface IProps {
   opening: boolean
@@ -115,6 +116,7 @@ export const Navbar: React.FC<IProps> = ({
       i={i}
       setShownSuggestion={setShownSuggestion}
       onClick={handleNavigate}
+      shownSuggestion={shownSuggestion}
     />
   ))
 
@@ -143,9 +145,9 @@ export const Navbar: React.FC<IProps> = ({
               : '100%',
         }}
         transition={{ duration: 0.6, type: 'spring', bounce: 0.45 }}
-        className={`absolute z-10 w-full `}
+        className={`absolute z-10 w-full flex justify-start gap-[5vw]`}
       >
-        <NavbarSuggested
+        <NavbarScontainer
           shownSuggestion={shownSuggestion}
           setShownSuggestion={setShownSuggestion}
           open={open}
@@ -276,7 +278,12 @@ export const Navbar: React.FC<IProps> = ({
             )}
           </div>
         </div>
-        <div className={`cursor-pointer z-10`} onMouseDown={() => toggle()}>
+        <motion.div
+          whileHover={{ y: 4 }}
+          whileTap={{ scale: 0.2, y: 0 }}
+          className={`cursor-pointer z-10`}
+          onMouseDown={() => toggle()}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 128 128"
@@ -293,7 +300,7 @@ export const Navbar: React.FC<IProps> = ({
               }}
             />
           </svg>
-        </div>
+        </motion.div>
       </div>
     </nav>
   )

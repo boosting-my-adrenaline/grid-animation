@@ -5,7 +5,7 @@ import useMediaQuery from './useMediaQuery'
 // See: https://usehooks-ts.com/react-hook/use-update-effect
 import useUpdateEffect from './useUpdateEffect'
 
-const COLOR_SCHEME_QUERY = '(prefers-color-scheme: light)'
+const COLOR_SCHEME_QUERY = '(prefers-color-scheme: dark)'
 
 interface UseDarkModeOutput {
   isDarkMode: boolean

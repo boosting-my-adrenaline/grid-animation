@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import useDarkMode from '../../utils/hooks/useDarkMode'
 import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
 import useElementSize from '../../utils/hooks/useElementSize'
-import { CardsCard } from '../main/Cards.card'
-import { CardsContainer } from '../main/Cards.container'
 import { assembleCards, Card, CardColors } from '../main/cards.former'
 import { NavbarCard } from './Navbar.card'
 
@@ -87,8 +85,8 @@ export const NavbarSuggested: React.FC<IProps> = ({
 
   return (
     <motion.div
-      className={`h-[30vh] w-[100vw]  flex items-center justify-start cursor-pointer border-b border-[#333] ${
-        isDarkMode ? 'bg-black' : 'bg-white'
+      className={`h-[30vh] w-[100vw] px-2 shrink-0 flex items-center justify-start cursor-pointer border-b border-[#333] ${
+        isDarkMode ? 'bg-black/95' : 'bg-white'
       }  shadow-[12px_2px_25px_80px_rgba(0,0,0,0.7)] `}
       ref={suggestedRef}
       onMouseLeave={() => setShownSuggestion(null)}
@@ -101,7 +99,7 @@ export const NavbarSuggested: React.FC<IProps> = ({
       <div
         className={`absolute w-full h-full ${
           isDarkMode
-            ? 'bg-purple-100/30 shadow-[#ff6afd]/60'
+            ? 'bg-purple-700/20 shadow-[#ff6afd]/60'
             : 'bg-purple-300/50 shadow-purple-300/80'
         } shadow-[0px_0px_19px_4px_rgba(0,0,0,0.2)] `}
         // style={{
