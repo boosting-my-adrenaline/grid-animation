@@ -42,13 +42,6 @@ export const CardsCard: React.FC<IProps> = ({
 }) => {
   const { isDarkMode } = useDarkMode()
 
-  const [timer, setTimer] = useState(false)
-
-  useEffect(() => {
-    let id = setInterval(() => setTimer((prev) => !prev), 5000)
-    return () => clearInterval(id)
-  }, [])
-
   const [hover, setHover] = useState(false)
 
   let highlight = {
@@ -67,7 +60,7 @@ export const CardsCard: React.FC<IProps> = ({
         height: height / rows,
         scale: open === i ? 1 : 0.98,
         borderRadius: open === i ? 0 : height * 0.02,
-        backgroundColor: 'white',
+        // backgroundColor: 'white',
       }}
       animate={{
         width: width / columns,
@@ -75,21 +68,22 @@ export const CardsCard: React.FC<IProps> = ({
         scale: open === i ? 1 : 0.93,
         borderRadius: open === i ? 0 : height * 0.0075,
         paddingTop: open === null ? (!sm ? '0.1%' : '0.5%') : ``,
-        boxShadow: `3px 4px 12px -2px rgba(22, 22, 22, 0.7)`,
+        boxShadow: isDarkMode
+          ? `3px 4px 12px -2px rgba(173,119,172, 0.8)`
+          : `3px 4px 12px -2px rgba(22, 22, 22, 0.7)`,
         border: open !== i ? '1px solid #bbb' : 'none',
-
         backgroundImage:
           hover || open === i
-            ? `linear-gradient(${card.colors.mainColor}, ${card.colors.mainColor})`
+            ? `linear-gradient(${card.colors.mainColor}, ${card.colors.mainColor}, ${card.colors.mainColor})`
             : isDarkMode
-            ? `linear-gradient(to bottom, rgba(255,106,253,0.5), rgba(0,3,90,0.6))`
-            : timer
-            ? `linear-gradient(to left bottom, rgba(255,106,253,0.3), rgba(0,3,90,0.2))`
-            : `linear-gradient(to left bottom, rgba(0,3,90,0.2), rgba(255,106,253,0.3))`,
+            ? `linear-gradient(25deg, rgba(21,25,181, 0.25), rgba(255,106,253,0.15), rgba(21,25,181, 0.15))`
+            : `linear-gradient(5deg, rgba(255,106,253,0.3), rgba(0,3,90,0.2), rgba(255,106,253,0.3))`,
       }}
       whileHover={{
         scale: open === i ? 1 : 0.98,
-        boxShadow: `3px 4px 12px 4px rgba(22, 22, 22, 0.4)`,
+        boxShadow: isDarkMode
+          ? `3px 4px 12px 4px rgba(173,119,172, 0.5)`
+          : `3px 4px 12px 4px rgba(22, 22, 22, 0.4)`,
       }}
       transition={{
         borderRadius: {
@@ -99,7 +93,7 @@ export const CardsCard: React.FC<IProps> = ({
           },
         },
       }}
-      className={`overflow-hidden flex flex-col justify-center items-center  bg-transparent  cursor-pointer `}
+      className={`overflow-hidden flex flex-col justify-center items-center cursor-pointer `}
       onMouseDown={() => handleClick(i)}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -190,6 +184,7 @@ export const CardsCard: React.FC<IProps> = ({
                 height: '0vh',
                 backgroundColor: isDarkMode ? `#505050` : '#f5f5f5',
                 backgroundImage: `url(${card.image.main})`,
+                opacity: isDarkMode ? 0.85 : 1,
               }
             : {
                 width: width / columns - height * 0.005,
@@ -199,6 +194,7 @@ export const CardsCard: React.FC<IProps> = ({
                 borderBottomRightRadius: 0,
                 backgroundColor: isDarkMode ? `#505050` : '#f5f5f5',
                 backgroundImage: `url(${card.image.main})`,
+                opacity: isDarkMode ? 0.85 : 1,
               }
         }
         whileHover={{ opacity: 1 }}
@@ -214,7 +210,7 @@ export const CardsCard: React.FC<IProps> = ({
               opacity: open === i ? 0 : 1,
             }}
             transition={{ default: { delay: 0.3 }, opacity: { delay: 0.1 } }}
-            className={`absolute bg-[#0081CF] text-white  px-[1rem]  rounded-l-full  ${
+            className={`absolute bg-[#0081CF] text-gray-100  px-[1rem]  rounded-l-full  ${
               !sm ? `text-[1.6vmin]` : `text-[2vmin]`
             } `}
           >
@@ -230,7 +226,12 @@ export const CardsCard: React.FC<IProps> = ({
           paddingTop: open === null ? '0%' : !sm ? '3%' : '3%',
           scale: open === null && !hover && !loading ? 0.9 : 1,
           x: open === null && !hover && !loading ? '-5%' : '0%',
-          y: open === null && !hover && !loading ? '5%' : '3%',
+          y:
+            open === i
+              ? '0%'
+              : open === null && !hover && !loading
+              ? '5%'
+              : '3%',
         }}
         transition={{
           default: { delay: 0.2, duration: 0.4 },
@@ -251,9 +252,12 @@ export const CardsCard: React.FC<IProps> = ({
         <h1
           className={`font-BebasNeue first-letter:uppercase   ${
             lg ? `text-React-h1` : `text-React-h1*1.5`
-          } `}
+          } transition duration-200 ease-out`}
           style={{
-            color: isDarkMode && !hover && open !== i ? 'white' : 'black',
+            color:
+              isDarkMode && !hover && open !== i
+                ? 'rgb(209 213 219'
+                : 'rgb(17 24 39 ',
           }}
         >
           {card.title}
@@ -264,11 +268,11 @@ export const CardsCard: React.FC<IProps> = ({
               lg ? `text-React-p4` : `text-React-p4*.1.5`
             } ${
               isDarkMode && !hover && open !== i
-                ? 'text-gray-200'
+                ? 'text-gray-400'
                 : hover || open === i
-                ? 'text-black'
+                ? 'text-gray-900'
                 : 'text-gray-700'
-            }`}
+            } transition duration-200 ease-out`}
           >
             {card.text.split(' ').map((el, i) => {
               if (el === el.toUpperCase()) {

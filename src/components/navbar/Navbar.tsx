@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { Navigate, useLocation, useNavigate } from 'react-router'
 import { Breakpoints } from '../../App'
 import useDarkMode from '../../utils/hooks/useDarkMode'
 import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
@@ -14,8 +14,8 @@ interface IProps {
   opening: boolean
   setOpening: (opening: boolean) => void
   breakpoint: Breakpoints
-  isMain: boolean
-  setIsMain: (main: boolean) => void
+  isCards: boolean
+  setIsCards: (isCards: boolean) => void
   loadingBlast: null | string
   setLoadingBlast: (tag: string) => void
 
@@ -37,9 +37,9 @@ export const Navbar: React.FC<IProps> = ({
   opening,
   setOpening,
   breakpoint,
-  isMain,
+  isCards,
   loadingBlast,
-  setIsMain,
+  setIsCards,
   setLoadingBlast,
   open,
   setOpen,
@@ -66,11 +66,32 @@ export const Navbar: React.FC<IProps> = ({
   const { pathname } = location
 
   useDidMountEffect(() => {
-    if (pathname) {
-      setIsMain(true)
+    if (pathname.slice(0, 6) === '/cards') {
+      setIsCards(true)
     }
     setTest((prev) => prev + 1)
   }, [pathname])
+
+  const navigate = useNavigate()
+
+  const handleNavigate = (link: string) => {
+    if (loadingBlast) {
+      return
+    }
+
+    setOpening(false)
+    setTimeout(() => {
+      setLoadingBlast(link)
+    }, 0)
+    setShownSuggestion(null)
+    setTimeout(() => {
+      if (link === 'blast') {
+        navigate('/')
+      } else {
+        navigate('/cards/' + link)
+      }
+    }, 800)
+  }
 
   const navChapters = [
     'Elisium',
@@ -89,7 +110,12 @@ export const Navbar: React.FC<IProps> = ({
   const [shownSuggestion, setShownSuggestion] = useState<number | null>(1)
 
   const chapters = navChapters.map((el, i) => (
-    <NavbarChapter chapter={el} i={i} setShownSuggestion={setShownSuggestion} />
+    <NavbarChapter
+      chapter={el}
+      i={i}
+      setShownSuggestion={setShownSuggestion}
+      onClick={handleNavigate}
+    />
   ))
 
   const renders = useRef(0)
@@ -100,8 +126,14 @@ export const Navbar: React.FC<IProps> = ({
 
   return (
     <nav
-      className={`z-[50] fixed top-0 right-0 left-0 flex  items-end justify-center  opacity-[0.995]   `}
+      className={`z-[50] fixed top-0 right-0 left-0 flex flex-col w-full  items-end justify-end  opacity-[0.995]`}
     >
+      <motion.div
+        className={`absolute w-full h-[8px] z-20 top-0 `}
+        onMouseEnter={() => setShownSuggestion(null)}
+        onMouseLeave={() => setShownSuggestion(null)}
+      />
+
       <motion.div
         initial={{ y: '-100%' }}
         animate={{
@@ -110,6 +142,7 @@ export const Navbar: React.FC<IProps> = ({
               ? '-100%'
               : '100%',
         }}
+        transition={{ duration: 0.6, type: 'spring', bounce: 0.45 }}
         className={`absolute z-10 w-full `}
       >
         <NavbarSuggested
@@ -130,7 +163,7 @@ export const Navbar: React.FC<IProps> = ({
         />
       </motion.div>
       <div
-        className={`z-10 px-[1%] w-full flex items-center justify-between ${
+        className={`z-10  px-[1%] w-full flex items-center justify-center ${
           isDarkMode
             ? `bg-gray-900 shadow-[#ff6afd]/80`
             : `bg-[rgb(231,224,237)] shadow-[#00035a]/40`
@@ -188,9 +221,9 @@ export const Navbar: React.FC<IProps> = ({
           </svg>
         </div>
 
-        {/* <div className={`absolute l-10`}>{width} </div> */}
+        {/* <div className={`absolute l-10`}>{isCards ? 1 : 0} </div> */}
         <div
-          className={`bg-sky-20 w-full flex items-center overflow-hidden ${
+          className={`bg-sky-20 w-full flex items-center overflow-hidden  ${
             sm ? 'justify-center' : `justify-between`
           } flex-grow! text-React-h1*0.75 py-1 font-Cooper ${
             breakpoint === `lg`
@@ -204,31 +237,41 @@ export const Navbar: React.FC<IProps> = ({
           {/* {open === null ? 'NULL' : open}----- {multiple}X----- x: {params.x} - y:{' '}
         {params.y} */}
           <div
-            className={` w-full relative flex  items-center ${
+            className={` w-full relative flex   items-center ${
               sm ? 'justify-center' : 'justify-start'
-            } gap-[2%] overflow-scroll `}
+            } gap-[2%] overflow `}
           >
+            {/* {isCards ? 1 : 0} */}
             <a
-              onMouseDown={() => {
-                setOpening(true)
-                setOpening(false)
-              }}
+              onMouseDown={() => handleNavigate('blast')}
+              // onMouseDown={() => {
+              //   setOpening(true)
+              //   setTimeout(() => setOpening(false))
+              // }}
             >
               <NavbarBLAST sm={sm} />
             </a>
 
             {!sm && (
-              <div className={`flex items-center justyfy-center `}>
+              <div className={`flex items-center justify-between w-full `}>
                 <div
-                  className={`w-2 bg-red-500 h-[3vh] top-0`}
+                  className={`flex items-center justify-center`}
                   onMouseEnter={() => setShownSuggestion(null)}
-                />
+                >
+                  <div className={` absolute w-[30px] h-full `} />
+                </div>
 
                 <motion.div
                   className={` flex items-start justify-between gap- 6 w-full overflow-hidden flex-wrap h-custom1*0.75  bg-red-30`}
                 >
                   {chapters}
                 </motion.div>
+                <div
+                  className={`flex items-center justify-center`}
+                  onMouseEnter={() => setShownSuggestion(null)}
+                >
+                  <div className={` absolute w-[30px] h-full `} />
+                </div>
               </div>
             )}
           </div>

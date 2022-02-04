@@ -10,7 +10,6 @@ export const LoadingPage: React.FC<IProps> = ({ tag, setLoadingBlast }) => {
   const [cooordinates, setCoordinates] = useState(['-100%', '-100%'])
 
   useEffect(() => {
-    // const delays = [100, 700, 1700, 2000, 2800]
     const delays = [0, 450, 900, 1100, 1500]
 
     setTimeout(() => setCoordinates(['0%', '-100%']), delays[0])

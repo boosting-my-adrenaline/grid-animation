@@ -28,6 +28,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
         backgroundImage: isDarkMode
           ? 'linear-gradient(to bottom right, #0081CF, #0081CF)'
           : 'linear-gradient(to bottom right, #0081CF, #0081CF)',
+        scale: 0.9,
       }}
       whileHover={{
         backgroundImage: isDarkMode

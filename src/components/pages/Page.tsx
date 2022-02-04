@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router'
 import useDarkMode from '../../utils/hooks/useDarkMode'
 import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
 import useOnScreen from '../../utils/hooks/useOnScreen'
+import { CardsAnimation } from '../main/Cards.animation'
 import { Card } from '../main/cards.former'
 import { PageReadMore } from './Page.read.more'
 import { PageShareThisStory } from './Page.share'
@@ -39,10 +40,8 @@ export const Page: React.FC<IProps> = ({
   const { pathname } = location
 
   useEffect(() => {
-    console.log(location)
     if (pathname == '') {
       setIsMain(true)
-      console.log('mainnn')
     } else {
       setIsMain(false)
     }
@@ -60,24 +59,37 @@ export const Page: React.FC<IProps> = ({
         setParams((prev) => ({
           ...prev,
           padding: xl || lg ? `1% 10%` : md ? `1% 5%` : `3% 5%`,
-          back: true,
           height: '0vh',
         })),
       0
     )
 
+    let id1 = setTimeout(
+      () =>
+        setParams((prev) => ({
+          ...prev,
+          back: true,
+        })),
+      300
+    )
+
     return () => {
       clearTimeout(id0)
+      clearTimeout(id1)
     }
   }, [])
 
   const handleBack = () => {
-    setParams((prev) => ({
-      ...prev,
-      padding: `3% 3%`,
-      height: '50vh',
-      back: false,
-    }))
+    setTimeout(
+      () =>
+        setParams((prev) => ({
+          ...prev,
+          padding: `3% 3%`,
+          height: '50vh',
+          back: false,
+        })),
+      150
+    )
 
     try {
       window.scroll({
@@ -89,19 +101,18 @@ export const Page: React.FC<IProps> = ({
       window.scrollTo(0, 0)
     }
 
-    setTimeout(() => navigate('/'), 500)
-    setTimeout(() => setOpen(null), 500)
+    setTimeout(() => navigate('/cards/cherie'), 500)
+    setTimeout(() => setOpen(null), 600)
   }
 
   useDidMountEffect(() => {
-    // if (!opening) {
     handleBack()
-    // }
   }, [opening])
 
   const { isDarkMode } = useDarkMode()
 
-  // const onScreen: boolean = useOnScreen<HTMLDivElement>(ref, '0px')
+  const refHead: any = useRef<HTMLDivElement>()
+  const onScreen: boolean = useOnScreen<HTMLDivElement>(refHead, '-50px')
 
   const bg: [string, string, string, boolean, string] = [
     card.colors.mainColor,
@@ -118,6 +129,50 @@ export const Page: React.FC<IProps> = ({
   return (
     <div className={`w-[100%] flex flex-col items-center`}>
       <motion.div
+        initial={{
+          top: xl || lg ? '140vh' : md ? '' : '',
+          left: xl || lg ? '2vw' : '1.75vw',
+        }}
+        animate={{
+          top: params.back ? '15vh' : '140vh',
+          backgroundColor: onScreen ? 'white' : card.colors.mainColor,
+          color: 'black',
+          borderColor: 'black',
+        }}
+        className={`fixed ${
+          xl || lg ? `px-4 py-1` : `px-1 py-1`
+        } z-50 font-Bebas text-React-h1 cursor-pointer border-2 rounded-md`}
+        onMouseDown={handleBack}
+      >
+        {xl || lg ? (
+          `BACK`
+        ) : (
+          <svg
+            viewBox="-10 0 128 128"
+            width={'1.2rem'}
+            height={'1.2rem'}
+            xmlSpace="preserve"
+          >
+            <path
+              style={{
+                // fill: isDarkMode ? 'rgb(55 65 81)' : 'rgb(229 231 235)',
+                fill: onScreen
+                  ? isDarkMode
+                    ? 'white'
+                    : 'black'
+                  : card.colors.mainColor,
+                stroke: 'black',
+                strokeWidth: 14,
+                strokeMiterlimit: 10,
+              }}
+              d="M68 111.3 22.7 66 68 20.7"
+            />
+          </svg>
+        )}
+      </motion.div>
+      <motion.div
+        onMouseDown={handleBack}
+        ref={refHead}
         initial={{
           height: 'min-content',
 
@@ -190,7 +245,7 @@ export const Page: React.FC<IProps> = ({
       <motion.div
         initial={{
           y: 1000,
-          padding: params.padding,
+          // padding: params.padding,
           // width: xl
           //   ? windowWidth >= 2700
           //     ? '70%'
@@ -203,7 +258,8 @@ export const Page: React.FC<IProps> = ({
         }}
         animate={{
           y: 0,
-          padding: params.padding,
+          // padding: params.padding,
+          padding: '5%',
           width: xl
             ? windowWidth >= 2700
               ? '70%'

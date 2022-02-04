@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Footer } from './components/footer/Footer'
+import { Landing } from './components/landing/Landing'
 import { LoadingPage } from './components/loading/LoadingPage'
 import { CardsContainer } from './components/main/Cards.container'
 import { CardsFilter } from './components/main/Cards.filter'
@@ -56,6 +57,10 @@ export const App: React.FC = () => {
   }, [])
 
   const handleLoadingBlast = (tag: string) => {
+    setTimeout(() => setLoadingCards(true), 200)
+    setTimeout(() => setShuffle((prev) => prev + 1), 600)
+    setTimeout(() => setLoadingCards(false), 900)
+
     if (loadingBlast === null) {
       try {
         window.scroll({
@@ -81,13 +86,13 @@ export const App: React.FC = () => {
     }
   }, [open])
 
-  const [isMain, setIsMain] = useState(true)
+  const [isCards, setIsCards] = useState(true)
 
   useEffect(() => {
-    if (isMain) {
+    if (isCards) {
       setTimeout(() => setOpen(null), 100)
     }
-  }, [isMain])
+  }, [isCards])
 
   const { isDarkMode } = useDarkMode()
 
@@ -122,7 +127,7 @@ export const App: React.FC = () => {
   const [loadingCards, setLoadingCards] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => setLoadingCards(false), 400)
+    setTimeout(() => setLoadingCards(false), 0)
   }, [])
 
   return (
@@ -141,8 +146,8 @@ export const App: React.FC = () => {
           breakpoint={breakpoint}
           loadingBlast={loadingBlast}
           setLoadingBlast={handleLoadingBlast}
-          isMain={isMain}
-          setIsMain={setIsMain}
+          isCards={isCards}
+          setIsCards={setIsCards}
           open={open}
           setOpen={setOpen}
           parentWidth={width}
@@ -158,11 +163,11 @@ export const App: React.FC = () => {
           cards={cards}
         />
         {loadingBlast && (
-          <LoadingPage setLoadingBlast={setLoadingBlast} tag={'BLAST'} />
+          <LoadingPage setLoadingBlast={setLoadingBlast} tag={loadingBlast} />
         )}
         <div
           // style={{ paddingTop: `${navbarHeight}px` }}
-          className={` flex flex-col items-center justify-center   ${
+          className={`-z-10 flex flex-col items-center justify-center   ${
             breakpoint === `lg`
               ? windowWidth >= 1800
                 ? `mx-[200px] `
@@ -180,8 +185,8 @@ export const App: React.FC = () => {
             className={`text-React-h1 ${
               breakpoint === `lg`
                 ? windowWidth >= 1500
-                  ? `py-[0.260rem]`
-                  : `py-2`
+                  ? `py-[0.160rem]`
+                  : `py-[0.4rem]`
                 : breakpoint === `md`
                 ? `py-2.5`
                 : `py-3.5`
@@ -192,8 +197,10 @@ export const App: React.FC = () => {
             ref={parentRef}
           >
             <Routes>
+              <Route path="/" element={<Landing />} />
+
               <Route
-                path="/*"
+                path="/cards/*"
                 element={
                   <>
                     <CardsFilter
@@ -243,8 +250,8 @@ export const App: React.FC = () => {
                     setOpen={setOpen}
                     opening={opening}
                     windowWidth={windowWidth}
-                    isMain={isMain}
-                    setIsMain={setIsMain}
+                    isMain={isCards}
+                    setIsMain={setIsCards}
                   />
                 }
               />

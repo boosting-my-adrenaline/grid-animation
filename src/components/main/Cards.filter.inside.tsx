@@ -107,19 +107,19 @@ export const CardsFilterInside: React.FC<IProps> = ({
       tag: `any`,
       filter: filter222 === 1,
       onClick: () => setFilter222(1),
-      extra: 'mr-0 rounded-r-none',
+      extra: '0',
     },
     {
       tag: `pharetra`,
       filter: filter222 === 2,
       onClick: () => setFilter222(2),
-      extra: 'mx-0 rounded-none',
+      extra: '1',
     },
     {
       tag: `integer`,
       filter: filter222 === 3,
       onClick: () => setFilter222(3),
-      extra: 'ml-0 rounded-l-none',
+      extra: '2',
     },
   ]
 
@@ -133,19 +133,19 @@ export const CardsFilterInside: React.FC<IProps> = ({
       tag: `any`,
       filter: filter111 === 1,
       onClick: () => setFilter111(1),
-      extra: 'mr-0 rounded-r-none',
+      extra: '0',
     },
     {
       tag: `ultrices`,
       filter: filter111 === 2,
       onClick: () => setFilter111(2),
-      extra: 'mx-0 rounded-none',
+      extra: '1',
     },
     {
       tag: `argen`,
       filter: filter111 === 3,
       onClick: () => setFilter111(3),
-      extra: 'ml-0 rounded-l-none',
+      extra: '2',
     },
   ]
 
@@ -182,7 +182,18 @@ export const CardsFilterInside: React.FC<IProps> = ({
           ? 'rgb(186 230 253)'
           : 'rgb(12 74 110)',
       }}
-      className={`px-3 py-1 mx-4 my-2 cursor-pointer rounded-md ${extra} bg-sky-800`}
+      whileHover={{ y: 2 }}
+      whileTap={{ scale: 0.9 }}
+      className={` px-3 py-1  cursor-pointer 
+      ${
+        extra === `0`
+          ? 'rounded-md mx-4 my-2 mr-0 rounded-r-none'
+          : extra === `1`
+          ? `my-2 mx-0 rounded-none`
+          : extra === `2`
+          ? `rounded-md mx-4  my-2 ml-0 rounded-l-none`
+          : 'rounded-md mx-4 my-2'
+      }  bg-sky-800`}
       onMouseDown={onClick}
     >
       {tag}

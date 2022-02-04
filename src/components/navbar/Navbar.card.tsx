@@ -55,22 +55,33 @@ export const NavbarCard: React.FC<IProps> = ({
   return (
     <motion.div
       initial={{
-        width: width / columns,
-        height: height / rows,
-        scale: open === i ? 1 : 0.98,
-        borderRadius: open === i ? 0 : width * 0.02,
+        width: width,
+        height: height,
+        scale: 0.98,
+        borderRadius: open === i ? 0 : height * 0.04,
         backgroundColor: 'white',
         backgroundPosition: `center`,
         backgroundSize: `cover`,
       }}
       animate={{
-        width: width / columns,
-        height: !sm || open !== i ? height / rows : height,
+        width: width,
+        height: height,
         scale: open === i ? 1 : 0.93,
-        borderRadius: open === i ? 0 : width * 0.0075,
+        borderRadius: open === i ? 0 : height * 0.015,
         // paddingTop: open === null ? (!sm ? '0.1%' : '0.5%') : ``,
-        boxShadow: `3px 4px 12px -2px rgba(22, 22, 22, 0.7)`,
-        border: open !== i ? '1px solid #bbb' : 'none',
+        boxShadow: hover
+          ? isDarkMode
+            ? `6px 8px 19px 4px rgba(173,119,172, 0.7)`
+            : `6px 8px 20px 4px rgba(75, 85, 99, 0.7)`
+          : isDarkMode
+          ? `6px 8px 16px 0px rgba(173,119,172, 1)`
+          : `6px 8px 16px 0px rgba(75, 85, 99, 1)`,
+        border:
+          open !== i
+            ? isDarkMode
+              ? '1px solid rgb(229 231 235)'
+              : '1px solid rgb(75 85 99)'
+            : 'none',
 
         // backgroundImage:
         //   hover || open === i
@@ -84,7 +95,9 @@ export const NavbarCard: React.FC<IProps> = ({
       }}
       whileHover={{
         scale: open === i ? 1 : 0.98,
-        boxShadow: `3px 4px 12px 4px rgba(22, 22, 22, 0.4)`,
+        // boxShadow: isDarkMode
+        //   ? `6px 8px 12px 4px rgba(75, 85, 99, 0.7)`
+        //   : `6px 8px 12px 4px rgba(22, 22, 22, 0.7)`,
       }}
       transition={{
         borderRadius: {
@@ -94,7 +107,7 @@ export const NavbarCard: React.FC<IProps> = ({
           },
         },
       }}
-      className={`overflow-hidden flex flex-col justify-center items-center bg-transparent cursor-pointer `}
+      className={`overflow-hidden snap-center shrink-0 flex flex-col justify-center items-center bg-transparent cursor-pointer`}
       onMouseDown={() => handleClick(i)}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -128,8 +141,8 @@ export const NavbarCard: React.FC<IProps> = ({
             // y: { duration: 0.3 },
           }
         }
-        className={`z-10 bg-red-20 flex flex-col items-start justify-start w-[100%]  ${
-          isDarkMode && open !== i ? `text-gray-200` : ``
+        className={`z-10 mb-2 bg-red-20 flex flex-col items-start justify-start w-[100%]  border-t border-b border-gray-700 ${
+          '' // isDarkMode && open !== i ? `text-gray-200` : ``
         } `}
       >
         <motion.div
@@ -143,15 +156,15 @@ export const NavbarCard: React.FC<IProps> = ({
         <motion.h1
           animate={{
             // flexGrow: open === i ? 0 : 1,
-            backgroundColor: card.colors.mainColor,
-            color: isDarkMode && !hover && open !== i ? 'white' : 'black',
+            // backgroundColor: card.colors.mainColor,
+            // color: isDarkMode && !hover && open !== i ? 'white' : 'black',
             scale: open === null && !hover ? 0.9 : 1,
             y: open === null && !hover ? '5%' : '3%',
           }}
+          transition={{ duration: 0.3 }}
           className={`font-BebasNeue first-letter:uppercase w-full flex justify-center items-center   ${
             lg ? `text-React-h1` : `text-React-h1*1.5`
           } `}
-          style={{}}
         >
           {card.title}
         </motion.h1>

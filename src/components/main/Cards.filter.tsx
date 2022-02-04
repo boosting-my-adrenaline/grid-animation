@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Breakpoints, Sort } from '../../App'
 import useDarkMode from '../../utils/hooks/useDarkMode'
 import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
@@ -65,7 +65,9 @@ export const CardsFilter: React.FC<IProps> = ({
             ? 'rgb(186 230 253)'
             : 'rgb(12 74 110)',
       }}
-      className={`px-3 py-1 cursor-pointer rounded-md bg-sky-800`}
+      whileHover={{ y: 2 }}
+      whileTap={{ scale: 0.9 }}
+      className={`px-3 py-1 cursor-pointer rounded-md `}
       onMouseDown={() => {
         setSort(el)
         setIsSortOpened(false)
@@ -116,14 +118,31 @@ export const CardsFilter: React.FC<IProps> = ({
   useOnClickOutside(refSort, handleOnClickOutsideSort)
   useOnClickOutside(refFilter, handleOnClickOutsideFilter)
 
+  const [show, setShow] = useLocalStorage('filterShow', false)
+
+  useEffect(() => {
+    let it = setTimeout(
+      () => {
+        if (open === null) {
+          setShow(true)
+        } else {
+          setShow(false)
+        }
+      },
+      open ? 250 : 300
+    )
+
+    // return () => clearTimeout(it)
+  }, [open])
+
   return (
     <motion.div
       animate={
-        open === null
+        show
           ? { height: 'min-content', y: 0, marginTop: !sm ? '1rem' : '0rem' }
           : { height: '0vh', y: -200, marginTop: '0rem' }
       }
-      transition={{ delay: 0.25 }}
+      // transition={{ delay: 0.25 }}
       className={` w-full flex flex-col items-center justify-center  ${
         !sm ? `text-React-h3 px-4 ` : `text-React-h1 px-3 `
       } `}
@@ -182,6 +201,8 @@ export const CardsFilter: React.FC<IProps> = ({
             backgroundColor: isDarkMode ? 'rgb(186 230 253)' : '#0081CF',
             color: isDarkMode ? 'rgb(7 89 133)' : 'rgb(255 255 255)',
           }}
+          whileHover={{ y: 2 }}
+          whileTap={{ scale: 0.9 }}
           className={`px-3 ${
             lg
               ? `py-[0.15rem]`

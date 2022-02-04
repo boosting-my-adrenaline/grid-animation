@@ -87,9 +87,11 @@ export const NavbarSuggested: React.FC<IProps> = ({
 
   return (
     <motion.div
-      className={`h-[35vh]  flex items-center justify-center cursor-pointer border-b border-[#333] `}
+      className={`h-[30vh] w-[100vw]  flex items-center justify-start cursor-pointer border-b border-[#333] ${
+        isDarkMode ? 'bg-black' : 'bg-white'
+      }  shadow-[12px_2px_25px_80px_rgba(0,0,0,0.7)] `}
       ref={suggestedRef}
-      // onMouseLeave={() => setShownSuggestion(null)}
+      onMouseLeave={() => setShownSuggestion(null)}
       style={{
         // backgroundImage: `url(${test})`,
         backgroundPosition: 'center',
@@ -97,22 +99,37 @@ export const NavbarSuggested: React.FC<IProps> = ({
       }}
     >
       <div
-        className={`absolute w-full h-full  text-[10rem] flex justify-center items-center`}
-        style={{
-          background: 'rgba(0,0,0,0.85)',
-          backdropFilter: 'blur(8px)',
-          boxShadow: '0 20px 30px rgba(0, 0, 0, 0.55)',
-        }}
-      ></div>
-
-      <div className={`z-10 flex items-center justify-start `}>
+        className={`absolute w-full h-full ${
+          isDarkMode
+            ? 'bg-purple-100/30 shadow-[#ff6afd]/60'
+            : 'bg-purple-300/50 shadow-purple-300/80'
+        } shadow-[0px_0px_19px_4px_rgba(0,0,0,0.2)] `}
+        // style={{
+        //   background: 'rgba(0,0,0,0.9)',
+        // }}
+      />
+      <div
+        className={`absolute z-[11] left-0 w-[1vw] h-full bg-gradient-to-r ${
+          isDarkMode
+            ? `from-black via-purple-800/20`
+            : `from-gray-500 via-purple-100`
+        } to-transparent`}
+      />
+      <motion.div
+        className={`relative z-10 flex items-center justify-start  w-full h-full overflow-x-scroll `}
+        // drag={'x'}
+        // dragConstraints={{ left: 200, right: 0 }}
+        // dragElastic={0.2}
+        // dragMomentum={false}
+        // dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+      >
         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((el) => (
           <NavbarCard
             card={cards[el]}
             i={el}
-            height={suggestedHeight * 0.66}
-            width={parentWidth / 1.5}
-            columns={3}
+            height={suggestedHeight / 1.2}
+            width={suggestedHeight * 1.6}
+            columns={10}
             rows={1}
             open={open}
             lg={true}
@@ -122,10 +139,63 @@ export const NavbarSuggested: React.FC<IProps> = ({
             isResizing={false}
           />
         ))}
-      </div>
+      </motion.div>
+      <div
+        className={`absolute z-[11] right-0 w-[1vw] h-full bg-gradient-to-l ${
+          isDarkMode
+            ? `from-black via-purple-800/20`
+            : `from-gray-500 via-purple-100`
+        } to-transparent`}
+      />
     </motion.div>
   )
 }
+
+/* <diva className={`mt-32 relative`}>
+<h1 className={`text-5xl font-extrabold tracking-tight text-center`}>
+  Get away this winter
+</h1>
+<ul
+  className={`mt-10 pb-8 px-[50vh] w-full flex overflow-x-auto gap-8`}
+>
+  {[
+    { image: l1, titile: 'Miami' },
+    { image: l2, titile: 'Miami' },
+    { image: l3, titile: 'Miami' },
+    { image: l4, titile: 'Miami' },
+  ].map((el, i) => (
+    <li key={i}>
+      <div
+        className={`relative flex-shrink-0 max-w-[95vw] owerflow-hidden rounded-3xl`}
+      >
+        <img
+          src={el.image}
+          alt=""
+          className={`absolute inset-0 h-full w-full object-cover object-bottom`}
+        />
+        <div
+          className={`z-10 absolute inset-0 h-full w-full bg-gradient-to-br from-black/25`}
+        />
+        <div
+          className={`ralative h-96 w-[768px] p-12 flex flex-col justify-between items-start`}
+        >
+          <p className={`font-medium text-white`}>Destinations</p>
+          <h2
+            className={`mt-3 w-2/3 text-3xl font-semibold tracking-tight text-white`}
+          >
+            {el.titile}
+          </h2>
+        </div>
+        <a
+          className={`px-4 py-3 rounded-lg bg-white text-slate-900 text-sm font-medium`}
+        >
+          Browse destination
+        </a>
+      </div>
+    </li>
+  ))}
+</ul>
+</diva> */
 
 // {<div
 //     // style={{ width: width }} ////////?!!!
