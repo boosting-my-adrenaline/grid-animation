@@ -1,0 +1,6 @@
+{
+  "port": 80,
+  "jwtSecret": "kbrd",
+  "mongoUri": "mongodb+srv://Anakin:kbrd1234@kbrd.rllwc.mongodb.net/kbrd",
+  "baseUrl": "http://kbrd.site"
+}
