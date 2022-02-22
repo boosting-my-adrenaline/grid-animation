@@ -78,7 +78,7 @@ export const NavbarBackground: React.FC = () => {
     <motion.div
       initial={{ backgroundColor: active ? `#101010` : `#FFFBFF` }}
       animate={{ backgroundColor: active ? `#101010` : `#FFFBFF` }}
-      className={`h-full w-full`}
+      className={`h-full w-full border-none`}
     />
   )
 

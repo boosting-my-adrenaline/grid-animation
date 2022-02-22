@@ -14,48 +14,25 @@ import { NavbarBackground } from './Navbar.Background'
 import { useScroll } from '../../utils/hooks/useScroll'
 
 interface IProps {
-  opening: boolean
   setOpening: (opening: boolean) => void
   breakpoint: Breakpoints
-  isCards: boolean
   setIsCards: (isCards: boolean) => void
   loadingBlast: null | string
   setLoadingBlast: (tag: string) => void
-
-  open: null | number
-  setOpen: (open: null | number) => void
-  parentWidth: number
-  height: number
-  params: { x: number; y: number }
-  setParams: (params: { x: number; y: number }) => void
-  multiple: number
-  setMultiple: (multiple: number) => void
-  isResizing: boolean
-  loading: boolean
   windowWidth: number
-  cards: Card[]
+  test: boolean
+  setTest: (test: boolean) => void
 }
 
 export const Navbar: React.FC<IProps> = ({
-  opening,
   setOpening,
   breakpoint,
-  isCards,
   loadingBlast,
   setIsCards,
   setLoadingBlast,
-  open,
-  setOpen,
-  parentWidth,
-  height,
-  params,
-  setParams,
-  multiple,
-  setMultiple,
-  isResizing,
-  loading,
   windowWidth,
-  cards,
+  test,
+  setTest,
 }) => {
   let sm = breakpoint === `sm`
   let md = breakpoint === `md`
@@ -63,7 +40,6 @@ export const Navbar: React.FC<IProps> = ({
 
   const { toggle, isDarkMode } = useDarkMode()
 
-  const [test, setTest] = useState(0)
   const location = useLocation()
 
   const { pathname } = location
@@ -72,7 +48,6 @@ export const Navbar: React.FC<IProps> = ({
     if (pathname.slice(0, 6) === '/cards') {
       setIsCards(true)
     }
-    setTest((prev) => prev + 1)
   }, [pathname])
 
   const navigate = useNavigate()
@@ -122,6 +97,7 @@ export const Navbar: React.FC<IProps> = ({
       setShownSuggestion={setShownSuggestion}
       onClick={handleNavigate}
       shownSuggestion={shownSuggestion}
+      test={test}
     />
   ))
 
@@ -181,7 +157,9 @@ export const Navbar: React.FC<IProps> = ({
           className={`z-10 flex w-full  items-center justify-center   ${
             sm ? `px-[10px]` : `px-[1%]`
           } ${
-            isDarkMode
+            test
+              ? `bg-transparent shadow-none`
+              : isDarkMode
               ? `bg-gray-900 shadow-[#ff6afd]/80`
               : `bg-[rgb(231,224,237)] shadow-[#00035a]/40`
           } shadow-[2px_0_5px_2px_rgba(0,0,0,0.1)]`}
@@ -266,7 +244,7 @@ export const Navbar: React.FC<IProps> = ({
                 //   setTimeout(() => setOpening(false))
                 // }}
               >
-                <NavbarBLAST sm={sm} />
+                <NavbarBLAST sm={sm} test={test} />
               </a>
 
               {!sm && (
@@ -296,7 +274,7 @@ export const Navbar: React.FC<IProps> = ({
           <motion.div
             whileHover={{ y: 4 }}
             whileTap={{ scale: 0.2, y: 0 }}
-            className={`z-10 flex cursor-pointer `}
+            className={`z-10 flex cursor-pointer ${test && `invisible`}`}
             onMouseDown={() => toggle()}
           >
             <div className={`flex-grow`} />

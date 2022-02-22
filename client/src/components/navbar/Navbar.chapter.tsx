@@ -9,6 +9,7 @@ interface IProps {
   setShownSuggestion: (sug: null | number) => void
   onClick: (link: string) => void
   shownSuggestion: null | number
+  test: boolean
 }
 
 export const NavbarChapter: React.FC<IProps> = ({
@@ -17,6 +18,7 @@ export const NavbarChapter: React.FC<IProps> = ({
   setShownSuggestion,
   onClick,
   shownSuggestion,
+  test,
 }) => {
   const degree = Math.floor((Math.pow(++i, 1.5) * 245 - 135) % 360)
 
@@ -44,7 +46,7 @@ export const NavbarChapter: React.FC<IProps> = ({
         animate={{
           y: hover ? 4 : 0,
           backgroundImage: hover
-            ? isDarkMode
+            ? isDarkMode && !test
               ? `linear-gradient(${
                   (degree + 94) % 360
                 }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
@@ -57,7 +59,7 @@ export const NavbarChapter: React.FC<IProps> = ({
                 }deg, rgba(0,0,0, 0.9), rgba(0, 3, 90, 0.9)), linear-gradient(${
                   (degree + 94) % 360
                 }deg, rgba(0,0,0, 0.8), rgba(0, 3, 90, 0.89))`
-            : isDarkMode
+            : isDarkMode && !test
             ? `linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1)), linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1))`
             : `linear-gradient(${degree}deg, rgba(170,72,199, 0.7), rgba(0, 3, 90, 0.9)), linear-gradient(${degree}deg, rgba(170,72,199, 0.7), rgba(0, 3, 90, 0.9))`,
         }}

@@ -58,7 +58,7 @@ export const LandingCARDS5: React.FC<IProps> = ({ sm, handleNavigate }) => {
   const startOnScreen: boolean = useOnScreen<HTMLDivElement>(
     startRef,
     `${
-      -0.8 *
+      -0.9 *
       (width >= 1400
         ? (width - 80 - 80) / 5
         : width > 1160

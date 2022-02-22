@@ -5,13 +5,16 @@ import { useWindowSize } from '../../utils/hooks/useDimensions'
 
 interface IProps {
   sm: boolean
+  test: boolean
 }
 
-export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
+export const NavbarBLAST: React.FC<IProps> = ({ sm, test }) => {
   const [into, setInto] = useState(false)
   const [hover, setHover] = useState(false)
 
-  const { isDarkMode } = useDarkMode()
+  const { isDarkMode: isDark } = useDarkMode()
+
+  const isDarkMode = isDark && !test
 
   const degree = 90
 
@@ -45,7 +48,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
               (degree + 94) % 360
             }deg, rgba(255, 106, 253, 0.8), rgba(0, 3, 90, 0.89))`,
       }}
-      className={`flex flex-row-reverse  items-center cursor-pointer font-extrabold text-transparent bg-clip-text ${
+      className={`flex cursor-pointer  flex-row-reverse items-center bg-clip-text font-extrabold text-transparent ${
         into
           ? isDarkMode
             ? `bg-gradient-to-br from-[#0081CF] to-[#0081CF]`
@@ -57,7 +60,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
           : isDarkMode
           ? `bg-gradient-to-br from-[#ff6afd]/90 to-sky-100`
           : `bg-gradient-to-br from-[#ff6afd]/70 to-[#00035a]/70`
-      } transition duration-200 ease-custom-1`}
+      } ease-custom-1 transition duration-200`}
       onMouseDown={() => setInto(true)}
       onMouseUp={() => setTimeout(() => setInto(false), 0)}
       onMouseEnter={() => setHover(true)}
@@ -101,7 +104,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
                 into ? -4.155 : hover ? -4.155 * -0.3 : 0
               }%, ${into ? 6.625 : hover ? 6.58 * -0.3 : 0}%)`,
             }}
-            className={`transition-all duration-200 ease-custom-1`}
+            className={`ease-custom-1 transition-all duration-200`}
             d="m61.6 28.1 30.7 24.1-.6-1.4L71.2 8.2z"
           />
           <path
@@ -112,7 +115,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
                 into ? 3.97 : hover ? 3.97 * -0.3 : 0
               }%, ${into ? 3.87 : hover ? 3.87 * -0.3 : 0}%)`,
             }}
-            className={`transition-all duration-200 ease-custom-1`}
+            className={`ease-custom-1 transition-all duration-200`}
             d="m34.4 66.6 20.2-1.8 6.3-13L67 63.7l18-1.705-3.1-6.4-30.7-24.1z"
           />
           <path
@@ -126,7 +129,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
                 into ? -3.2 : hover ? -3 * -0.3 : 0
               }%)`,
             }}
-            className={`transition-all duration-200 ease-custom-1`}
+            className={`ease-custom-1 transition-all duration-200`}
             d="m61.6 73.6-7.2 14.8h27L74 72.5l18-1.7 16.7 35H26.8l14.6-30.4z"
           />
         </svg>
@@ -166,7 +169,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
                 into ? -4.155 : hover ? -4.155 * -0.3 : 0
               }%, ${into ? 6.625 : hover ? 6.58 * -0.3 : 0}%)`,
             }}
-            className={`transition-all duration-200 ease-custom-1`}
+            className={`ease-custom-1 transition-all duration-200`}
             d="m61.6 28.1 30.7 24.1-.6-1.4L71.2 8.2z"
           />
           <path
@@ -177,7 +180,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
                 into ? 3.97 : hover ? 3.97 * -0.3 : 0
               }%, ${into ? 3.87 : hover ? 3.87 * -0.3 : 0}%)`,
             }}
-            className={`transition-all duration-200 ease-custom-1`}
+            className={`ease-custom-1 transition-all duration-200`}
             d="m34.4 66.6 20.2-1.8 6.3-13L67 63.7l18-1.705-3.1-6.4-30.7-24.1z"
           />
           <path
@@ -191,7 +194,7 @@ export const NavbarBLAST: React.FC<IProps> = ({ sm }) => {
                 into ? -3.2 : hover ? -3 * -0.3 : 0
               }%)`,
             }}
-            className={`transition-all duration-200 ease-custom-1`}
+            className={`ease-custom-1 transition-all duration-200`}
             d="m61.6 73.6-7.2 14.8h27L74 72.5l18-1.7 16.7 35H26.8l14.6-30.4z"
           />
         </svg>

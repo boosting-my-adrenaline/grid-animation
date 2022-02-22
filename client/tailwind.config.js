@@ -63,6 +63,9 @@ module.exports = {
         custom1: '3/2',
         custom2: `1.743421052631579`,
       },
+      backgroundImage: {
+        slide1: `url('./static/slide1.jpg')`,
+      },
       height: {
         custom1: 'calc(14px + 3vmin)',
         'custom1*0.75': 'calc(9px + 2.3vmin)',

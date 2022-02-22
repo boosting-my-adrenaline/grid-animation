@@ -41,6 +41,7 @@ export const App: React.FC = () => {
   }
 
   const [loadingBlast, setLoadingBlast] = useState<null | string>('BLAST')
+  const [test, setTest] = useState(false)
   const [allHidden, setAllHidden] = useState(true)
 
   useEffect(() => {
@@ -73,6 +74,7 @@ export const App: React.FC = () => {
         window.scrollTo(0, 0)
       }
       setLoadingBlast(tag)
+      setTest(false)
     }
   }
 
@@ -141,26 +143,14 @@ export const App: React.FC = () => {
     >
       <BrowserRouter>
         <Navbar
-          opening={opening}
-          setOpening={setOpening}
           breakpoint={breakpoint}
+          setOpening={setOpening}
           loadingBlast={loadingBlast}
-          setLoadingBlast={handleLoadingBlast}
-          isCards={isCards}
           setIsCards={setIsCards}
-          open={open}
-          setOpen={setOpen}
-          parentWidth={width}
           windowWidth={windowWidth}
-          height={windowHeight}
-          // colors={colors}
-          params={params}
-          setParams={setParams}
-          multiple={multiple}
-          setMultiple={setMultiple}
-          isResizing={isResizing}
-          loading={loadingCards}
-          cards={cards}
+          setLoadingBlast={handleLoadingBlast}
+          test={test}
+          setTest={setTest}
         />
         {loadingBlast && (
           <LoadingPage setLoadingBlast={setLoadingBlast} tag={loadingBlast} />
@@ -181,17 +171,6 @@ export const App: React.FC = () => {
               : 'mx-[2px]'
           }  ${allHidden && `opacity-0`}`}
         >
-          <div
-            className={`text-React-h1 ${
-              breakpoint === `lg`
-                ? windowWidth >= 1500
-                  ? `py-[0.160rem]`
-                  : `py-[0.4rem]`
-                : breakpoint === `md`
-                ? `py-2.5`
-                : `py-3.5`
-            } font-Cooper uppercase`}
-          >{`\u00a0`}</div>
           <motion.div
             className={`flex w-[100%] flex-col items-center`}
             ref={parentRef}
@@ -214,11 +193,14 @@ export const App: React.FC = () => {
               <Route
                 path="/hotels"
                 element={
-                  <div className={`flex w-[100vw] shrink-0 justify-center `}>
+                  <div
+                    className={`relative top-0 w-[100vw] shrink-0 justify-center`}
+                  >
                     <SlidesContainer
                       loadingBlast={loadingBlast}
                       setOpening={setOpening}
                       setLoadingBlast={handleLoadingBlast}
+                      setTest={setTest}
                     />
                   </div>
                 }
@@ -228,6 +210,17 @@ export const App: React.FC = () => {
                 path="/cards/*"
                 element={
                   <>
+                    <div
+                      className={`text-React-h1 ${
+                        breakpoint === `lg`
+                          ? windowWidth >= 1500
+                            ? `py-[0.160rem]`
+                            : `py-[0.4rem]`
+                          : breakpoint === `md`
+                          ? `py-2.5`
+                          : `py-3.5`
+                      } font-Cooper uppercase`}
+                    >{`\u00a0`}</div>
                     <CardsFilter
                       open={open}
                       loadingCards={loadingCards}
@@ -268,16 +261,29 @@ export const App: React.FC = () => {
               <Route
                 path="/page/*"
                 element={
-                  <Page
-                    card={cards[open || 0]}
-                    width={windowWidth}
-                    height={height}
-                    setOpen={setOpen}
-                    opening={opening}
-                    windowWidth={windowWidth}
-                    isMain={isCards}
-                    setIsMain={setIsCards}
-                  />
+                  <>
+                    <div
+                      className={`text-React-h1 ${
+                        breakpoint === `lg`
+                          ? windowWidth >= 1500
+                            ? `py-[0.160rem]`
+                            : `py-[0.4rem]`
+                          : breakpoint === `md`
+                          ? `py-2.5`
+                          : `py-3.5`
+                      } font-Cooper uppercase`}
+                    >{`\u00a0`}</div>
+                    <Page
+                      card={cards[open || 0]}
+                      width={windowWidth}
+                      height={height}
+                      setOpen={setOpen}
+                      opening={opening}
+                      windowWidth={windowWidth}
+                      isMain={isCards}
+                      setIsMain={setIsCards}
+                    />
+                  </>
                 }
               />
             </Routes>
