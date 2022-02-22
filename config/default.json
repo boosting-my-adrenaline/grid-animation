@@ -1,6 +1,4 @@
 {
-  "port": 5005,
-  "jwtSecret": "kbrd",
-  "mongoUri": "mongodb+srv://Anakin:kbrd1234@kbrd.rllwc.mongodb.net/kbrd",
-  "baseUrl": "http://localhost:5005"
+  "port": 81,
+  "baseUrl": "http://elisium.space"
 }
