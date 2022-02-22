@@ -27,7 +27,7 @@ export const NavbarChapter: React.FC<IProps> = ({
   return (
     <motion.div
       key={chapter}
-      className={` flex justify-center flex-grow mb-5`}
+      className={` mb-5 flex flex-grow justify-center`}
       onMouseDown={() => onClick(chapter.toLowerCase())}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -39,28 +39,27 @@ export const NavbarChapter: React.FC<IProps> = ({
       /> */}
 
       <motion.div
-        onMouseEnter={() => setShownSuggestion(i)}
+        // onMouseEnter={() => setShownSuggestion(i)}
         // onMouseDown={() => navigate(`/${chapter.toLowerCase()}`)}
         animate={{
-          y: hover || shownSuggestion === i ? 4 : 0,
-          backgroundImage:
-            hover || shownSuggestion === i
-              ? isDarkMode
-                ? `linear-gradient(${
-                    (degree + 94) % 360
-                  }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
-                    (degree + 94) % 360
-                  }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
-                    (degree + 94) % 360
-                  }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1))`
-                : `linear-gradient(${
-                    (degree + 94) % 360
-                  }deg, rgba(0,0,0, 0.9), rgba(0, 3, 90, 0.9)), linear-gradient(${
-                    (degree + 94) % 360
-                  }deg, rgba(0,0,0, 0.8), rgba(0, 3, 90, 0.89))`
-              : isDarkMode
-              ? `linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1)), linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1))`
-              : `linear-gradient(${degree}deg, rgba(170,72,199, 0.7), rgba(0, 3, 90, 0.9)), linear-gradient(${degree}deg, rgba(170,72,199, 0.7), rgba(0, 3, 90, 0.9))`,
+          y: hover ? 4 : 0,
+          backgroundImage: hover
+            ? isDarkMode
+              ? `linear-gradient(${
+                  (degree + 94) % 360
+                }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
+                  (degree + 94) % 360
+                }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
+                  (degree + 94) % 360
+                }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1))`
+              : `linear-gradient(${
+                  (degree + 94) % 360
+                }deg, rgba(0,0,0, 0.9), rgba(0, 3, 90, 0.9)), linear-gradient(${
+                  (degree + 94) % 360
+                }deg, rgba(0,0,0, 0.8), rgba(0, 3, 90, 0.89))`
+            : isDarkMode
+            ? `linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1)), linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1))`
+            : `linear-gradient(${degree}deg, rgba(170,72,199, 0.7), rgba(0, 3, 90, 0.9)), linear-gradient(${degree}deg, rgba(170,72,199, 0.7), rgba(0, 3, 90, 0.9))`,
         }}
         whileTap={{
           backgroundImage: isDarkMode
@@ -70,7 +69,7 @@ export const NavbarChapter: React.FC<IProps> = ({
           scale: 0.9,
         }}
         // transition={{ type: `spring`, bounce: 0.6 }}
-        className={`flex-grow px-[0.5rem] text-center whitespace-nowrap text-transparent bg-clip-text cursor-pointer`}
+        className={`flex-grow cursor-pointer whitespace-nowrap bg-clip-text px-[0.5rem] text-center text-transparent`}
       >
         <a>{chapter}</a>
       </motion.div>

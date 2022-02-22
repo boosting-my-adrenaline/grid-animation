@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useWindowSize } from '../../utils/hooks/useDimensions'
 import { FooterLi } from './Footer.li'
 
 interface IPropsCol {
@@ -9,6 +10,8 @@ interface IPropsCol {
 
 export const FooterCol: React.FC<IPropsCol> = ({ title, lis, lg }) => {
   const [expanded, setExpanded] = useState(false)
+  const { width } = useWindowSize()
+  let mobile = width <= 500
 
   useEffect(() => {
     setExpanded(false)
@@ -21,15 +24,19 @@ export const FooterCol: React.FC<IPropsCol> = ({ title, lis, lg }) => {
   return (
     <li
       className={` ${
-        lg ? ` mx-[1rem]` : `w-full pt-[0.75rem] cursor-pointer`
-      }  transition duration-500 ease-custom-1`}
+        lg ? ` mx-[1rem]` : `w-full cursor-pointer pt-[0.75rem]`
+      }  ease-custom-1 transition duration-500`}
       onMouseDown={handleClick}
     >
-      <div className={`${lg || `flex justify-between items-center mr-[2rem]`}`}>
+      <div className={`${lg || `mr-[2rem] flex items-center justify-between`}`}>
         <h5
           className={` ${
-            lg ? `text-React-h2` : `text-React-h1*2`
-          } mb-[0.5rem]  font-BebasNeue`}
+            lg
+              ? `text-React-h2`
+              : !mobile
+              ? `text-React-h1*2`
+              : `text-React-h1*1.5`
+          } font-BebasNeue  mb-[0.5rem]`}
         >
           {title}
         </h5>
@@ -37,7 +44,7 @@ export const FooterCol: React.FC<IPropsCol> = ({ title, lis, lg }) => {
           <svg
             className={`w-[2rem] text-gray-100 ${
               expanded && `rotate-180`
-            } translate-y-[-0.25rem] transition duration-400 ease`}
+            } duration-400 ease translate-y-[-0.25rem] translate-x-[20px] transition`}
             viewBox="0 0 33.5 19.992"
           >
             <path

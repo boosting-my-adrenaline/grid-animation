@@ -3,12 +3,12 @@ import React from 'react'
 export const PageShareThisStory: React.FC = () => {
   return (
     <div
-      className={`w-full flex flex-col items-center justify-center gap-4 my-2`}
+      className={`my-2 flex w-full flex-col items-center justify-center gap-4`}
     >
       <div>SHARE THIS STORY</div>
       <div className={`flex items-center justify-center gap-4`}>
         <a
-          className={`cursor-pointer hover:translate-y-[-3px] transition duration-200 ease-custom-1`}
+          className={`ease-custom-1 cursor-pointer transition duration-200 hover:translate-y-[-3px]`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ export const PageShareThisStory: React.FC = () => {
           </svg>
         </a>
         <a
-          className={`cursor-pointer hover:translate-y-[-3px] transition duration-200 ease-custom-1`}
+          className={`ease-custom-1 cursor-pointer transition duration-200 hover:translate-y-[-3px]`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ export const PageShareThisStory: React.FC = () => {
           </svg>
         </a>
         <a
-          className={`cursor-pointer hover:translate-y-[-3px] transition duration-200 ease-custom-1`}
+          className={`ease-custom-1 cursor-pointer transition duration-200 hover:translate-y-[-3px]`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

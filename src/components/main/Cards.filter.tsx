@@ -46,7 +46,9 @@ export const CardsFilter: React.FC<IProps> = ({
               ? 'rgb(3 105 161)'
               : '#0081CF'
             : isDarkMode
-            ? 'rgb(12 74 110)'
+            ? sm
+              ? `rgb(178, 156, 145)`
+              : 'rgb(12 74 110)'
             : 'rgb(186 230 253)',
         backgroundColor:
           el === sort
@@ -54,7 +56,9 @@ export const CardsFilter: React.FC<IProps> = ({
               ? 'rgb(186 230 253)'
               : '#0081CF'
             : isDarkMode
-            ? 'rgba(12 74 110, 0.3)'
+            ? sm
+              ? 'rgba(12 74 110)'
+              : 'rgba(12 74 110, 0.3)'
             : 'rgb(224 242 254)',
         color:
           el === sort
@@ -67,7 +71,7 @@ export const CardsFilter: React.FC<IProps> = ({
       }}
       whileHover={{ y: 2 }}
       whileTap={{ scale: 0.9 }}
-      className={`px-3 py-1 cursor-pointer rounded-md `}
+      className={`cursor-pointer rounded-md px-3 py-1 `}
       onMouseDown={() => {
         setSort(el)
         setIsSortOpened(false)
@@ -143,25 +147,25 @@ export const CardsFilter: React.FC<IProps> = ({
           : { height: '0vh', y: -200, marginTop: '0rem' }
       }
       // transition={{ delay: 0.25 }}
-      className={` w-full flex flex-col items-center justify-center  ${
+      className={` flex w-full flex-col items-center justify-center  ${
         !sm ? `text-React-h3 px-4 ` : `text-React-h1 px-3 `
       } `}
     >
-      <div className={`w-full flex items-center justify-between`}>
+      <div className={`flex w-full items-center justify-between`}>
         {!sm ? (
           <>
-            <div className={`py-4 flex items-center jusity-center gap-6`}>
+            <div className={`jusity-center flex items-center gap-6 py-4`}>
               {elements}
             </div>
           </>
         ) : (
           <div className={`mt-3 flex w-full items-center justify-between `}>
             <div
-              className={`px-3 py-1.5 my-3 ${
+              className={`my-3 px-3 py-1.5 ${
                 isDarkMode
                   ? 'bg-sky-200 text-sky-800'
                   : 'bg-[#0081CF] text-white'
-              }  cursor-pointer rounded-md flex items-center justify-between gap-2`}
+              }  flex cursor-pointer items-center justify-between gap-2 rounded-md`}
               onMouseDown={() => {
                 !isSortOpened
                   ? setTimeout(() => setIsSortOpened(true))
@@ -172,7 +176,7 @@ export const CardsFilter: React.FC<IProps> = ({
               <svg
                 className={`w-[0.75rem] text-gray-100 ${
                   isSortOpened && `rotate-180`
-                }  transition duration-400 ease`}
+                }  duration-400 ease transition`}
                 viewBox="0 0 33.5 19.992"
               >
                 <path
@@ -184,7 +188,7 @@ export const CardsFilter: React.FC<IProps> = ({
             {isSortOpened && (
               <div
                 ref={refSort}
-                className={`mt-1 absolute translate-y-[60%] z-10 flex gap-2 py-2 flex-col ${
+                className={`absolute z-10 mt-1 flex translate-y-[60%] flex-col gap-2 py-2 ${
                   isDarkMode ? '' : 'bg- sky-300'
                 } opacity-95`}
               >
@@ -207,9 +211,9 @@ export const CardsFilter: React.FC<IProps> = ({
             lg
               ? `py-[0.15rem]`
               : md
-              ? 'py-[0.225rem] -mt-[0.01rem]'
-              : 'py-[0.3rem] mt-[0.7rem]'
-          } cursor-pointer rounded-md flex justify-center items-center gap-2`}
+              ? '-mt-[0.01rem] py-[0.225rem]'
+              : 'mt-[0.7rem] py-[0.3rem]'
+          } flex cursor-pointer items-center justify-center gap-2 rounded-md`}
         >
           <div
             onMouseDown={() => {
@@ -239,7 +243,7 @@ export const CardsFilter: React.FC<IProps> = ({
       {isFilterOpened && (
         <div
           ref={refFilter}
-          className={`mt-1 w-full  z-10 flex gap-2 py-2 flex-col opacity-95`}
+          className={`z-10 mt-1  flex w-full flex-col gap-2 py-2 opacity-95`}
         >
           <CardsFilterInside
             setFilterActives={setFilterActives}

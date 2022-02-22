@@ -15,15 +15,15 @@ export const Footer: React.FC = () => {
 
   return (
     <div
-      className={`w-full h-[min-content] ${
+      className={` h-[min-content] w-full ${
         isDarkMode ? `bg-[#333] text-gray-100` : `bg-gray-400 text-[#333]`
-      } border-t border-gray-500 font-Bebas ${
+      } font-Bebas border-t border-gray-500 ${
         lg
           ? `text-React-h2 px-[2vh]`
           : sm
           ? `text-React-h1*1.2 p-[0.5vh]`
           : `text-React-h1*1.5 p-[1vh]`
-      } pt-[4rem]  `}
+      } pt-[2rem]  `}
     >
       <FooterButtonAbove />
 
@@ -120,9 +120,9 @@ export const Footer: React.FC = () => {
           />
         </ul>
 
-        <div className={`w-full h-[1px] bg-gray-200 mb-[2rem]`} />
+        <div className={`mb-[2rem] h-[1px] w-full bg-gray-200`} />
 
-        <FooterBottom lg={lg} />
+        <FooterBottom lg={lg} sm={sm} />
       </div>
     </div>
   )

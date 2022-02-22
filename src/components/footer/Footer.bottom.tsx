@@ -3,18 +3,19 @@ import { FooterLi } from './Footer.li'
 
 interface IProps {
   lg: boolean
+  sm: boolean
 }
 
-export const FooterBottom: React.FC<IProps> = ({ lg }) => {
+export const FooterBottom: React.FC<IProps> = ({ lg, sm }) => {
   return (
     <div
-      className={`w-full flex ${
+      className={`flex w-full ${
         lg
-          ? ` justify-between text-React-h2 items-center pb-[1.5rem]`
-          : `flex-col-reverse text-React-h1*1.5 gap-[1rem] pb-[2.5rem]`
+          ? ` text-React-h2 items-center justify-between pb-[1.5rem]`
+          : `text-React-h1*1.5 flex-col-reverse gap-[1rem] pb-[2.5rem]`
       }  `}
     >
-      <ul className={`flex flex-wrap gap-[4rem]`}>
+      <ul className={`flex flex-wrap gap-[4rem] ${sm && `justify-center`}`}>
         {[
           `Interdum © 2022 Faucibus Tellum`,
           `Henderit`,

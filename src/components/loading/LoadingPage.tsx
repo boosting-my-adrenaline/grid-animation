@@ -21,23 +21,25 @@ export const LoadingPage: React.FC<IProps> = ({ tag, setLoadingBlast }) => {
 
   return (
     <div
-      className={`fixed h-[200vh] w-full z-[9] flex items-start justify-center`}
+      // className={` z-[30] flex h-[200vh] w-[100vw] items-start justify-center `}
+      className={` absolute z-[30] flex h-[200vh] w-[100vw] items-start justify-center`}
     >
       <motion.div
         initial={{ x: '-100%', y: '-50%' }}
-        animate={{ x: cooordinates[0] }}
+        animate={{ x: cooordinates[0], y: 0 }}
         // transition={{ duration: 0.8 }}
         transition={{ duration: 0.5 }}
-        className={`absolute w-full h-full bg-white`}
+        className={`absolute h-full w-full bg-white`}
       >
-        <div className={`w-full h-full bg-[#ff6afd]/70`} />
+        <div className={`h-full w-full bg-[#ff6afd]/70`} />
       </motion.div>
+
       <motion.div
         // transition={{ duration: 0.6 }}
         transition={{ duration: 0.3 }}
         initial={{ x: '-100%', y: '-50%' }}
-        animate={{ x: cooordinates[1] }}
-        className={`absolute w-full h-full bg-[#00035a]/70`}
+        animate={{ x: cooordinates[1], y: 0 }}
+        className={`absolute h-full w-full bg-[#00035a]/70`}
       />
 
       <motion.div
@@ -47,7 +49,7 @@ export const LoadingPage: React.FC<IProps> = ({ tag, setLoadingBlast }) => {
           skew: { delay: 0.4, duration: 0.5 },
           opacity: { delay: 0, duration: 0.3 },
         }}
-        className={` absolute font-BebasNeue text-Blast h-[100vh] flex items-center justify-center text-white `}
+        className={` font-BebasNeue text-Blast absolute flex h-[100vh] items-center justify-center text-white `}
       >
         <motion.div
           initial={{}}
@@ -65,7 +67,7 @@ export const LoadingPage: React.FC<IProps> = ({ tag, setLoadingBlast }) => {
               y: { delay: 0.1, duration: 1 },
               opacity: { delay: 0.8, duration: 0.5 },
             }}
-            className={'-z-10 absolute font-BebasNeue text-Blast text-[#333]'}
+            className={'font-BebasNeue text-Blast absolute -z-10 text-[#333]'}
             style={{
               textShadow: `-1px -1px 0 #333,   1px -1px 0 #333, -1px 1px 0 #333, 1px 1px 0 #333`,
             }}

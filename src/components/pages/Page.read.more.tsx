@@ -1,4 +1,3 @@
-import { title } from 'process'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import useDarkMode from '../../utils/hooks/useDarkMode'
@@ -42,12 +41,12 @@ export const PageReadMore: React.FC<IProps> = ({
           <img
             src={image}
             alt=""
-            className={`${
+            className={`h-auto w-full ${
               !sm ? `aspect-book ` : `aspect-custom1`
             }  object-cover`}
           />
         </div>
-        <div className={` ${!sm ? `w-[32%] -mt-2` : 'w-full mt-2'}`}>
+        <div className={` ${!sm ? `-mt-2 w-[32%]` : 'mt-2 w-full'}`}>
           <div
             className={` ${isDarkMode ? 'text-gray-100' : 'text-gray-900'} 
              ${
@@ -68,7 +67,7 @@ export const PageReadMore: React.FC<IProps> = ({
                     ? 'text-React-h2'
                     : 'text-React-h3'
                   : `text-React-h2*1.5 `
-              } opacity-80 mt-4 `}
+              } mt-4 opacity-80 `}
             >
               {text}
             </div>
@@ -82,7 +81,7 @@ export const PageReadMore: React.FC<IProps> = ({
   const pageButton = (num: number) => (
     <div
       key={num}
-      className={`w-[2vh] h-[2vh] rounded-sm cursor-pointer ${
+      className={`h-[2vh] w-[2vh] cursor-pointer rounded-sm ${
         num === page
           ? isDarkMode
             ? 'bg-sky-200'
@@ -97,10 +96,10 @@ export const PageReadMore: React.FC<IProps> = ({
   const pages = [0, 1, 2, 3, 4].map((el) => pageButton(el))
 
   return (
-    <div className={`w-full  my-4 mx-[] font-Bebas`}>
+    <div className={`font-Bebas  my-4 mx-[] w-full`}>
       <div
         className={`text-React-h1  ${
-          xl ? `pl-20 mx-[15px]` : lg ? `pl-12 mx-[15px]` : `mx-[15px]`
+          xl ? `mx-[15px] pl-20` : lg ? `mx-[15px] pl-12` : `mx-[15px]`
         } ${
           isDarkMode ? 'bg-sky-900 text-gray-50' : `bg-sky-100 text-gray-900`
         }`}
@@ -124,7 +123,7 @@ export const PageReadMore: React.FC<IProps> = ({
       >
         {cards.map((el, i) => card(el.title, el.text, el.image, i))}
       </div>
-      <div className={`w-full flex justify-center items-center gap-4 my-4`}>
+      <div className={`my-4 flex w-full items-center justify-center gap-4`}>
         {pages}
       </div>
     </div>

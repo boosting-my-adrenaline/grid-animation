@@ -15,7 +15,7 @@
 
 		.st2 {
 			opacity: 0.8;
-			fill: #3F3FFF;
+			fill: #a5a5bd;
 		}
 	</style>
 	<polygon class="st0" points="34.4,66.6 54.6,64.8 60.9,51.8 67,63.7 85,62.1 81.9,55.7 51.2,31.6 " />

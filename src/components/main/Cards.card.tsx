@@ -93,18 +93,18 @@ export const CardsCard: React.FC<IProps> = ({
           },
         },
       }}
-      className={`overflow-hidden flex flex-col justify-center items-center cursor-pointer `}
+      className={`flex cursor-pointer flex-col items-center justify-center overflow-hidden `}
       onMouseDown={() => handleClick(i)}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
       <motion.div
         ////////////SKELETON
-        className={`${loading || `opacity-0`} absolute z-20 w-full h-full ${
+        className={`${loading || `opacity-0`} absolute z-20 h-full w-full ${
           isDarkMode ? `bg-slate-800` : `bg-slate-100`
         } flex flex-col ${!sm ? `pt-[0.55%]` : `pt-[0.5%]`} ${
           !sm ? 'translate-y-[-0.35%]' : 'translate-y-[-0.5%]'
-        } justify-center items-center `}
+        } items-center justify-center `}
       >
         <motion.div
           initial={{
@@ -117,11 +117,11 @@ export const CardsCard: React.FC<IProps> = ({
             borderBottomLeftRadius: 0,
             borderBottomRightRadius: 0,
           }}
-          className={`${skeletonStyle} flex justify-end items-end`}
+          className={`${skeletonStyle} flex items-end justify-end`}
         />
 
         <motion.div
-          className={`z-10 bg-red-20 flex flex-col items-start justify-start translate-x-[-5%] translate-y-[5%] scale-90 p-[3%]  w-[100%] h-[100%] ${
+          className={`bg-red-20 z-10 flex h-[100%] w-[100%] translate-x-[-5%] translate-y-[5%] scale-90 flex-col items-start  justify-start p-[3%] ${
             isDarkMode && open !== i ? `text-gray-200` : ``
           } `}
         >
@@ -135,7 +135,7 @@ export const CardsCard: React.FC<IProps> = ({
           >
             {'\u00a0'}
             <div
-              className={`w-[65%] absolute ${skeletonStyle} h-4  rounded-full translate-y-[-0.22rem]`}
+              className={`absolute w-[65%] ${skeletonStyle} h-4  translate-y-[-0.22rem] rounded-full`}
             />
           </div>
 
@@ -144,21 +144,21 @@ export const CardsCard: React.FC<IProps> = ({
               lg ? `text-React-p4` : `text-React-p4*.1.5`
             } `}
           >
-            <p className={`flex justify-start items-center`}>
+            <p className={`flex items-center justify-start`}>
               {' '}
               {'\u00a0'}
               <div
-                className={`w-full absolute flex items-center justify-start gap-2 translate-y-[0.1rem]`}
+                className={`absolute flex w-full translate-y-[0.1rem] items-center justify-start gap-2`}
               >
                 <div className={`${skeletonStyle} h-2 w-[15%] rounded-full`} />
                 <div className={`${skeletonStyle} h-2 w-[46%] rounded-full`} />
                 <div className={`${skeletonStyle} h-2 w-[25%] rounded-full`} />
               </div>
             </p>
-            <p className={`flex justify-start items-center`}>
+            <p className={`flex items-center justify-start`}>
               {'\u00a0'}
               <div
-                className={`w-full absolute flex items-center justify-start gap-2 translate-y-[0.1rem]`}
+                className={`absolute flex w-full translate-y-[0.1rem] items-center justify-start gap-2`}
               >
                 <div className={`${skeletonStyle} h-2 w-[26%] rounded-full`} />
                 <div className={`${skeletonStyle} h-2 w-[15%] rounded-full`} />
@@ -199,7 +199,7 @@ export const CardsCard: React.FC<IProps> = ({
         }
         whileHover={{ opacity: 1 }}
         transition={{ duration: isResizing ? 0 : 0.5 }}
-        className={`flex justify-end items-end`}
+        className={`flex items-end justify-end`}
       >
         {card.popular ? (
           <motion.div
@@ -210,7 +210,7 @@ export const CardsCard: React.FC<IProps> = ({
               opacity: open === i ? 0 : 1,
             }}
             transition={{ default: { delay: 0.3 }, opacity: { delay: 0.1 } }}
-            className={`absolute bg-[#0081CF] text-gray-100  px-[1rem]  rounded-l-full  ${
+            className={`absolute rounded-l-full bg-[#0081CF]  px-[1rem]  text-gray-100  ${
               !sm ? `text-[1.6vmin]` : `text-[2vmin]`
             } `}
           >
@@ -239,7 +239,7 @@ export const CardsCard: React.FC<IProps> = ({
           x: { duration: 0.3 },
           y: { duration: 0.3 },
         }}
-        className={`z-10 bg-red-20 flex flex-col items-start justify-start w-[100%] h-[100%] ${
+        className={`bg-red-20 z-10 flex h-[100%] w-[100%] flex-col items-start justify-start ${
           isDarkMode && open !== i ? `text-gray-200` : ``
         } `}
       >
@@ -256,7 +256,7 @@ export const CardsCard: React.FC<IProps> = ({
           style={{
             color:
               isDarkMode && !hover && open !== i
-                ? 'rgb(209 213 219'
+                ? 'rgb(229 231 235'
                 : 'rgb(17 24 39 ',
           }}
         >
@@ -268,7 +268,7 @@ export const CardsCard: React.FC<IProps> = ({
               lg ? `text-React-p4` : `text-React-p4*.1.5`
             } ${
               isDarkMode && !hover && open !== i
-                ? 'text-gray-400'
+                ? 'text-gray-300'
                 : hover || open === i
                 ? 'text-gray-900'
                 : 'text-gray-700'

@@ -1,7 +1,9 @@
 import React from 'react'
+import { InfiniteScroll } from '../../utils/infiniteSroll'
 import { Card } from '../main/cards.former'
 import { NavbarSuggested } from './Navbar.suggested'
-
+import { CardContainer } from './TheFile2'
+// import * as foo from 'react-horizontal-infinite-scroll'
 interface IProps {
   shownSuggestion: null | number
   setShownSuggestion: (show: null) => void
@@ -37,6 +39,8 @@ export const NavbarScontainer: React.FC<IProps> = ({
 }) => {
   return (
     <div>
+      {/* <CardContainer /> */}
+
       <NavbarSuggested
         shownSuggestion={shownSuggestion}
         setShownSuggestion={setShownSuggestion}

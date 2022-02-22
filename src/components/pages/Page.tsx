@@ -127,49 +127,52 @@ export const Page: React.FC<IProps> = ({
   const highlightTitleText = { color: card.colors.contrastForMain }
 
   return (
-    <div className={`w-[100%] flex flex-col items-center`}>
-      <motion.div
-        initial={{
-          top: xl || lg ? '140vh' : md ? '' : '',
-          left: xl || lg ? '2vw' : '1.75vw',
-        }}
-        animate={{
-          top: params.back ? '15vh' : '140vh',
-          backgroundColor: onScreen ? 'white' : card.colors.mainColor,
-          color: 'black',
-          borderColor: 'black',
-        }}
-        className={`fixed ${
-          xl || lg ? `px-4 py-1` : `px-1 py-1`
-        } z-50 font-Bebas text-React-h1 cursor-pointer border-2 rounded-md`}
-        onMouseDown={handleBack}
-      >
-        {xl || lg ? (
-          `BACK`
-        ) : (
-          <svg
-            viewBox="-10 0 128 128"
-            width={'1.2rem'}
-            height={'1.2rem'}
-            xmlSpace="preserve"
-          >
-            <path
-              style={{
-                // fill: isDarkMode ? 'rgb(55 65 81)' : 'rgb(229 231 235)',
-                fill: onScreen
-                  ? isDarkMode
-                    ? 'white'
-                    : 'black'
-                  : card.colors.mainColor,
-                stroke: 'black',
-                strokeWidth: 14,
-                strokeMiterlimit: 10,
-              }}
-              d="M68 111.3 22.7 66 68 20.7"
-            />
-          </svg>
-        )}
-      </motion.div>
+    <div className={` flex w-[100%] flex-col items-center`}>
+      {!sm && (
+        <motion.div
+          initial={{
+            top: xl || lg ? '140vh' : md ? '' : '',
+            left: xl || lg ? '2vw' : '1.75vw',
+          }}
+          animate={{
+            top: params.back ? '15vh' : '140vh',
+            backgroundColor: onScreen ? 'white' : card.colors.mainColor,
+            color: 'black',
+            borderColor: 'black',
+          }}
+          className={`fixed ${
+            xl || lg ? `px-4 py-1` : `px-1 py-1`
+          } font-Bebas text-React-h1 z-20 cursor-pointer rounded-md border-2`}
+          onMouseDown={handleBack}
+        >
+          {xl || lg ? (
+            `BACK`
+          ) : (
+            <svg
+              viewBox="-10 0 128 128"
+              width={'1.2rem'}
+              height={'1.2rem'}
+              xmlSpace="preserve"
+            >
+              <path
+                style={{
+                  // fill: isDarkMode ? 'rgb(55 65 81)' : 'rgb(229 231 235)',
+                  fill: onScreen
+                    ? isDarkMode
+                      ? 'white'
+                      : 'black'
+                    : card.colors.mainColor,
+                  stroke: 'black',
+                  strokeWidth: 14,
+                  strokeMiterlimit: 10,
+                }}
+                d="M68 111.3 22.7 66 68 20.7"
+              />
+            </svg>
+          )}
+        </motion.div>
+      )}
+
       <motion.div
         onMouseDown={handleBack}
         ref={refHead}
@@ -185,7 +188,7 @@ export const Page: React.FC<IProps> = ({
           padding: params.padding,
         }}
         transition={{ delay: 0, duration: 0.4 }}
-        className={`z-10 flex flex-col items-center justify-center w-[100%] relative `}
+        className={`relative z-10 flex w-[100%] flex-col items-center justify-center `}
       >
         <motion.div
           initial={{
@@ -199,7 +202,7 @@ export const Page: React.FC<IProps> = ({
         />
         <div className={`z-10 w-full`}>
           <h1
-            className={`z-10 font-BebasNeue  ${
+            className={`font-BebasNeue z-10  ${
               !sm ? `text-React-h1*3 ` : `text-React-h1*1.5`
             } translate-y-[-3px] `}
           >
@@ -216,7 +219,7 @@ export const Page: React.FC<IProps> = ({
                 : 'calc(2.8vmin)',
             }}
             transition={{ duration: 0.4 }}
-            className={`z-10 font-Bebas first-letter:uppercase`}
+            className={`font-Bebas z-10 first-letter:uppercase`}
           >
             {' '}
             {card.text.split(' ').map((el, i) => {
@@ -271,25 +274,25 @@ export const Page: React.FC<IProps> = ({
             : '',
         }}
         transition={{ delay: 0, duration: 0.4 }}
-        className={`w-[100%] h-[min-content]  font-Cooper ${
+        className={`font-Cooper h-[min-content] w-[100%]  text-justify ${
           !sm || 1 ? `text-React-Page max-w-[1000] ` : `text-React-p`
         } ${isDarkMode ? ` text-gray-200` : `text-gray-800 `}`}
       >
         <div
           className={` w-full ${
-            !sm ? `pb-8 text-React-h2 ` : `pb-4 text-React-p2`
-          } w-full  flex items-center`}
+            !sm ? `text-React-h2 pb-8 ` : `text-React-p2 pb-4`
+          } flex  w-full items-center`}
         >
           {['Belize Sierra', 'Ivory Coast', 'Liberia', 'Montenegro'].map(
             (el, i) => (
               <span
                 className={`${
                   isDarkMode
-                    ? `text-gray-400 border-gray-400`
-                    : `text-gray-700 border-gray-800`
+                    ? `border-gray-400 text-gray-400`
+                    : `border-gray-800 text-gray-700`
                 } border  ${
-                  !sm ? `p-[2px_8px]` : `p-[2px_4px] whitespace-nowrap`
-                } rounded-md mr-3`}
+                  !sm ? `p-[2px_8px]` : `whitespace-nowrap p-[2px_4px]`
+                } mr-3 rounded-md`}
               >
                 {el}
               </span>
@@ -300,7 +303,7 @@ export const Page: React.FC<IProps> = ({
           {/* <div className={`w-[32%]`} /> */}
         </div>
         {(xl || lg || md) && (
-          <picture className={`flex flex-col  float-right w-[30%] ml-8 mb-4`}>
+          <picture className={`float-right ml-8  mb-4 flex w-[30%] flex-col`}>
             <img
               className={` aspect-album object-cover`}
               // alt="Miami Beach. FL. USA"
@@ -312,7 +315,7 @@ export const Page: React.FC<IProps> = ({
           </picture>
         )}
         <div
-          className={`  bg-red-20 ${
+          className={` bg-red-20 text-left ${
             xl ? `space-y-[-3.5vh]` : lg ? `space-y-[-2.5vh]` : ``
           }`}
         >
@@ -335,7 +338,7 @@ export const Page: React.FC<IProps> = ({
         <div
           className={`${
             isDarkMode ? `text-gray-400` : `text-gray-700`
-          } text-React-p2 pl-1 font-Cooper`}
+          } text-React-p2 font-Cooper pl-1`}
         >
           Praesent elementum lorem vel ligula imperdiet molestie elementum nunc.
         </div>
@@ -362,7 +365,7 @@ export const Page: React.FC<IProps> = ({
         <br />
         {sm && (
           <img
-            className={`w-[47%] float-left mb-6 aspect-album object-cover`}
+            className={`aspect-album float-left mb-6 w-[47%] object-cover`}
             // alt="Miami Beach. FL. USA"
             // src={MiamiBeach}
             src={card.image.main}
@@ -372,18 +375,16 @@ export const Page: React.FC<IProps> = ({
         <img
           className={`aspect-album object-cover ${
             xl || lg
-              ? ` translate-y-[10px] float-left  w-[40%] mr-10 mb-8`
+              ? `float-left mr-10  mb-8 w-[40%] translate-y-[10px]`
               : md
-              ? `w-[40%] mr-6 mb-4 float-left translate-y-[10px]`
-              : 'w-[47%] mr-3 mb-6 float-right'
+              ? `float-left mr-6 mb-4 w-[40%] translate-y-[10px]`
+              : `float-right mr-3 mb-6 w-[47%]`
           } `}
-          // alt="Ocean Drive"
-          // src={OceanDrive}
           src={card.image.vertical}
-          alt=""
+          alt={``}
         />
         <p>
-          Fugiat est<span style={textHighlight}> repudiandae tenetur </span>{' '}
+          Fugiat est<span style={textHighlight}> repudiandae tenetur </span>
           delectus repellendus corrupti impedit, commodi nam debitis illo
           distinctio<span style={textHighlight}> reiciendis </span>veritatis
           excepturi quidem inventore reprehenderit repellat aspernatur ullam?
@@ -424,11 +425,11 @@ export const Page: React.FC<IProps> = ({
         </p>
         <br />
         <img
-          className={`float-right aspect-book object-cover ${
+          className={`aspect-book float-right object-cover ${
             xl || lg
-              ? ` w-[50%] ml-10 mb-8 `
+              ? ` ml-10 mb-8 w-[50%] `
               : md
-              ? `w-[100%] mb-8`
+              ? `mb-8 w-[100%]`
               : 'ml-3 mb-6'
           } translate-y-[10px]`}
           // alt="Tropics"

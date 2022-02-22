@@ -1,6 +1,12 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    screens: {
+      xs: '640px',
+      sm: '800px',
+      md: '1200px',
+      lg: '1800px',
+    },
     extend: {
       fontFamily: {
         BebasNeue: ['Bebas Neue'],
@@ -11,6 +17,7 @@ module.exports = {
         Cooper: ['Cooper'],
         Nuvo: ['Nuvo'],
         Pitch: ['Pitch'],
+        UI: [`SF UI Text`],
       },
       fontSize: {
         'React-h1': 'calc(10px + 2vmin)',
@@ -54,6 +61,7 @@ module.exports = {
         album: '10/16',
         book: '16/10',
         custom1: '3/2',
+        custom2: `1.743421052631579`,
       },
       height: {
         custom1: 'calc(14px + 3vmin)',
@@ -62,6 +70,7 @@ module.exports = {
       },
     },
   },
+  plugins: [require('@tailwindcss/typography')],
 }
 
 // text-React-h1*1.5

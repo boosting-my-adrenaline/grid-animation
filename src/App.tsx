@@ -10,6 +10,7 @@ import { assembleCards } from './components/main/cards.former'
 import { CardsPagination } from './components/main/Cards.pagination'
 import { Navbar } from './components/navbar/Navbar'
 import { Page } from './components/pages/Page'
+import { SlidesContainer } from './components/slides/Slide.container'
 import useDarkMode from './utils/hooks/useDarkMode'
 import { useDidMountEffect } from './utils/hooks/useDidMountEffect'
 import { useWindowSize } from './utils/hooks/useDimensions'
@@ -132,11 +133,10 @@ export const App: React.FC = () => {
 
   return (
     <div
-      className={`w-full h-[100%] overflow-y-hidden transition duration-150  ${
+      className={`h-[100%] w-full overflow-y-hidden transition duration-150  ${
         isDarkMode
-          ? // ? `bg-[#333333] shadow-gray-200/60`
-            `bg-[#101010] shadow-gray-200/60`
-          : `bg-[#FFFBFF] shadow-gray-500/60`
+        // ? `bg-[#101010] shadow-gray-200/60`
+        // : `bg-[#FFFBFF] shadow-gray-500/60`
       }`}
     >
       <BrowserRouter>
@@ -193,11 +193,36 @@ export const App: React.FC = () => {
             } font-Cooper uppercase`}
           >{`\u00a0`}</div>
           <motion.div
-            className={`w-[100%] flex flex-col items-center pt-[]`}
+            className={`flex w-[100%] flex-col items-center`}
             ref={parentRef}
           >
             <Routes>
-              <Route path="/" element={<Landing />} />
+              <Route
+                path="/"
+                element={
+                  <div
+                    className={`flex w-[100vw] max-w-[1680px] justify-center `}
+                  >
+                    <Landing
+                      loadingBlast={loadingBlast}
+                      setOpening={setOpening}
+                      setLoadingBlast={handleLoadingBlast}
+                    />
+                  </div>
+                }
+              />
+              <Route
+                path="/hotels"
+                element={
+                  <div className={`flex w-[100vw] shrink-0 justify-center `}>
+                    <SlidesContainer
+                      loadingBlast={loadingBlast}
+                      setOpening={setOpening}
+                      setLoadingBlast={handleLoadingBlast}
+                    />
+                  </div>
+                }
+              />
 
               <Route
                 path="/cards/*"
