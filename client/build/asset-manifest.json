@@ -1,14 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.57c55872.css",
-    "main.js": "/static/js/main.231fa450.js",
+    "main.css": "/static/css/main.f249e9f5.css",
+    "main.js": "/static/js/main.277e0d6f.js",
     "static/media/v14.jpg": "/static/media/v14.8b2f3b3f41348f7912cc.jpg",
     "static/media/g9.jpg": "/static/media/g9.70154140afb0b18aede7.jpg",
     "static/media/v0.jpg": "/static/media/v0.b85e12851408351d0eb0.jpg",
+    "static/media/moon.jpg": "/static/media/moon.799c0fcdd844ba788d62.jpg",
     "static/media/g5.jpg": "/static/media/g5.e71ba89d9d495dd3e0f8.jpg",
     "static/media/v16.jpg": "/static/media/v16.71c6d64fadc7b2ae1616.jpg",
     "static/media/v20.jpg": "/static/media/v20.76d481fc1995bcce05cb.jpg",
     "static/media/v17.jpg": "/static/media/v17.73c0bda70547d8c6de79.jpg",
+    "static/media/slide2.jpg": "/static/media/slide2.6d448c6586b513c80de8.jpg",
     "static/media/v23.jpg": "/static/media/v23.68930f0202021aa00ce1.jpg",
     "static/media/g12.jpg": "/static/media/g12.b54cb4543dba16064c29.jpg",
     "static/media/g7.jpg": "/static/media/g7.8cddad188c8a3e6db559.jpg",
@@ -74,7 +76,12 @@
     "static/media/g13.jpg": "/static/media/g13.c3fb5f22b22260463218.jpg",
     "static/media/l16.jpg": "/static/media/l16.d0cd42d5909c9f1a93d9.jpg",
     "static/media/n2.jpg": "/static/media/n2.1ae272d4cc7546a6c5c6.jpg",
+    "static/media/GeogrotesqueCyr-SemiBold.ttf": "/static/media/GeogrotesqueCyr-SemiBold.5e2f237c1c64879a3a85.ttf",
+    "static/media/Geogrotesque.ttf": "/static/media/Geogrotesque.e75bd3f38bd324cd9cb9.ttf",
     "static/media/l5.jpg": "/static/media/l5.d1dcde10a3afdd109894.jpg",
+    "static/media/GothamMedium.otf": "/static/media/GothamMedium.bcd733e6f8ebeb6a5e75.otf",
+    "static/media/Gotham.otf": "/static/media/Gotham.e37cf59954e32a3f5401.otf",
+    "static/media/GothamBold.otf": "/static/media/GothamBold.19cbd08d9da163ba87d6.otf",
     "static/media/v8.jpg": "/static/media/v8.d5408dbbadd3e62659aa.jpg",
     "static/media/t0.jpg": "/static/media/t0.0ff385d5180192204b78.jpg",
     "static/media/w10.jpg": "/static/media/w10.0ee35b2579d97cd69b81.jpg",
@@ -83,6 +90,7 @@
     "static/media/w8.jpg": "/static/media/w8.fe5a3a1462e53ed5a921.jpg",
     "static/media/n7.jpg": "/static/media/n7.7f760b46aaf9d90531e7.jpg",
     "static/media/v7.jpg": "/static/media/v7.d16f536584e1cb1b25ee.jpg",
+    "static/media/slide3.jpg": "/static/media/slide3.90a2a0d8a14b0fc239e9.jpg",
     "static/media/n11.jpg": "/static/media/n11.7813bdb891bc3370e118.jpg",
     "static/media/l0.jpg": "/static/media/l0.7260f25f801ce9732634.jpg",
     "static/media/l7.jpg": "/static/media/l7.cdf0e3583072ddb25809.jpg",
@@ -136,13 +144,15 @@
     "static/media/Nuvo.ttf": "/static/media/Nuvo.581d56d1303b1ab85d74.ttf",
     "static/media/h4.jpg": "/static/media/h4.7faf278bb61d8c4d0abb.jpg",
     "static/media/w3.jpg": "/static/media/w3.48186783c758c922ef5f.jpg",
+    "static/media/PNG.png": "/static/media/PNG.f4af04a553dc4a0d856f.png",
+    "static/media/TESLA.ttf": "/static/media/TESLA.7e1592bd859398505313.ttf",
     "static/media/Bebas.otf": "/static/media/Bebas.11748dca3fa28ee0de97.otf",
     "index.html": "/index.html",
-    "main.57c55872.css.map": "/static/css/main.57c55872.css.map",
-    "main.231fa450.js.map": "/static/js/main.231fa450.js.map"
+    "main.f249e9f5.css.map": "/static/css/main.f249e9f5.css.map",
+    "main.277e0d6f.js.map": "/static/js/main.277e0d6f.js.map"
   },
   "entrypoints": [
-    "static/css/main.57c55872.css",
-    "static/js/main.231fa450.js"
+    "static/css/main.f249e9f5.css",
+    "static/js/main.277e0d6f.js"
   ]
 }
