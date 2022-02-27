@@ -101,7 +101,7 @@ export const Page: React.FC<IProps> = ({
       window.scrollTo(0, 0)
     }
 
-    setTimeout(() => navigate('/cards/cherie'), 500)
+    setTimeout(() => navigate('/slide3'), 500)
     setTimeout(() => setOpen(null), 600)
   }
 

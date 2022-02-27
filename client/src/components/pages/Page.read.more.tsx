@@ -26,8 +26,6 @@ export const PageReadMore: React.FC<IProps> = ({
 
   useDidMountEffect(() => setCards(rmAssembleCards(2, cards)), [page])
 
-  const navigate = useNavigate()
-
   const card = (title: string, text: string, image: any, i: number) => (
     <>
       <div
@@ -99,7 +97,7 @@ export const PageReadMore: React.FC<IProps> = ({
     <div className={`font-Bebas  my-4 mx-[] w-full`}>
       <div
         className={`text-React-h1  ${
-          xl ? `mx-[15px] pl-20` : lg ? `mx-[15px] pl-12` : `mx-[15px]`
+          xl ? `mx-[100px] pl-20` : lg ? `mx-[15px] pl-12` : `mx-[15px]`
         } ${
           isDarkMode ? 'bg-sky-900 text-gray-50' : `bg-sky-100 text-gray-900`
         }`}

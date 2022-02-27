@@ -22,7 +22,7 @@ export const LoadingPage: React.FC<IProps> = ({ tag, setLoadingBlast }) => {
   return (
     <div
       // className={` z-[30] flex h-[200vh] w-[100vw] items-start justify-center `}
-      className={` absolute z-[30] flex h-[200vh] w-[100vw] items-start justify-center`}
+      className={` absolute z-[10000] flex h-[200vh] w-[100vw] items-start justify-center`}
     >
       <motion.div
         initial={{ x: '-100%', y: '-50%' }}
@@ -59,7 +59,7 @@ export const LoadingPage: React.FC<IProps> = ({ tag, setLoadingBlast }) => {
           }}
           className={`flex items-center justify-center`}
         >
-          <div className={`z-10 `}>{tag}</div>
+          <div className={`z-10 `}>BLAST</div>
           <motion.div
             animate={{ x: 10, y: 10, opacity: 0 }}
             transition={{
@@ -72,7 +72,8 @@ export const LoadingPage: React.FC<IProps> = ({ tag, setLoadingBlast }) => {
               textShadow: `-1px -1px 0 #333,   1px -1px 0 #333, -1px 1px 0 #333, 1px 1px 0 #333`,
             }}
           >
-            {tag}
+            {/* {tag} */}
+            BLAST
           </motion.div>
         </motion.div>
       </motion.div>

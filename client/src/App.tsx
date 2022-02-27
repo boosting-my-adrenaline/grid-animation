@@ -2,15 +2,15 @@ import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Footer } from './components/footer/Footer'
-import { Landing } from './components/landing/Landing'
+import { AppleContainer } from './components/Apple/Apple.Container'
 import { LoadingPage } from './components/loading/LoadingPage'
 import { CardsContainer } from './components/main/Cards.container'
 import { CardsFilter } from './components/main/Cards.filter'
 import { assembleCards } from './components/main/cards.former'
 import { CardsPagination } from './components/main/Cards.pagination'
-import { Navbar } from './components/navbar/Navbar'
+import { NavbarBlast } from './components/navbar-blast/NavbarBlast'
 import { Page } from './components/pages/Page'
-import { SlidesContainer } from './components/slides/Slide.container'
+import { TeslaContainer } from './components/tesla/Tesla.container'
 import useDarkMode from './utils/hooks/useDarkMode'
 import { useDidMountEffect } from './utils/hooks/useDidMountEffect'
 import { useWindowSize } from './utils/hooks/useDimensions'
@@ -41,7 +41,6 @@ export const App: React.FC = () => {
   }
 
   const [loadingBlast, setLoadingBlast] = useState<null | string>('BLAST')
-  const [test, setTest] = useState(false)
   const [allHidden, setAllHidden] = useState(true)
 
   useEffect(() => {
@@ -74,7 +73,6 @@ export const App: React.FC = () => {
         window.scrollTo(0, 0)
       }
       setLoadingBlast(tag)
-      setTest(false)
     }
   }
 
@@ -142,16 +140,6 @@ export const App: React.FC = () => {
       }`}
     >
       <BrowserRouter>
-        <Navbar
-          breakpoint={breakpoint}
-          setOpening={setOpening}
-          loadingBlast={loadingBlast}
-          setIsCards={setIsCards}
-          windowWidth={windowWidth}
-          setLoadingBlast={handleLoadingBlast}
-          test={test}
-          setTest={setTest}
-        />
         {loadingBlast && (
           <LoadingPage setLoadingBlast={setLoadingBlast} tag={loadingBlast} />
         )}
@@ -177,39 +165,42 @@ export const App: React.FC = () => {
           >
             <Routes>
               <Route
-                path="/"
+                path="/slide1"
                 element={
-                  <div
-                    className={`flex w-[100vw] max-w-[1680px] justify-center `}
-                  >
-                    <Landing
+                  <div className={`flex w-[100vw] justify-center `}>
+                    <AppleContainer
                       loadingBlast={loadingBlast}
-                      setOpening={setOpening}
                       setLoadingBlast={handleLoadingBlast}
                     />
                   </div>
                 }
               />
               <Route
-                path="/hotels"
+                path="/slide2"
                 element={
                   <div
                     className={`relative top-0 w-[100vw] shrink-0 justify-center`}
                   >
-                    <SlidesContainer
+                    <TeslaContainer
                       loadingBlast={loadingBlast}
-                      setOpening={setOpening}
                       setLoadingBlast={handleLoadingBlast}
-                      setTest={setTest}
                     />
                   </div>
                 }
               />
 
               <Route
-                path="/cards/*"
+                path="/slide3"
                 element={
                   <>
+                    <NavbarBlast
+                      breakpoint={breakpoint}
+                      setOpening={setOpening}
+                      loadingBlast={loadingBlast}
+                      setIsCards={setIsCards}
+                      windowWidth={windowWidth}
+                      setLoadingBlast={handleLoadingBlast}
+                    />
                     <div
                       className={`text-React-h1 ${
                         breakpoint === `lg`
@@ -255,13 +246,24 @@ export const App: React.FC = () => {
                       breakpoint={breakpoint}
                       windowWidth={windowWidth}
                     />
+                    <div className={`w-screen`}>
+                      <Footer />
+                    </div>
                   </>
                 }
               />
               <Route
-                path="/page/*"
+                path="/slide3/page/*"
                 element={
                   <>
+                    <NavbarBlast
+                      breakpoint={breakpoint}
+                      setOpening={setOpening}
+                      loadingBlast={loadingBlast}
+                      setIsCards={setIsCards}
+                      windowWidth={windowWidth}
+                      setLoadingBlast={handleLoadingBlast}
+                    />
                     <div
                       className={`text-React-h1 ${
                         breakpoint === `lg`
@@ -283,13 +285,16 @@ export const App: React.FC = () => {
                       isMain={isCards}
                       setIsMain={setIsCards}
                     />
+
+                    <div className={`w-screen`}>
+                      <Footer />
+                    </div>
                   </>
                 }
               />
             </Routes>
           </motion.div>
         </div>
-        <Footer />
       </BrowserRouter>
     </div>
   )

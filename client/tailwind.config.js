@@ -18,6 +18,9 @@ module.exports = {
         Nuvo: ['Nuvo'],
         Pitch: ['Pitch'],
         UI: [`SF UI Text`],
+        Gotham: [`Gotham`],
+        Tesla: [`Tesla`],
+        Geogrotesque: [`Geogrotesque`],
       },
       fontSize: {
         'React-h1': 'calc(10px + 2vmin)',
@@ -56,6 +59,7 @@ module.exports = {
         'in-expo': 'cubic-bezier(0.95, 0.05, 0.795, 0.035)',
         'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
         'custom-1': ' cubic-bezier(0.165, 0.84, 0.44, 1)',
+        apple: 'cubic-bezier(.52,.16,.24,1)',
       },
       aspectRatio: {
         album: '10/16',
@@ -64,8 +68,19 @@ module.exports = {
         custom2: `1.743421052631579`,
       },
       backgroundImage: {
-        slide1: `url('./static/slide1.jpg')`,
+        slide1: `url('./static/slides/slide1.jpg')`,
+        slide2: `url('./static/slides/slide2.jpg')`,
+        slide3: `url('./static/slides/slide3.jpg')`,
+        slide4: `url('./static/slides/slide4.jpg')`,
+        slide5: `url('./static/slides/slide5.jpg')`,
+        slide5: `url('./static/slides/slide5.jpg')`,
+        moon: `url('./static/slides/moon.jpg')`,
       },
+
+      gridTemplateColumns: {
+        custom1: `1fr max-content 1fr`,
+      },
+
       height: {
         custom1: 'calc(14px + 3vmin)',
         'custom1*0.75': 'calc(9px + 2.3vmin)',

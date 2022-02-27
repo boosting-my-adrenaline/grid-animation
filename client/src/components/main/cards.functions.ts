@@ -28,9 +28,9 @@ export const handleClickMultiple3 = (
 
   setTimeout(() => {
     if (open !== null) {
-      navigate('/')
+      navigate('/slide3')
     } else {
-      navigate('/page/' + (num + 1))
+      navigate('/slide3/page/' + (num + 1))
     }
 
     //
@@ -123,9 +123,9 @@ export const handleClickMultiple2 = (
 
   setTimeout(() => {
     if (open !== null) {
-      navigate('/')
+      navigate('/slide3')
     } else {
-      navigate('/page/' + (num + 1))
+      navigate('/slide3/page/' + (num + 1))
     }
     //////////
   }, 800)
@@ -211,9 +211,9 @@ export const handleClickMultiple1 = (
 
   setTimeout(() => {
     if (open !== null) {
-      navigate('/')
+      navigate('/slide3')
     } else {
-      navigate('/page/' + (num + 1))
+      navigate('/slide3/page/' + (num + 1))
     }
   }, 800)
   if (open !== null) {

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 13 29" style="enable-background:new 0 0 13 29;" xml:space="preserve">
+<g id="Слой_1">
+</g>
+<g id="Слой_2">
+	<g>
+		<defs>
+			<path id="SVGID_1_" d="M368.7-9.3h-725.5c-23.2,0-42.1-18.8-42.1-42.1v-154.3c0-23.2,18.8-42.1,42.1-42.1h725.5
+				c23.2,0,42.1,18.8,42.1,42.1v154.3C410.7-28.1,391.9-9.3,368.7-9.3z"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_2_);">
+			<image style="overflow:visible;" width="900" height="600" xlink:href="png1.png"  transform="matrix(1 0 0 1 -444 -286)">
+			</image>
+		</g>
+	</g>
+</g>
+</svg>
