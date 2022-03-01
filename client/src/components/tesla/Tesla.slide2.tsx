@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
 import { useWindowSize } from '../../utils/hooks/useDimensions'
 import useElementSize from '../../utils/hooks/useElementSize'
-import useOnScreen from '../../utils/hooks/useOnScreen'
 
 interface IProps {
   show?: boolean
@@ -30,6 +29,12 @@ export const TeslaSlide2: React.FC<IProps> = ({
 
   const testing = width >= 900
   const [turn, setTurn] = useState(mobile ? 4 : 0)
+
+  useDidMountEffect(() => {
+    if (sm) {
+      setTurn(4)
+    }
+  }, [sm])
 
   useDidMountEffect(() => {
     if (mobile) {
@@ -374,7 +379,7 @@ export const TeslaSlide2: React.FC<IProps> = ({
               }}
               className={` absolute flex ${
                 i % 2 && width >= 1200 && `flex-row-reverse`
-              } rounded-[6px] border-2 border-black/[.1] shadow-[0_20px_25px_-5px_rgb(0,0,0,0.1)] shadow-gray-600`}
+              } rounded-[0px] border-2 border-black/[.1] shadow-[0_20px_25px_-5px_rgb(0,0,0,0.1)] shadow-gray-800`}
             >
               {!mobile && (
                 <div

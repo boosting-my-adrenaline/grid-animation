@@ -160,17 +160,17 @@ export const LandingCARDS2: React.FC<IProps> = ({ sm }) => {
           ref={ref}
         >
           <li className={`h-full ${snap} `} ref={startRef}>
-            <LandingCardSquareSmall2 opinion={0} sm={false} />
+            <LandingCardSquareSmall2 option={0} sm={false} />
           </li>
 
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((el) => (
             <li key={el} className={`h-full ${snap} `}>
-              <LandingCardSquareSmall2 sm={false} opinion={el} />
+              <LandingCardSquareSmall2 sm={false} option={el} />
             </li>
           ))}
 
           <li className={`h-full ${snap} `} ref={endRef}>
-            <LandingCardSquareSmall2 sm={false} opinion={13} />
+            <LandingCardSquareSmall2 sm={false} option={13} />
           </li>
         </ul>
         {width > 1000 && (

@@ -18,10 +18,10 @@ const n13 = require('../../static/nature/n13.jpg')
 
 interface IProps {
   sm: boolean
-  opinion: number
+  option: number
 }
 
-export const LandingCardSquareSmall2: React.FC<IProps> = ({ sm, opinion }) => {
+export const LandingCardSquareSmall2: React.FC<IProps> = ({ sm, option }) => {
   const images = [n0, n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12, n13]
 
   const titles = [
@@ -46,7 +46,7 @@ export const LandingCardSquareSmall2: React.FC<IProps> = ({ sm, opinion }) => {
     <div className={`full h-full cursor-pointer select-none`}>
       <div className={`relative w-full overflow-hidden rounded-[6px] bg-black`}>
         <img
-          src={images[opinion]}
+          src={images[option]}
           className={`aspect-[1] rounded-[6px] object-cover transition-all duration-200 ease-in hover:scale-[1.02] hover:opacity-70`}
         />
       </div>
@@ -57,7 +57,7 @@ export const LandingCardSquareSmall2: React.FC<IProps> = ({ sm, opinion }) => {
           ${isDarkMode ? `text-white/[.92]` : `text-black/[.86]`}
           `}
           >
-            {titles[opinion][0]}
+            {titles[option][0]}
           </span>
         </div>
         <div className={`translate-y-[-8px]`}>
@@ -65,7 +65,7 @@ export const LandingCardSquareSmall2: React.FC<IProps> = ({ sm, opinion }) => {
             className={` space-y-0 text-[12px] font-[400] leading-[1.25]
           ${isDarkMode ? `text-white/[.64]` : `text-black/[.56]`}`}
           >
-            {titles[opinion][1]}
+            {titles[option][1]}
           </span>
         </div>
       </div>

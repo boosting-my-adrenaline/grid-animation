@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
 import { useWindowSize } from '../../utils/hooks/useDimensions'
 import useOnScreen from '../../utils/hooks/useOnScreen'
+import { useScroll } from '../../utils/hooks/useScroll'
 import '../Apple/noscrollbar.css'
 import { TeslaMenu } from './Tesla.menu'
 import { TeslaSide } from './Tesla.side'
@@ -128,6 +129,8 @@ export const TeslaContainer: React.FC<IProps> = ({
     </li>
   )
 
+  const { isScrollingTop } = useScroll()
+
   return (
     <div className={`font-Gotham relative w-full overflow-visible`}>
       {width >= 900 && (
@@ -136,9 +139,18 @@ export const TeslaContainer: React.FC<IProps> = ({
         </div>
       )}
 
+      {/* {(width < 900 && !onScreen1 && isScrollingTop) || (
+        <div className={`fixed top-0 z-[20] h-[126px] w-full bg-red-400`}>
+          ist? {isScrollingTop ? 1 : 0}
+        </div>
+      )} */}
+
       {activeSlide === 1 || width < 900 || (
         <div className={`absolute top-[20px] right-[25px] z-40 `}>
-          <TeslaSlideUp onClick={() => scroll(10)} dark={activeSlide !== 4} />{' '}
+          <TeslaSlideUp
+            onClick={() => scroll(10)}
+            dark={![4, 8].includes(activeSlide)}
+          />{' '}
         </div>
       )}
       {menuOpen && (
@@ -221,35 +233,40 @@ export const TeslaContainer: React.FC<IProps> = ({
           ref={ref1}
         />
         <div
-          className={`absolute top-[150vh] z-40 h-[100px] w-[10px] bg-red-200`}
+          className={`absolute top-[150vh] z-40 h-[100px] w-[0.1px] `}
           ref={ref2}
         />
         <div
           className={`absolute ${
             width >= 900 ? `top-[250vh]` : `top-[220vh]`
-          } z-40 h-[100px] w-[10px] bg-sky-900`}
+          } z-40 h-[100px] w-[0.1px] `}
           ref={ref3}
         />
         <div
           className={`absolute ${
-            width >= 900 ? `top-[350vh]` : `top-[310vh]`
-          } z-40 h-[300px] w-[10px] bg-emerald-200`}
+            width >= 900 ? `top-[350vh] h-[0.1px]` : `top-[290vh] h-[300px]`
+          } z-40  w-[0.1px] `}
           ref={ref4}
         />
         <div
-          className={`absolute top-[450vh] z-40 h-[100px] w-[10px] bg-purple-200`}
+          className={`absolute ${
+            width >= 900 ? `top-[450vh] h-[0.1px]` : `top-[360vh] h-[60vh]`
+          } top-[450vh] z-40  w-[0.1px] `}
           ref={ref5}
         />
+
         <div
-          className={`absolute top-[550vh] z-40 h-[100px] w-[10px] bg-rose-200`}
+          className={`absolute top-[550vh] z-40 h-[100px] w-[0.1px] `}
           ref={ref6}
         />
         <div
-          className={`absolute top-[650vh] z-40 h-[100px] w-[10px] `}
+          className={`absolute top-[650vh] z-40 h-[100px] w-[0.1px] `}
           ref={ref7}
         />
         <div
-          className={`absolute top-[750vh] z-40 h-[100px] w-[10px] `}
+          className={`absolute ${
+            width >= 900 ? `top-[750vh]` : `top-[690vh]`
+          } z-40 h-[100px] w-[0.1px] `}
           ref={ref8}
         />
       </ul>

@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.f249e9f5.css",
-    "main.js": "/static/js/main.277e0d6f.js",
+    "main.css": "/static/css/main.420098ff.css",
+    "main.js": "/static/js/main.13853bb9.js",
+    "static/media/moon3.png": "/static/media/moon3.1f78d0a394f15a3c9343.png",
+    "static/media/TESLAVIDEO.mp4": "/static/media/TESLAVIDEO.c9c5289b4249df3c5440.mp4",
     "static/media/v14.jpg": "/static/media/v14.8b2f3b3f41348f7912cc.jpg",
     "static/media/g9.jpg": "/static/media/g9.70154140afb0b18aede7.jpg",
     "static/media/v0.jpg": "/static/media/v0.b85e12851408351d0eb0.jpg",
-    "static/media/moon.jpg": "/static/media/moon.799c0fcdd844ba788d62.jpg",
     "static/media/g5.jpg": "/static/media/g5.e71ba89d9d495dd3e0f8.jpg",
     "static/media/v16.jpg": "/static/media/v16.71c6d64fadc7b2ae1616.jpg",
     "static/media/v20.jpg": "/static/media/v20.76d481fc1995bcce05cb.jpg",
@@ -15,6 +16,7 @@
     "static/media/g12.jpg": "/static/media/g12.b54cb4543dba16064c29.jpg",
     "static/media/g7.jpg": "/static/media/g7.8cddad188c8a3e6db559.jpg",
     "static/media/g0.jpg": "/static/media/g0.587cbf07d96625f13a0b.jpg",
+    "static/media/teslaImage.jpeg": "/static/media/teslaImage.e151bcc4ae514d1ce7a2.jpeg",
     "static/media/v1.jpg": "/static/media/v1.71952674af66c8d098bc.jpg",
     "static/media/v9.jpg": "/static/media/v9.94e733705416f862a84f.jpg",
     "static/media/v2.jpg": "/static/media/v2.b71411bc354ed8506deb.jpg",
@@ -49,6 +51,7 @@
     "static/media/SFUIDisplay-Ultralight.ttf": "/static/media/SFUIDisplay-Ultralight.44ec17c4e7358011459c.ttf",
     "static/media/g11.jpg": "/static/media/g11.daa38734f6a2a79eca18.jpg",
     "static/media/SFUIDisplay-Black.ttf": "/static/media/SFUIDisplay-Black.f8903fbef724cdf31819.ttf",
+    "static/media/bat.jpeg": "/static/media/bat.66919b9d50a48eab7fb2.jpeg",
     "static/media/SFUIDisplay-Regular.ttf": "/static/media/SFUIDisplay-Regular.2a83d66408047e712880.ttf",
     "static/media/v15.jpg": "/static/media/v15.5042fb4fda25ac31e364.jpg",
     "static/media/v19.jpg": "/static/media/v19.956a28878d229376d0bd.jpg",
@@ -148,11 +151,11 @@
     "static/media/TESLA.ttf": "/static/media/TESLA.7e1592bd859398505313.ttf",
     "static/media/Bebas.otf": "/static/media/Bebas.11748dca3fa28ee0de97.otf",
     "index.html": "/index.html",
-    "main.f249e9f5.css.map": "/static/css/main.f249e9f5.css.map",
-    "main.277e0d6f.js.map": "/static/js/main.277e0d6f.js.map"
+    "main.420098ff.css.map": "/static/css/main.420098ff.css.map",
+    "main.13853bb9.js.map": "/static/js/main.13853bb9.js.map"
   },
   "entrypoints": [
-    "static/css/main.f249e9f5.css",
-    "static/js/main.277e0d6f.js"
+    "static/css/main.420098ff.css",
+    "static/js/main.13853bb9.js"
   ]
 }

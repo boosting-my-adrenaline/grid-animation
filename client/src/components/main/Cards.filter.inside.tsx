@@ -81,7 +81,7 @@ export const CardsFilterInside: React.FC<IProps> = ({
       onClick: () => setFilter3((prev) => !prev),
     },
     {
-      tag: `muerto`,
+      tag: `suspicit`,
       filter: filter4,
       onClick: () => setFilter4((prev) => !prev),
     },
@@ -184,15 +184,15 @@ export const CardsFilterInside: React.FC<IProps> = ({
       }}
       whileHover={{ y: 2 }}
       whileTap={{ scale: 0.9 }}
-      className={` px-3 py-1  cursor-pointer 
+      className={` cursor-pointer px-3  py-1 
       ${
         extra === `0`
-          ? 'rounded-md mx-4 my-2 mr-0 rounded-r-none'
+          ? 'mx-4 my-2 mr-0 rounded-md rounded-r-none'
           : extra === `1`
           ? `my-2 mx-0 rounded-none`
           : extra === `2`
-          ? `rounded-md mx-4  my-2 ml-0 rounded-l-none`
-          : 'rounded-md mx-4 my-2'
+          ? `mx-4 my-2  ml-0 rounded-md rounded-l-none`
+          : 'mx-4 my-2 rounded-md'
       }  bg-sky-800`}
       onMouseDown={onClick}
     >
@@ -204,23 +204,23 @@ export const CardsFilterInside: React.FC<IProps> = ({
     <div
       className={`w-full ${
         '' // !isDarkMode ? 'bg-sky-900' : 'bg-sky-50'
-      } py-4 items-center justify-center flex-wrap border-t border-b ${
+      } flex-wrap items-center justify-center border-t border-b py-4 ${
         isDarkMode ? 'border-gray-200' : 'border-gray-700'
       }`}
     >
       <div
         className={`${
           !sm && `mx-4`
-        } bg-red-40 flex items-center justify-center flex-wrap`}
+        } bg-red-40 flex flex-wrap items-center justify-center`}
       >
         {toggles1.map((el, i) =>
           toggleElement(el.tag, el.filter, el.onClick, i, ' ')
         )}
       </div>
       <div className={`flex ${sm && `flex-col`} w-full justify-evenly`}>
-        <div className={`w-full flex flex-col items-center `}>
+        <div className={`flex w-full flex-col items-center `}>
           <div
-            className={`w-full my-2 text-center ${
+            className={`my-2 w-full text-center ${
               isDarkMode
                 ? `bg-sky-800 text-gray-100`
                 : `bg-sky-100 text-sky-900`
@@ -228,16 +228,16 @@ export const CardsFilterInside: React.FC<IProps> = ({
           >
             sollicitudin tempor
           </div>
-          <div className={`mx-4 bg-red-40 flex items-center justify-start`}>
+          <div className={`bg-red-40 mx-4 flex items-center justify-start`}>
             {selectors1.map((el, i) =>
               toggleElement(el.tag, el.filter, el.onClick, i, el.extra)
             )}
           </div>
         </div>
 
-        <div className={`w-full flex flex-col items-center `}>
+        <div className={`flex w-full flex-col items-center `}>
           <div
-            className={`w-full my-2 text-center ${
+            className={`my-2 w-full text-center ${
               isDarkMode
                 ? `bg-sky-800 text-gray-100`
                 : `bg-sky-100 text-sky-900`
@@ -245,7 +245,7 @@ export const CardsFilterInside: React.FC<IProps> = ({
           >
             bibendum le cont
           </div>
-          <div className={`mx-4 bg-red-40 flex items-center justify-start`}>
+          <div className={`bg-red-40 mx-4 flex items-center justify-start`}>
             {selectors2.map((el, i) =>
               toggleElement(el.tag, el.filter, el.onClick, i, el.extra)
             )}

@@ -74,7 +74,9 @@ module.exports = {
         slide4: `url('./static/slides/slide4.jpg')`,
         slide5: `url('./static/slides/slide5.jpg')`,
         slide5: `url('./static/slides/slide5.jpg')`,
-        moon: `url('./static/slides/moon.jpg')`,
+        moon: `url('./static/slides/moon3.png')`,
+        bat: `url('./static/slides/bat.jpeg')`,
+        teslaImage: `url('./static/slides/teslaImage.jpeg')`,
       },
 
       gridTemplateColumns: {

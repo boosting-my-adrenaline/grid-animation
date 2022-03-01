@@ -32,9 +32,9 @@ export const NavbarBlast: React.FC<IProps> = ({
   let md = breakpoint === `md`
   let lg = breakpoint === `lg`
 
-  // useEffect(() => {
-  //   setMenuOpen(false)
-  // }, [sm, md, lg])
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [sm, md, lg])
 
   const { toggle, isDarkMode } = useDarkMode()
 
@@ -118,7 +118,6 @@ export const NavbarBlast: React.FC<IProps> = ({
   return (
     <>
       <div className={`fixed inset-0  z-[-10]`}>
-        {' '}
         <NavbarBackground />
       </div>
       <motion.nav
@@ -304,104 +303,106 @@ export const NavbarBlast: React.FC<IProps> = ({
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{
-            // rotate: `180deg`,
-            // x: `-50%`,
-            y: `-120%`,
-          }}
-          animate={{
-            // rotate: menuOpen ? `0deg` : `180deg`,
-            // x: menuOpen ? `0` : `-50%`,
-            y: menuOpen ? `0` : `-160%`,
-          }}
-          transition={{ type: 'just' }}
-          className={` w-full origin-top bg-red-100 ${
-            isDarkMode
-              ? `   bg-gray-900/[.97]  shadow-[12px_2px_25px_80px_rgba(0,0,0,0.7)] `
-              : `bg-[rgb(231,224,237)]/[.97]   shadow-[12px_2px_25px_80px_rgba(0,0,0,0.7)]`
-          }`}
-        >
-          <div
-            className={`flex  w-full flex-col items-center ${
+        {sm && (
+          <motion.div
+            initial={{
+              // rotate: `180deg`,
+              // x: `-50%`,
+              y: `-120%`,
+            }}
+            animate={{
+              // rotate: menuOpen ? `0deg` : `180deg`,
+              // x: menuOpen ? `0` : `-50%`,
+              y: menuOpen ? `0` : `-160%`,
+            }}
+            transition={{ type: 'just' }}
+            className={` w-full origin-top bg-red-100 ${
               isDarkMode
-                ? ` shadow-[2px_0_5px_2px_rgba(0,0,0,0.1)] shadow-[#ff6afd]/70`
-                : ` shadow-[2px_0_5px_2px_rgba(0,0,0,0.1)] shadow-[#00035a]/30`
+                ? `   bg-gray-900/[.97]  shadow-[12px_2px_25px_80px_rgba(0,0,0,0.7)] `
+                : `bg-[rgb(231,224,237)]/[.97]   shadow-[12px_2px_25px_80px_rgba(0,0,0,0.7)]`
             }`}
           >
-            <ul className={`flex  flex-wrap justify-between p-[30px_20px] `}>
-              {navChapters.map((el) => (
-                <li
-                  key={el}
-                  className={` ${
-                    windowWidth >= 700
-                      ? `flex-[25%]`
-                      : windowWidth >= 600
-                      ? `flex-[33%]`
-                      : windowWidth >= 400
-                      ? `flex-[50%]`
-                      : `flex-[100%]`
-                  } flex justify-center p-[10px_30px]`}
-                  onMouseDown={() => {
-                    setMenuOpen(false)
-                    handleNavigate(el)
-                  }}
-                >
-                  <a
-                    className={`font-Cooper cursor-pointer rounded-[6px] ${
-                      isDarkMode ? `bg-white/80` : `bg-black/20`
-                    } p-[7px_15px] text-[20px] tracking-[0.75px]`}
-                  >
-                    <motion.span
-                      animate={{
-                        backgroundImage: hover
-                          ? isDarkMode
-                            ? `linear-gradient(${
-                                (degree + 94) % 360
-                              }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
-                                (degree + 94) % 360
-                              }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
-                                (degree + 94) % 360
-                              }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1))`
-                            : `linear-gradient(${
-                                (degree + 94) % 360
-                              }deg, rgba(0,0,0, 0.9), rgba(0, 3, 90, 0.9)), linear-gradient(${
-                                (degree + 94) % 360
-                              }deg, rgba(0,0,0, 0.8), rgba(0, 3, 90, 0.89))`
-                          : isDarkMode
-                          ? `linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1)), linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1))`
-                          : `linear-gradient(${degree}deg, rgba(170,72,199, 0.7), rgba(0, 3, 90, 0.9)), linear-gradient(${degree}deg, rgba(170,72,199, 0.7), rgba(0, 3, 90, 0.9))`,
-                      }}
-                      className={`bg-clip-text`}
-                    >
-                      {el}
-                    </motion.span>
-                  </a>
-                </li>
-              ))}
-            </ul>
             <div
-              className={`  mb-[40px] h-[1px] w-[90%] rounded-full bg-gradient-to-r from-transparent  via-gray-500/[90] to-transparent `}
-            />
-            <motion.div
-              animate={{ rotate: 90, scale: [1.1, 1, 1.1] }}
-              whileHover={{ scale: 1.1 }}
-              transition={{
-                repeat: Infinity,
-                repeatDelay: 1.3,
-              }}
-              className={`mb-[40px] flex h-[50px] w-[50px]  cursor-pointer items-center justify-center rounded-full border-black/90 bg-gray-400`}
-              onMouseDown={() => setMenuOpen(false)}
+              className={`flex  w-full flex-col items-center ${
+                isDarkMode
+                  ? ` shadow-[2px_0_5px_2px_rgba(0,0,0,0.1)] shadow-[#ff6afd]/70`
+                  : ` shadow-[2px_0_5px_2px_rgba(0,0,0,0.1)] shadow-[#00035a]/30`
+              }`}
             >
+              <ul className={`flex  flex-wrap justify-between p-[30px_20px] `}>
+                {navChapters.map((el) => (
+                  <li
+                    key={el}
+                    className={` ${
+                      windowWidth >= 700
+                        ? `flex-[25%]`
+                        : windowWidth >= 600
+                        ? `flex-[33%]`
+                        : windowWidth >= 400
+                        ? `flex-[50%]`
+                        : `flex-[100%]`
+                    } flex justify-center p-[10px_30px]`}
+                    onMouseDown={() => {
+                      setMenuOpen(false)
+                      handleNavigate(el)
+                    }}
+                  >
+                    <a
+                      className={`font-Cooper cursor-pointer rounded-[6px] ${
+                        isDarkMode ? `bg-white/80` : `bg-black/20`
+                      } p-[7px_15px] text-[20px] tracking-[0.75px]`}
+                    >
+                      <motion.span
+                        animate={{
+                          backgroundImage: hover
+                            ? isDarkMode
+                              ? `linear-gradient(${
+                                  (degree + 94) % 360
+                                }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
+                                  (degree + 94) % 360
+                                }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1)), linear-gradient(${
+                                  (degree + 94) % 360
+                                }deg, rgba(255, 228, 230, 1), rgba(224, 242, 254, 1))`
+                              : `linear-gradient(${
+                                  (degree + 94) % 360
+                                }deg, rgba(0,0,0, 0.9), rgba(0, 3, 90, 0.9)), linear-gradient(${
+                                  (degree + 94) % 360
+                                }deg, rgba(0,0,0, 0.8), rgba(0, 3, 90, 0.89))`
+                            : isDarkMode
+                            ? `linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1)), linear-gradient(${degree}deg, rgba(255, 106, 253, 0.8), rgba(224, 242, 254, 1))`
+                            : `linear-gradient(${degree}deg, rgba(170,72,199, 0.7), rgba(0, 3, 90, 0.9)), linear-gradient(${degree}deg, rgba(170,72,199, 0.7), rgba(0, 3, 90, 0.9))`,
+                        }}
+                        className={`bg-clip-text`}
+                      >
+                        {el}
+                      </motion.span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
               <div
-                className={`absolute h-[4px] w-[36px] rotate-45 rounded-full bg-red-500`}
+                className={`  mb-[40px] h-[1px] w-[90%] rounded-full bg-gradient-to-r from-transparent  via-gray-500/[90] to-transparent `}
               />
-              <div
-                className={`absolute h-[4px] w-[36px] rotate-[135deg] rounded-full bg-red-500`}
-              />
-            </motion.div>
-          </div>
-        </motion.div>
+              <motion.div
+                animate={{ rotate: 90, scale: [1.1, 1, 1.1] }}
+                whileHover={{ scale: 1.1 }}
+                transition={{
+                  repeat: Infinity,
+                  repeatDelay: 1.3,
+                }}
+                className={`mb-[40px] flex h-[50px] w-[50px]  cursor-pointer items-center justify-center rounded-full border-black/90 bg-gray-400`}
+                onMouseDown={() => setMenuOpen(false)}
+              >
+                <div
+                  className={`absolute h-[4px] w-[36px] rotate-45 rounded-full bg-red-500`}
+                />
+                <div
+                  className={`absolute h-[4px] w-[36px] rotate-[135deg] rounded-full bg-red-500`}
+                />
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
       </motion.nav>
     </>
   )

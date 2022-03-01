@@ -10,8 +10,9 @@ import { LandingCardSquareSmall } from './Apple.card.square.small'
 
 interface IProps {
   sm: boolean
+  reverse?: boolean
 }
-export const LandingCARDS3: React.FC<IProps> = ({ sm }) => {
+export const LandingCARDS3: React.FC<IProps> = ({ sm, reverse }) => {
   const { width: windowWidth, height } = useWindowSize()
   const ref: any = useRef<HTMLElement>(null)
 
@@ -111,7 +112,7 @@ export const LandingCARDS3: React.FC<IProps> = ({ sm }) => {
           ${isDarkMode ? `text-white/[.92]` : `text-black/[.86]`}
           `}
         >
-          Proin vitae
+          {reverse ? `Octus` : `Proin vitae`}
         </h1>
         <button
           className={`text-[15px] text-[#fa586a] decoration-2 outline-none hover:underline`}
@@ -160,17 +161,20 @@ export const LandingCARDS3: React.FC<IProps> = ({ sm }) => {
           ref={ref}
         >
           <li className={`h-full ${snap} `} ref={startRef}>
-            <LandingCardSquareSmall sm={false} opinion={0} />
+            <LandingCardSquareSmall sm={false} opinion={reverse ? 11 : 0} />
           </li>
 
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((el) => (
+          {(reverse
+            ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].reverse()
+          ).map((el) => (
             <li key={el} className={`h-full ${snap} `}>
               <LandingCardSquareSmall sm={false} opinion={el} />
             </li>
           ))}
 
           <li className={`h-full ${snap} `} ref={endRef}>
-            <LandingCardSquareSmall sm={false} opinion={11} />
+            <LandingCardSquareSmall sm={false} opinion={reverse ? 0 : 11} />
           </li>
         </ul>
         {width > 1000 && (

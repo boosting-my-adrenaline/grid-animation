@@ -1,11 +1,8 @@
 import { motion } from 'framer-motion'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
 import { useWindowSize } from '../../utils/hooks/useDimensions'
 import useElementSize from '../../utils/hooks/useElementSize'
-import useOnScreen from '../../utils/hooks/useOnScreen'
-import { TeslaNavbar } from './Tesla.navbar'
-import { TeslaSlideDown } from './Tesla.slidedown'
 
 interface IProps {
   show: boolean
@@ -32,7 +29,7 @@ export const TeslaSlide4: React.FC<IProps> = ({
   const [turn, setTurn] = useState(0)
 
   useDidMountEffect(() => {
-    let delays = [200, 1200, 2000]
+    let delays = [100, 900, 1500]
 
     let id0 = setTimeout(() => setTurn(1), delays[0])
     let id1 = setTimeout(() => setTurn(2), delays[1])

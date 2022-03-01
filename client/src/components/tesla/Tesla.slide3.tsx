@@ -1,9 +1,6 @@
 import { motion } from 'framer-motion'
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { useWindowSize } from '../../utils/hooks/useDimensions'
-import useOnScreen from '../../utils/hooks/useOnScreen'
-import { TeslaNavbar } from './Tesla.navbar'
-import { TeslaSlideDown } from './Tesla.slidedown'
 
 interface IProps {
   show: boolean
@@ -84,9 +81,9 @@ export const TeslaSlide3: React.FC<IProps> = ({
   ]
   return (
     <div
-      className={`w-f font-Gotham flex  ${
+      className={`w-f font-Gotham flex   ${
         width >= 900 ? `h-screen` : width >= 300 ? `h-[60vh]` : `h-[70vh]`
-      } flex-col items-center bg-cover object-cover`}
+      } flex-col items-center justify-center bg-cover object-cover`}
     >
       {width >= 900 && (
         <div
@@ -118,7 +115,7 @@ export const TeslaSlide3: React.FC<IProps> = ({
 
       <div
         className={`${
-          !sm ? `h-full` : `h-screen`
+          !sm ? `h-[25vh]` : `h-screen`
         } flex w-full items-center justify-center px-[40px]`}
       >
         <ul

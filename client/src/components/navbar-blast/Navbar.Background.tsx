@@ -78,12 +78,14 @@ export const NavbarBackground: React.FC = () => {
     <motion.div
       initial={{ backgroundColor: active ? `#101010` : `#FFFBFF` }}
       animate={{ backgroundColor: active ? `#101010` : `#FFFBFF` }}
-      className={`h-full w-full border-none`}
+      className={`h-full w-full shrink-0 border-none`}
     />
   )
 
   const row = (arr: boolean[]) => (
-    <div className={`flex h-[20%] w-full`}>{arr.map((elem) => el(elem))}</div>
+    <div className={`flex h-[20%] w-full shrink-0 border-none`}>
+      {arr.map((elem) => el(elem))}
+    </div>
   )
 
   return (

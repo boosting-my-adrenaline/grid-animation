@@ -187,11 +187,8 @@ export const LandingCARDS8: React.FC<IProps> = ({ sm }) => {
         )}
       </div>
       <div
-        className={` h-[0.5px]!   h-[50.5px] 
-         ${
-           ``
-           //  isDarkMode ? `bg-white/[.16]` : `bg-black/[.18]`
-         }
+        className={` h-[0.5px]  
+         ${isDarkMode ? `bg-white/[.16]` : `bg-black/[.18]`}
          `}
         style={{ width: windowWidth > 1000 ? width - 80 : width - 40 }}
       />

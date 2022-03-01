@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDidMountEffect } from '../../utils/hooks/useDidMountEffect'
 import { useWindowSize } from '../../utils/hooks/useDimensions'
 
 interface IProps {
@@ -8,22 +9,35 @@ interface IProps {
 
 export const TeslaSide: React.FC<IProps> = ({ scroll, activeSlide }) => {
   const elements = [
-    `first`,
-    `second`,
-    'third',
-    'fourth',
-    'fifth',
-    'sixth',
-    'seventh',
-    `eighth`,
+    `praesent`,
+    `awards`,
+    'regardo',
+    'mauris',
+    'aliquam',
+    'licinia',
+    'reverso',
+    `muerte`,
   ]
+
+  const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    setShow(true)
+    let id = setTimeout(() => setShow(false), 900)
+
+    return () => {
+      clearTimeout(id)
+      setShow(false)
+    }
+  }, [activeSlide])
 
   return (
     <div>
-      <ul className={`flex flex-col  gap-[4px]`}>
+      <ul className={`flex flex-col gap-[4px]`}>
         {elements.map((el, i) => (
           <TeslaSideElement
-            dark={activeSlide === 4}
+            show={show}
+            dark={[4, 5, 6, 8].includes(activeSlide)}
             i={i}
             el={el}
             scroll={scroll}
@@ -43,6 +57,7 @@ interface IProps2 {
   slides: number
   active: boolean
   dark: boolean
+  show: boolean
 }
 
 const TeslaSideElement: React.FC<IProps2> = ({
@@ -52,6 +67,7 @@ const TeslaSideElement: React.FC<IProps2> = ({
   slides,
   active,
   dark,
+  show,
 }) => {
   const [hover, setHover] = useState(false)
   const { height } = useWindowSize()
@@ -69,7 +85,7 @@ const TeslaSideElement: React.FC<IProps2> = ({
       // onMouseDown={() => onClick((i + 1) * (height / slides) - 200)}
       onMouseDown={handleClick}
     >
-      <div className={`mr-[8px] flex  h-[24px] w-[4px] justify-center `}>
+      <div className={`mr-[8px] flex h-[24px] w-[4px] justify-center`}>
         <div
           className={`${
             active
@@ -80,14 +96,17 @@ const TeslaSideElement: React.FC<IProps2> = ({
       </div>
       <span
         className={`font-Gotham w-full rounded-[6px] p-[4px]  text-center text-[10px] ${
-          hover
+          hover || (active && show)
             ? `${dark ? `bg-white/[.2]` : `bg-black/[.1]`}`
             : `text-transparent`
         } ease transition duration-200 ${
-          dark ? `hover:text-white/[.9]` : `hover:text-black/[.9]`
-        }`}
+          hover || (active && show)
+            ? dark
+              ? `text-white/[.9]`
+              : `text-black/[.9]`
+            : ``
+        } uppercase`}
       >
-        {' '}
         {el}
       </span>
     </div>

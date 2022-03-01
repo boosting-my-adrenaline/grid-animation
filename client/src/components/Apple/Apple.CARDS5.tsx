@@ -110,7 +110,7 @@ export const LandingCARDS5: React.FC<IProps> = ({ sm }) => {
           ${isDarkMode ? `text-white/[.92]` : `text-black/[.86]`}
           `}
         >
-          Hotels
+          Eros
         </h1>
         <button
           className={`text-[15px] text-[#fa586a] decoration-2 outline-none hover:underline`}
