@@ -32,10 +32,6 @@ export const NavbarBlast: React.FC<IProps> = ({
   let md = breakpoint === `md`
   let lg = breakpoint === `lg`
 
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [sm, md, lg])
-
   const { toggle, isDarkMode } = useDarkMode()
 
   const location = useLocation()
@@ -113,6 +109,23 @@ export const NavbarBlast: React.FC<IProps> = ({
 
   const [menuOpen, setMenuOpen] = useState(false)
 
+  const [showMenu, setShowMenu] = useState(false)
+
+  // useDidMountEffect(() => {
+  //  if(menuOpen) {
+  //    return setShowMenu(true)
+  //  }
+
+  //  let id = setTimeout(() => setShowMenu(false), 500)
+
+  //  return () => setTimeout
+  // }, [menuOpen])
+
+  useEffect(() => {
+    setMenuOpen(false)
+    setShowMenu(false)
+  }, [sm, md, lg])
+
   let [degree, hover] = [10, false]
 
   return (
@@ -122,7 +135,7 @@ export const NavbarBlast: React.FC<IProps> = ({
       </div>
       <motion.nav
         animate={{ y: !isScrollingTop ? '-110%' : 0 }}
-        className={`fixed top-0 right-0 left-0 z-[30] flex w-full flex-col items-end justify-end opacity-[0.995] `}
+        className={`fixed top-0 right-0 left-0 z-[30]  flex w-full flex-col items-end justify-end opacity-[0.995] `}
       >
         <motion.div
           className={`absolute top-0 z-20 h-[8px] w-full `}
@@ -303,7 +316,7 @@ export const NavbarBlast: React.FC<IProps> = ({
           </motion.div>
         </div>
 
-        {sm && (
+        {sm && menuOpen && (
           <motion.div
             initial={{
               // rotate: `180deg`,

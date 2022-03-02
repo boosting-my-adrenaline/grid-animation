@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.66e2d6b9.css",
-    "main.js": "/static/js/main.b90e69de.js",
+    "main.js": "/static/js/main.37e6a44a.js",
     "static/media/moon3.png": "/static/media/moon3.1f78d0a394f15a3c9343.png",
     "static/media/TESLAVIDEO.mp4": "/static/media/TESLAVIDEO.c9c5289b4249df3c5440.mp4",
     "static/media/v14.jpg": "/static/media/v14.8b2f3b3f41348f7912cc.jpg",
@@ -152,10 +152,10 @@
     "static/media/Bebas.otf": "/static/media/Bebas.11748dca3fa28ee0de97.otf",
     "index.html": "/index.html",
     "main.66e2d6b9.css.map": "/static/css/main.66e2d6b9.css.map",
-    "main.b90e69de.js.map": "/static/js/main.b90e69de.js.map"
+    "main.37e6a44a.js.map": "/static/js/main.37e6a44a.js.map"
   },
   "entrypoints": [
     "static/css/main.66e2d6b9.css",
-    "static/js/main.b90e69de.js"
+    "static/js/main.37e6a44a.js"
   ]
 }
