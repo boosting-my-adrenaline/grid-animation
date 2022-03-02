@@ -25,20 +25,20 @@ export const LandingCardSquareSmall: React.FC<IProps> = ({ sm, opinion }) => {
   const images = [w0, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13]
 
   const titles = [
-    [`  eros est tincidunt `, ` Suspendisse eget sem euismod`],
+    [`  eros est tincidunt `, ` Suspendisse eget sem `],
     [` commodo orci  `, `  Ut dui odio`],
     [`  suscipit augue `, ` fermentum eros `],
-    [`    Vivamus lobortis nulla`, `  Nunc eleifend `],
+    [`Vivamus lobortis nulla`, `  Nunc eleifend `],
     [` aliquam dignissim  `, ` Curabitur a dolor dui `],
     [`  Nullam suscipit `, ` sit amet vestibulum `],
     [` posuere tempor erat  `, ` Aenean et tincidunt leo `],
     [` Donec vehicula  `, `  metus  venenatis`],
     [`  arcu magna mollis sem `, ` consectetur adipiscing `],
-    [`  auctor nisl lobortis `, ` congue leo augue sed metus `],
+    [`  auctor nisl lobortis `, ` congue leo augue sed `],
     [`  Curabitur volutpat  `, `  purus ac facilisis  `],
     [`  ultricies arcu sem `, ` Aliquam erat volutpat `],
     [`   odio eget elementum `, ` consectetur urna `],
-    [` amet  vehicula velit.  `, ` Vestibulum euismod pretium `],
+    [` amet  vehicula velit.  `, ` Vestibulum euismod `],
   ]
 
   const { isDarkMode } = useDarkMode()
@@ -53,7 +53,7 @@ export const LandingCardSquareSmall: React.FC<IProps> = ({ sm, opinion }) => {
       <div className={`font-UI capitalize`}>
         <div>
           <span
-            className={` text-[12px] font-[400]
+            className={` text-[12px] font-[400] leading-[1.25]
           ${isDarkMode ? `text-white/[.92]` : `text-black/[.86]`}
           `}
           >
@@ -62,7 +62,7 @@ export const LandingCardSquareSmall: React.FC<IProps> = ({ sm, opinion }) => {
         </div>
         <div className={`translate-y-[-8px]`}>
           <span
-            className={` space-y-0 text-[12px] font-[400] leading-[1.25]
+            className={` space-y-0  text-[12px] font-[400] leading-[1.25]
           ${isDarkMode ? `text-white/[.64]` : `text-black/[.56]`}`}
           >
             {titles[opinion][1]}

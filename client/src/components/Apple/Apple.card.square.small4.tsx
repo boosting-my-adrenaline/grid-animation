@@ -28,11 +28,11 @@ export const LandingCardSquareSmall4: React.FC<IProps> = ({ sm, opinion }) => {
     [`  Curabitur volutpat  `, `  purus ac facilisis  `],
     [`  ultricies arcu sem `, ` Aliquam erat volutpat `],
     [`   odio eget elementum `, ` consectetur urna `],
-    [` amet  vehicula velit.  `, ` Vestibulum euismod pretium `],
+    [` amet  vehicula velit.  `, ` Vestibulum euismod  `],
     [` posuere tempor erat  `, ` Aenean et tincidunt leo `],
     [` Donec vehicula  `, `  metus  venenatis`],
     [`  arcu magna mollis sem `, ` consectetur adipiscing `],
-    [`  auctor nisl lobortis `, ` congue leo augue sed metus `],
+    [`  auctor nisl lobortis `, ` congue leo augue sed  `],
     [`  Curabitur volutpat  `, `  purus ac facilisis  `],
     [`  ultricies arcu sem `, ` Aliquam erat volutpat `],
   ]

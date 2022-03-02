@@ -25,7 +25,7 @@ export const LandingCardSquareSmall2: React.FC<IProps> = ({ sm, option }) => {
   const images = [n0, n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12, n13]
 
   const titles = [
-    [`  eros est tincidunt `, ` Suspendisse eget sem euismod`],
+    [`  eros est tincidunt `, ` Suspendisse eget sem `],
     [` commodo orci  `, `  Ut dui odio`],
     [`  suscipit augue `, ` fermentum eros `],
     [`    Vivamus lobortis nulla`, `  Nunc eleifend `],
@@ -34,11 +34,11 @@ export const LandingCardSquareSmall2: React.FC<IProps> = ({ sm, option }) => {
     [` posuere tempor erat  `, ` Aenean et tincidunt leo `],
     [` Donec vehicula  `, `  metus  venenatis`],
     [`  arcu magna mollis sem `, ` consectetur adipiscing `],
-    [`  auctor nisl lobortis `, ` congue leo augue sed metus `],
+    [`  auctor nisl lobortis `, ` congue leo augue sed  `],
     [`  Curabitur volutpat  `, `  purus ac facilisis  `],
     [`  ultricies arcu sem `, ` Aliquam erat volutpat `],
     [`   odio eget elementum `, ` consectetur urna `],
-    [` amet  vehicula velit.  `, ` Vestibulum euismod pretium `],
+    [` amet  vehicula velit.  `, ` Vestibulum euismod `],
   ].reverse()
 
   const { isDarkMode } = useDarkMode()

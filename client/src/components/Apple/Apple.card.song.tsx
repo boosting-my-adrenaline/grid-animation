@@ -42,7 +42,7 @@ export const AppleSong: React.FC<IProps2> = ({ title, title2, image }) => {
   const images = [h0, h1, h2, h3, h4, h5, h6]
 
   return (
-    <div className={` w-full   `}>
+    <div className={`   `}>
       <div
         className={`mb-[7.5px] h-[0.5px] w-full   ${
           isDarkMode ? `bg-white/[.16]` : `bg-black/[.18]`
@@ -50,7 +50,7 @@ export const AppleSong: React.FC<IProps2> = ({ title, title2, image }) => {
       />
 
       <div
-        className={`full flex h-full cursor-pointer select-none items-center p-[0_19px_7.5px_5px] `}
+        className={`full relative flex h-full cursor-pointer select-none items-center overflow-hidden p-[0_19px_7.5px_5px]`}
       >
         <div
           className={`relative mr-[12px] h-[40px] w-[40px] shrink-0 overflow-hidden rounded`}
@@ -61,25 +61,26 @@ export const AppleSong: React.FC<IProps2> = ({ title, title2, image }) => {
             alt=""
           />
         </div>
-        <ul className={`mr-[10px] flex-grow`}>
+        <ul className={`mr-[10px] flex-shrink-[10] flex-grow `}>
           <li
-            className={`first-letter: overflow-hidden overflow-ellipsis whitespace-nowrap text-[13px] capitalize leading-[1.385] ${
+            className={`  text-[13px] capitalize leading-[1.385] ${
               isDarkMode ? `text-white/[.92]` : ` text-black/[.86]`
             }`}
           >
             {title}
           </li>
           <li
-            className={`overflow-hidden overflow-ellipsis whitespace-nowrap text-[12px] leading-[1.25] first-letter:uppercase   ${
+            className={` flex-shrink  text-[12px] leading-[1.25] first-letter:uppercase  ${
               isDarkMode ? `text-white/[.64]` : `text-black/[.56]`
             }`}
+            style={{ textOverflow: `ellipsis` }}
           >
             {title2}
           </li>
         </ul>
 
         <div
-          className={`flex h-[25px] w-[25px] items-center justify-center gap-[3px] `}
+          className={`flex h-[25px] w-[25px] shrink-0 items-center justify-center gap-[3px]`}
         >
           <svg viewBox="0 0 16 16" xmlSpace="preserve" width={14}>
             <circle cx={2} cy={8} r={1.75} fill="#fa586a" />

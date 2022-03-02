@@ -52,7 +52,7 @@ export const LandingCardSquareSmall3: React.FC<IProps> = ({ sm, opinion }) => {
   ]
 
   const titles = [
-    [`  eros est tincidunt `, ` Suspendisse eget sem euismod`],
+    [`  eros est tincidunt `, ` Suspendisse eget sem `],
     [` commodo orci  `, `  Ut dui odio`],
     [`  suscipit augue `, ` fermentum eros `],
     [`    Vivamus lobortis nulla`, `  Nunc eleifend `],
@@ -65,7 +65,7 @@ export const LandingCardSquareSmall3: React.FC<IProps> = ({ sm, opinion }) => {
     [`  Curabitur volutpat  `, `  purus ac facilisis  `],
     [`  ultricies arcu sem `, ` Aliquam erat volutpat `],
     [`   odio eget elementum `, ` consectetur urna `],
-    [` amet  vehicula velit.  `, ` Vestibulum euismod pretium `],
+    [` amet  vehicula velit.  `, ` Vestibulum euismod `],
     [` posuere tempor erat  `, ` Aenean et tincidunt leo `],
     [` Donec vehicula  `, `  metus  venenatis`],
     [`  arcu magna mollis sem `, ` consectetur adipiscing `],

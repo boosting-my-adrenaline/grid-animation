@@ -51,7 +51,7 @@ export const LandingMore: React.FC<IProps> = ({ sm }) => {
           {[
             `Consequat`,
             `Justo Quis`,
-            `Rhoncus iaculis`,
+            `Rhoncus Laculis`,
             `Antre`,
             `Ornare Nih`,
             `De Grace`,

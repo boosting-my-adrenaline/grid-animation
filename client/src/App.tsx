@@ -165,7 +165,7 @@ export const App: React.FC = () => {
           >
             <Routes>
               <Route
-                path="/slide1"
+                path="*"
                 element={
                   <div className={`flex w-[100vw] justify-center `}>
                     <AppleContainer

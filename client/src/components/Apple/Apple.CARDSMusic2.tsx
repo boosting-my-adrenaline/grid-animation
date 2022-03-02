@@ -65,7 +65,7 @@ export const LandingMusic2: React.FC<IProps> = ({ sm }) => {
   const startOnScreen: boolean = useOnScreen<HTMLDivElement>(
     startRef,
     `${
-      -0.7 *
+      -0.8 *
       (width >= 1400
         ? (width - 60 - 80) / 4
         : width > 1160
@@ -193,9 +193,9 @@ export const LandingMusic2: React.FC<IProps> = ({ sm }) => {
     `Morbi rutrum`,
     ` lacus in efficitur consequat`,
     `  lacus mi maximus ex`,
-    `  Fusce hendrerit erat sit amet hendrerit lobortis`,
+    `  Fusce hendrerit erat `,
     `  scelerisque diam`,
-    `  Vestibulum cursus faucibus rhoncus`,
+    `  Vestibulum cursus faucibus `,
     `  felis`,
     `  malesuada fames`,
     `  quis vel ex euismod`,
@@ -213,9 +213,9 @@ export const LandingMusic2: React.FC<IProps> = ({ sm }) => {
     `Morbi rutrum`,
     ` lacus in efficitur consequat`,
     `  lacus mi maximus ex`,
-    `  Fusce hendrerit erat sit amet hendrerit lobortis`,
+    `  Fusce hendrerit erat `,
     `  scelerisque diam`,
-    `  Vestibulum cursus faucibus rhoncus`,
+    `  Vestibulum cursus faucibus`,
     `  felis`,
     `  malesuada fames`,
     `  quis vel ex euismod`,
