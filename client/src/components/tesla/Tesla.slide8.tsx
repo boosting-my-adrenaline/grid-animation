@@ -48,8 +48,12 @@ export const TeslaSlide8: React.FC<IProps> = ({
       <div
         className={`w-f font-Gotham  flex ${
           width >= 1200 ? `h-screen` : `h-screen`
+        } ${
+          mobile && ` flex-col gap-[20px] pt-[35vh]`
         } items-center justify-center  bg-black bg-cover object-cover`}
       >
+        {/* <div className={`h-full w-full flex-grow`}></div> */}
+
         <div
           className={`flex ${
             width >= 900
@@ -79,9 +83,13 @@ export const TeslaSlide8: React.FC<IProps> = ({
           </a>
         </div>
 
-        {show && (
+        {/* <div className={`h-full w-full flex-grow`}></div> */}
+
+        {(show || mobile) && (
           <footer
-            className={`fixed bottom-0 w-full   ${mobile || `h-[70px]`} ${
+            className={`${mobile ? `mt-[20vh]` : `fixed bottom-0`} w-full   ${
+              mobile || `h-[70px]`
+            } ${
               show || `opacity-0`
             }  flex justify-center px-[20px] transition duration-300 ease-in`}
           >

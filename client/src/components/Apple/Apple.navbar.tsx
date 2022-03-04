@@ -32,12 +32,12 @@ export const AppleNavbar: React.FC<IProps> = ({ handleNavigate }) => {
         >
           <div
             className={`h-[44px] `}
-            onMouseDown={() => setOpen((prev) => !prev)}
+            // onMouseDown={() => setOpen((prev) => !prev)}
           >
             <ul
               className={`flex h-full items-center justify-between px-[25px]`}
             >
-              <li>
+              <li onMouseDown={() => setOpen((prev) => !prev)}>
                 <AppleAnimation open={open} />
               </li>
 

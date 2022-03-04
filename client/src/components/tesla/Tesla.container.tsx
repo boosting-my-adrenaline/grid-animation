@@ -260,13 +260,13 @@ export const TeslaContainer: React.FC<IProps> = ({
           ref={ref6}
         />
         <div
-          className={`absolute top-[650vh] z-40 h-[100px] w-[0.1px] `}
+          className={`absolute top-[650vh] z-40 h-[100px] w-[0.1px]`}
           ref={ref7}
         />
         <div
           className={`absolute ${
-            width >= 900 ? `top-[750vh]` : `top-[690vh]`
-          } z-40 h-[100px] w-[0.1px] `}
+            width >= 900 ? `top-[750vh]` : `top-[705vh]`
+          } z-40 h-[60px] w-[0.1px] `}
           ref={ref8}
         />
       </ul>
