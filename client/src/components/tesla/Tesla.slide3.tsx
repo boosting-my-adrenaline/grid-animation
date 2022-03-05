@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 import { useWindowSize } from '../../utils/hooks/useDimensions'
+const bg = require('../../static/slides/slide3.jpeg')
 
 interface IProps {
   show: boolean
@@ -83,33 +84,37 @@ export const TeslaSlide3: React.FC<IProps> = ({
     <div
       className={`w-f font-Gotham flex   ${
         width >= 900 ? `h-screen` : width >= 300 ? `h-[60vh]` : `h-[70vh]`
-      } flex-col items-center justify-center bg-cover object-cover`}
+      } bg-bottom! flex-col items-center justify-center object-cover`}
     >
       {width >= 900 && (
         <div
-          className={`bg-slide3 h-[110vh] ${
+          className={` h-[110vh] ${
             `` // !sm ? `h-[70vh]` : `0`
-          } flex w-full items-end justify-center bg-cover pb-[2%]`}
+          } relative flex w-full items-end justify-center overflow-hidden bg-bottom pb-[2%]`}
         >
-          <div
-            // initial={{ opacity: 0, y: '-4vh' }}
-            // animate={{
-            //   opacity: showNav ? 1 : 0,
-            //   y: !sm ? (showNav ? `0vh` : '-4vh') : showNav ? `0vh` : '2vh',
-            // }}
-            className={`h-[40px]  ${mobile ? `w-[297px]` : `w-[204px]`}  ${
-              `` //!show && sm && `translate-y-[-3vh] opacity-0`
-            } transition duration-300 ease-linear`}
-          >
-            <a
-              className={`ease flex h-full w-full flex-grow cursor-pointer items-center justify-center rounded-full border-[3px] border-[#171a20]
-              bg-[#171a20] p-[4px_24px]  text-[#f4f4f4] transition  duration-200`}
+          {mobile ? (
+            <div
+              // initial={{ opacity: 0, y: '-4vh' }}
+              // animate={{
+              //   opacity: showNav ? 1 : 0,
+              //   y: !sm ? (showNav ? `0vh` : '-4vh') : showNav ? `0vh` : '2vh',
+              // }}
+              className={`h-[40px]  ${mobile ? `w-[297px]` : `w-[204px]`}  ${
+                `` //!show && sm && `translate-y-[-3vh] opacity-0`
+              } transition duration-300 ease-linear`}
             >
-              <span className={`text-[12px] font-[500] uppercase `}>
-                order now
-              </span>
-            </a>
-          </div>
+              <a
+                className={`ease flex h-full w-full flex-grow cursor-pointer items-center justify-center rounded-full border-[3px] border-[#171a20]
+              bg-[#171a20] p-[4px_24px]  text-[#f4f4f4] transition  duration-200`}
+              >
+                <span className={`text-[12px] font-[500] uppercase `}>
+                  order now
+                </span>
+              </a>
+            </div>
+          ) : (
+            <img alt={``} src={bg} className={`object-cover object-top`} />
+          )}
         </div>
       )}
 

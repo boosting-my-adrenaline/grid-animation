@@ -70,7 +70,7 @@ module.exports = {
       backgroundImage: {
         slide1: `url('./static/slides/slide1.jpg')`,
         slide2: `url('./static/slides/slide2.jpg')`,
-        slide3: `url('./static/slides/slide3.jpg')`,
+        slide3: `url('./static/slides/slide3.jpeg')`,
         slide4: `url('./static/slides/slide4.jpg')`,
         slide5: `url('./static/slides/slide5.jpg')`,
         slide5: `url('./static/slides/slide5.jpg')`,
